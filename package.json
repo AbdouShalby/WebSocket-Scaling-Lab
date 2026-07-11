@@ -1,0 +1,21 @@
+{
+  "name": "websocket-scaling-lab",
+  "version": "1.0.0",
+  "description": "Horizontally-scalable WebSocket fan-out lab — Node.js + Redis pub/sub, backpressure policy, heartbeats, and an honest E2E latency benchmark",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "publish-events": "node src/publisher.js",
+    "bench": "node bench/connect-storm.js",
+    "test": "node --test tests/"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "author": "Abdelrhman Shalby",
+  "repository": { "type": "git", "url": "git+https://github.com/AbdouShalby/WebSocket-Scaling-Lab.git" },
+  "keywords": ["websocket", "redis", "pubsub", "scaling", "backpressure", "distributed-systems", "nodejs"],
+  "dependencies": {
+    "ioredis": "^5.4.1",
+    "ws": "^8.18.0"
+  }
+}
