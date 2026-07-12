@@ -49,20 +49,22 @@ npm ci
 node bench/connect-storm.js --url ws://localhost:8080 --conns 5000 --channels 20 --measure 30
 ```
 
-Example output:
+### Measured results
+
+Single instance + Redis (WSL2), publisher at 50 ev/s × 20 channels — **AMD Ryzen 7 5800X (8c/16t), 24 GB RAM, Windows 11**:
 
 ```
-all 5000 connected in 6.2s — measuring for 30s
-
 ══════════ RESULTS ══════════
 connections opened : 5000/5000 (0 failed)
-events received    : 371842
-E2E latency  p50   : <run it — numbers belong to your machine>
-             p95   : ...
-             p99   : ...
+ramp time          : 5.6s
+events received    : 404460            → ~13,500 deliveries/sec sustained
+E2E latency  p50   : 155 ms
+             p95   : 317 ms
+             p99   : 365 ms
+             max   : 404 ms
 ```
 
-> The benchmark measures **true end-to-end latency** — from the publisher's timestamp, through Redis, through the instance, to client receive — not just server-side send times. Run it on your own hardware; this README deliberately doesn't paste numbers your laptop can't reproduce.
+> The benchmark measures **true end-to-end latency** — from the publisher's timestamp, through Redis, through the instance, to client receive — not server-side send times. Two honesty notes: (1) the single-process bench client holds all 5,000 sockets itself on the same machine, so these figures *include* client-side receive queuing — per-client latency in a real deployment is lower; (2) run it on your own hardware (`npm run bench`) — your numbers will differ, and that's the point.
 
 Watch the fleet while it runs:
 
