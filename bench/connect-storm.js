@@ -57,11 +57,7 @@ function openOne(i) {
   ws.on('open', () => {
     connected += 1;
     ws.send(JSON.stringify({ action: 'subscribe', channel: `product:${(i % CHANNELS) + 1}` }));
-    if (connected === CONNS) {
-      rampEnd = Date.now();
-      console.log(`all ${CONNS} connected in ${((rampEnd - rampStart) / 1000).toFixed(1)}s — measuring for ${MEASURE_SECONDS}s`);
-      setTimeout(finish, MEASURE_SECONDS * 1000);
-    }
+    maybeStartMeasuring();
   });
 
   ws.on('message', (raw) => {
@@ -75,7 +71,24 @@ function openOne(i) {
     }
   });
 
-  ws.on('error', () => { failed += 1; });
+  ws.on('error', () => {
+    failed += 1;
+    maybeStartMeasuring();
+  });
+}
+
+// Start the measurement window once every connection attempt has RESOLVED
+// (connected or failed) — waiting for connected === CONNS would hang forever
+// if even one connection fails, and a few failures at high counts are normal.
+let measuring = false;
+function maybeStartMeasuring() {
+  if (measuring) return;
+  if (connected + failed >= CONNS) {
+    measuring = true;
+    rampEnd = Date.now();
+    console.log(`ramp done: ${connected}/${CONNS} connected (${failed} failed) in ${((rampEnd - rampStart) / 1000).toFixed(1)}s — measuring for ${MEASURE_SECONDS}s`);
+    setTimeout(finish, MEASURE_SECONDS * 1000);
+  }
 }
 
 const ramp = setInterval(() => {
