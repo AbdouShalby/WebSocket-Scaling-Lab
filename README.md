@@ -64,7 +64,17 @@ E2E latency  p50   : 155 ms
              max   : 404 ms
 ```
 
-> The benchmark measures **true end-to-end latency** — from the publisher's timestamp, through Redis, through the instance, to client receive — not server-side send times. Two honesty notes: (1) the single-process bench client holds all 5,000 sockets itself on the same machine, so these figures *include* client-side receive queuing — per-client latency in a real deployment is lower; (2) run it on your own hardware (`npm run bench`) — your numbers will differ, and that's the point.
+**Pushing the same single instance to 10,000** (ramp 50/100ms):
+
+```
+connections opened : 9725/10000 (275 failed)
+events received    : 983316            → ~32,800 deliveries/sec sustained
+E2E latency  p50   : 309 ms   p95: 678 ms   p99: 736 ms
+```
+
+That's the single-node ceiling announcing itself: ~2.75% of connections failed during the ramp as accept pressure and one bench process saturated a shared machine. **This is exactly why the fleet topology exists** — when one node runs out of headroom, the answer is `--scale ws=4` behind the LB, not a bigger box.
+
+> The benchmark measures **true end-to-end latency** — from the publisher's timestamp, through Redis, through the instance, to client receive — not server-side send times. Two honesty notes: (1) the single-process bench client holds all sockets itself on the same machine as the server, so these figures *include* client-side receive queuing — per-client latency in a real deployment is lower; (2) run it on your own hardware (`npm run bench`) — your numbers will differ, and that's the point.
 
 Watch the fleet while it runs:
 
