@@ -3,3 +3,4 @@ node_modules/
 .env
 /bench/results/
 !/docs/evidence/ws-1a/*.log
+!/docs/evidence/ws-1b/*.log

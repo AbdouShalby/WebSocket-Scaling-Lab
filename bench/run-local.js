@@ -48,7 +48,7 @@ async function startServer(options) {
       const onExit = () => done(new Error(`server exited before ready: ${errors}`));
       child.once('exit', onExit); child.once('error', done);
     });
-    return { url: `ws://127.0.0.1:${port}`, stop, runtime: {
+    return { url: `ws://127.0.0.1:${port}`, pid: child.pid, stop, runtime: {
       schemaVersion: 1, evidenceSource: 'run-local spawned this server with explicit configuration',
       environment: 'controller, publisher and one server on this host; Redis endpoint recorded in options and INFO',
       topology: { description: 'direct one-server loopback, no nginx, external real Redis', wsInstances: 1 },

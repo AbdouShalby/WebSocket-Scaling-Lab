@@ -47,9 +47,15 @@ jobs:
           REDIS_HOST: 127.0.0.1
           REDIS_PORT: 6379
 
-      - name: Benchmark validation artifacts
+      - name: WS-1B two-process cross-instance proof (real Redis required; no skip)
+        run: npm run test:ws1b
+        env:
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
+
+      - name: Benchmark and integration evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ws-1a-validation
+          name: websocket-validation
           path: bench/results/

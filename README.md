@@ -9,7 +9,7 @@
 [![Redis](https://img.shields.io/badge/Redis-pub%2Fsub-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. The current evidence covers local Hub policies and a one-server Redis/WebSocket path. Cross-instance proof and scaling curves are planned in WS-1B and WS-1C.
+This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. Current evidence covers local Hub policies, a one-server Redis/WebSocket path, and real Redis fan-out across two independent server processes on the same host (WS-1B). Scaling curves remain deferred to WS-1C.
 
 ---
 
@@ -60,6 +60,15 @@ Latency uses the same controller's monotonic clock immediately before Redis publ
 The old July 12 results (5k/10k connection attempts, claimed ~13.5k/~32.8k deliveries/sec, and associated latency percentiles) are **historical/unverified**. They remain in Git history at `17f3771` and `e8648b4`. Counters and samples included ramp traffic while the throughput denominator used only 30 seconds. Raw evidence and exact runtime metadata were not retained. These numbers are withdrawn as capacity/CV evidence; neither a single-node ceiling nor scaling improvement was established.
 
 The Compose fleet remains an implementation topology. WS-1A does not run or prove multi-node scaling. The retained small one-server validation is methodology evidence, not a capacity benchmark.
+
+### Two-instance correctness proof
+
+```bash
+# Requires real Redis; starts and stops its own two Node server processes.
+npm run proof:two-node -- --redis-port 6379
+```
+
+[WS-1B methodology and retained evidence](docs/ws-1b.md) demonstrate six simultaneously open real WebSocket connections, split deterministically between two independent ports/processes. Shared-channel fan-out, private-channel isolation, unsubscribe and repeat subscribe produce exactly the 13 expected client/event receipts during bounded observation windows. Two real-server negative controls ensure missing and duplicate fan-out fail the proof. This is same-host correctness evidence, not a throughput, nginx routing, failover or multi-host experiment.
 
 Watch the fleet while it runs:
 
@@ -131,9 +140,10 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 ```bash
 npm test          # Hub + benchmark regression tests; legacy E2E auto-skips without Redis
 npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; no skip
+npm run test:ws1b # mandatory real Redis + two-process proof and negative controls; no skip
 ```
 
-CI runs both commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. Heartbeat and deployment-drain tests are not part of WS-1A.
+CI is configured to run all three commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. Heartbeat and deployment-drain experiments remain outside WS-1A/WS-1B.
 
 ## Project layout
 
@@ -147,6 +157,7 @@ src/
 bench/
   connect-storm.js   existing-target CLI + versioned result/provenance artifacts
   run-local.js       one-server launcher with captured runtime metadata
+  prove-two-node.js  two-process Redis fan-out proof + per-client receipt artifacts
   runner.js          acknowledged lifecycle + controlled publisher
   accounting.js      exact per-event/per-client delivery ledger
   options.js         bounded workload and runtime metadata validation
@@ -157,6 +168,8 @@ tests/
   e2e.test.js        full-stack smoke test
   benchmark.test.js  accounting regressions + real-socket/test-publisher fixtures
   benchmark-integration.test.js  mandatory real Redis + one server + CLI artifacts
+  two-node.test.js   mandatory real Redis + two servers + negative controls
+  fixtures/ws1b-mutant.cjs       explicit test-only in-memory mutation preload
 ```
 
 ## Related work
