@@ -40,3 +40,16 @@ jobs:
         env:
           REDIS_HOST: 127.0.0.1
           REDIS_PORT: 6379
+
+      - name: WS-1A benchmark integrity (real Redis required; no skip)
+        run: npm run test:ws1a
+        env:
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
+
+      - name: Benchmark validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ws-1a-validation
+          path: bench/results/

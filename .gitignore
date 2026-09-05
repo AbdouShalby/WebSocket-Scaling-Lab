@@ -1,3 +1,5 @@
 node_modules/
 *.log
 .env
+/bench/results/
+!/docs/evidence/ws-1a/*.log

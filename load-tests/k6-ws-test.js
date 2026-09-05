@@ -1,5 +1,5 @@
 // k6 WebSocket soak test — complements bench/connect-storm.js.
-// connect-storm measures E2E broadcast latency precisely; this k6 scenario
+// The WS-1A controlled benchmark measures a defined E2E window; this k6 scenario
 // stresses connection churn (connect / subscribe / hold / disconnect cycles),
 // which is what actually kills WS servers in production.
 //

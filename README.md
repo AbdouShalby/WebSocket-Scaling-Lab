@@ -1,6 +1,6 @@
 # WebSocket Scaling Lab
 
-> How do you push real-time events to **tens of thousands of concurrent WebSocket clients** without one slow phone on a bad network taking the whole fleet down?
+> A production-inspired lab for WebSocket fan-out, backpressure, and reproducible measurement.
 >
 > A horizontally-scalable WebSocket fan-out architecture — Node.js + Redis pub/sub — with an explicit **backpressure policy**, dead-connection reaping, per-instance observability, and an honest end-to-end latency benchmark.
 
@@ -9,7 +9,7 @@
 [![Redis](https://img.shields.io/badge/Redis-pub%2Fsub-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-This lab is a distilled, reproducible version of the architecture behind a production real-time marketplace I built and operated (30k+ concurrent connections). Company code stays with the company — the engineering decisions are what this repo demonstrates.
+This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. The current evidence covers local Hub policies and a one-server Redis/WebSocket path. Cross-instance proof and scaling curves are planned in WS-1B and WS-1C.
 
 ---
 
@@ -20,8 +20,8 @@ This lab is a distilled, reproducible version of the architecture behind a produ
 | One instance can't hold every socket | Stateless instances behind an LB; **Redis pub/sub** fans events out to all instances; each instance delivers only to its own subscribers |
 | One slow client can OOM the server | **Backpressure policy**: drop frames for clients over a `bufferedAmount` threshold, disconnect after N consecutive drops — drops are counted, never silent |
 | Mobile clients vanish without closing | **Heartbeat reaper**: ping/pong sweep terminates dead sockets every interval |
-| "It's fast" is not a number | `bench/connect-storm.js` measures **publish → Redis → instance → client** latency: p50/p95/p99 across thousands of real connections |
-| Deploys drop every connection | **Graceful drain** on SIGTERM: close frames to every client, then exit |
+| Performance needs a defined workload | Controlled benchmark publications, acknowledged subscriptions, an isolated measurement window, and versioned result artifacts |
+| Process termination | SIGTERM sends close frames to every client, then exits; connection-preserving deployment is not proven |
 
 ## Architecture
 
@@ -41,42 +41,30 @@ flowchart LR
 ## Run it
 
 ```bash
-# fleet: 4 ws instances + nginx + redis + a publisher pushing 50 ev/s
-docker compose up --build --scale ws=4
-
-# in another terminal: open 5,000 connections and measure E2E latency
+# Start Redis for the local single-server methodology check.
+docker compose up -d redis
 npm ci
-node bench/connect-storm.js --url ws://localhost:8080 --conns 5000 --channels 20 --measure 30
+node bench/run-local.js --conns 12 --channels 3 --rate 30 --measure 2
 ```
 
-### Measured results
+`run-local` starts one server, waits for its Redis subscription, captures its actual runtime/configuration, and stops that server after the run. Redis must already be reachable. The benchmark owns its publisher and isolated logical channels; the demo publisher is not part of this workload. Routine timestamped JSON/log files go to ignored `bench/results/`.
 
-Single instance + Redis (WSL2), publisher at 50 ev/s × 20 channels — **AMD Ryzen 7 5800X (8c/16t), 24 GB RAM, Windows 11**:
+### Benchmark methodology and evidence
 
-```
-══════════ RESULTS ══════════
-connections opened : 5000/5000 (0 failed)
-ramp time          : 5.6s
-events received    : 404460            → ~13,500 deliveries/sec sustained
-E2E latency  p50   : 155 ms
-             p95   : 317 ms
-             p99   : 365 ms
-             max   : 404 ms
-```
+WS-1A repairs measurement integrity. See [methodology, options, and validation](docs/ws-1a.md).
+Each run waits for every subscription acknowledgment, warms up, resets counters, measures, then drains separately.
+Expected deliveries come from the issued-event ledger, including publications that nobody received.
+Throughput counts unique deliveries received inside the actual measurement window; late and duplicate deliveries do not inflate it.
+Latency uses the same controller's monotonic clock immediately before Redis publish and upon client receipt, excluding warmup and drain.
 
-**Pushing the same single instance to 10,000** (ramp 50/100ms):
+The old July 12 results (5k/10k connection attempts, claimed ~13.5k/~32.8k deliveries/sec, and associated latency percentiles) are **historical/unverified**. They remain in Git history at `17f3771` and `e8648b4`. Counters and samples included ramp traffic while the throughput denominator used only 30 seconds. Raw evidence and exact runtime metadata were not retained. These numbers are withdrawn as capacity/CV evidence; neither a single-node ceiling nor scaling improvement was established.
 
-```
-connections opened : 9725/10000 (275 failed)
-events received    : 983316            → ~32,800 deliveries/sec sustained
-E2E latency  p50   : 309 ms   p95: 678 ms   p99: 736 ms
-```
-
-That's the single-node ceiling announcing itself: ~2.75% of connections failed during the ramp as accept pressure and one bench process saturated a shared machine. **This is exactly why the fleet topology exists** — when one node runs out of headroom, the answer is `--scale ws=4` behind the LB, not a bigger box.
-
-> The benchmark measures **true end-to-end latency** — from the publisher's timestamp, through Redis, through the instance, to client receive — not server-side send times. Two honesty notes: (1) the single-process bench client holds all sockets itself on the same machine as the server, so these figures *include* client-side receive queuing — per-client latency in a real deployment is lower; (2) run it on your own hardware (`npm run bench`) — your numbers will differ, and that's the point.
+The Compose fleet remains an implementation topology. WS-1A does not run or prove multi-node scaling. The retained small one-server validation is methodology evidence, not a capacity benchmark.
 
 Watch the fleet while it runs:
+
+The following JSON is illustrative server telemetry. Server `delivered` counts
+send calls; the WS-1A benchmark counts actual client receipts independently.
 
 ```bash
 curl -s localhost:8080/metrics | jq   # hits one instance through the LB
@@ -98,7 +86,7 @@ curl -s localhost:8080/metrics | jq   # hits one instance through the LB
 
 ### Backpressure — the part most demos skip
 
-`ws` exposes `socket.bufferedAmount`: bytes queued in userland that the kernel hasn't accepted yet. A client on a congested link makes that number grow — and every broadcast you `send()` to it is memory you can never reclaim until the client drains. At 30k connections, a few hundred slow consumers without a policy = OOM.
+`ws` exposes `socket.bufferedAmount`: queued outbound bytes. A congested client can accumulate buffered frames, creating memory pressure. The lab makes the drop/disconnect policy explicit; a real slow-network memory experiment remains future work.
 
 The policy in [`src/hub.js`](src/hub.js):
 
@@ -116,14 +104,14 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 |---|---|
 | Redis Streams / Kafka | Pub/sub is fire-and-forget: disconnected clients miss events. Right trade-off for ephemeral data (prices, presence). If clients must catch up after reconnect, you need Streams + per-client cursors — different lab. |
 | Message ACKs / delivery guarantees | Same reason: this models at-most-once ephemeral fan-out, and says so, instead of pretending to be exactly-once. |
-| `perMessageDeflate` | CPU per frame hurts p99 at high connection counts; payloads here are ~100B JSON. Measured trade-off, not an oversight. |
+| `perMessageDeflate` | Disabled as a design choice for small payloads; no compression A/B benchmark is retained. |
 | Sticky sessions | Nothing is session-bound; any instance can serve any client. That's the point. |
 
 ### Failure modes, honestly
 
 - **Redis is a SPOF here.** Production answer: Redis Sentinel/Cluster, or a broker per shard. The lab keeps one node so the fan-out logic stays legible.
 - **Pub/sub delivery is at-most-once.** A client that reconnects lost the events published while it was away — acceptable for tickers/presence, unacceptable for chat history.
-- **Clock skew** breaks the benchmark's E2E numbers if publisher and bench run on different unsynced machines (compose setup shares the host clock).
+- **Measurement overhead:** the WS-1A controller publishes and receives on one monotonic clock, including its own event-loop queuing. It does not isolate server-only latency or establish results for a distributed load generator.
 
 ## Client protocol
 
@@ -141,11 +129,11 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 ## Tests
 
 ```bash
-npm test          # unit tests for the Hub (fan-out, backpressure, reaping) — no infra needed
-                  # + E2E test (real server, real Redis, real client) — auto-skips without Redis
+npm test          # Hub + benchmark regression tests; legacy E2E auto-skips without Redis
+npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; no skip
 ```
 
-CI runs both against a Redis service container on every push.
+CI runs both commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. Heartbeat and deployment-drain tests are not part of WS-1A.
 
 ## Project layout
 
@@ -157,12 +145,18 @@ src/
   metrics.js     dependency-free counters behind /metrics
   config.js      every knob as an env var
 bench/
-  connect-storm.js   N-connection E2E latency benchmark
+  connect-storm.js   existing-target CLI + versioned result/provenance artifacts
+  run-local.js       one-server launcher with captured runtime metadata
+  runner.js          acknowledged lifecycle + controlled publisher
+  accounting.js      exact per-event/per-client delivery ledger
+  options.js         bounded workload and runtime metadata validation
 load-tests/
   k6-ws-test.js      connection-churn soak test (ramping VUs)
 tests/
   hub.test.js        unit tests (node:test, zero deps)
   e2e.test.js        full-stack smoke test
+  benchmark.test.js  accounting regressions + real-socket/test-publisher fixtures
+  benchmark-integration.test.js  mandatory real Redis + one server + CLI artifacts
 ```
 
 ## Related work

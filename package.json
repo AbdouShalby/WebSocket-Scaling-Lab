@@ -7,7 +7,9 @@
     "start": "node src/server.js",
     "publish-events": "node src/publisher.js",
     "bench": "node bench/connect-storm.js",
-    "test": "node --test tests/hub.test.js tests/e2e.test.js"
+    "test": "node --test tests/hub.test.js tests/benchmark.test.js tests/e2e.test.js",
+    "test:ws1a": "node --test tests/hub.test.js tests/benchmark.test.js tests/benchmark-integration.test.js",
+    "bench:local": "node bench/run-local.js"
   },
   "engines": { "node": ">=20" },
   "license": "MIT",

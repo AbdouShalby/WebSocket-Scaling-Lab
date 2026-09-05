@@ -1,129 +1,74 @@
 'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const os = require('node:os');
+const { createHash } = require('node:crypto');
+const { execFileSync } = require('node:child_process');
+const { ROOT, parseArgs } = require('./options');
+const { runBenchmark } = require('./runner');
 
-/**
- * connect-storm — the honest benchmark client.
- *
- * Opens N WebSocket connections against the target (ramped, not all at once),
- * subscribes each to a product channel, then measures END-TO-END broadcast
- * latency: publisher's `publishedAt` timestamp → client receive time.
- *
- * Reports: connect success/failure, time-to-N-connections, latency
- * p50 / p95 / p99 / max, and messages received.
- *
- * NOTE on clocks: publisher and bench must run on the same machine (or
- * NTP-synced machines) for publishedAt deltas to be meaningful. In this lab's
- * docker-compose everything shares the host clock.
- *
- * Usage:
- *   node bench/connect-storm.js --url ws://localhost:8080 --conns 5000 \
- *        --channels 50 --ramp 200 --measure 30
- *     --conns     total connections to open           (default 1000)
- *     --channels  spread subscriptions over N channels (default 10)
- *     --ramp      new connections per 100ms tick       (default 100)
- *     --measure   seconds to measure after ramp        (default 30)
- */
-
-const WebSocket = require('ws');
-
-function arg(name, fallback) {
-  const i = process.argv.indexOf(`--${name}`);
-  if (i === -1) return fallback;
-  const v = process.argv[i + 1];
-  return typeof fallback === 'number' ? Number(v) : v;
+function provenance(argv, runtime) {
+  const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  const files = git('ls-files', '--cached', '--others', '--exclude-standard').split('\n')
+    .filter((f) => /^(src\/|bench\/.*\.js$|package(-lock)?\.json$|Dockerfile$|docker-compose\.yml$|nginx\.conf$)/.test(f));
+  // Git checkouts may use CRLF on Windows: hash normalized source text for portability.
+  const hashes = Object.fromEntries(files.sort().map((f) => [f, createHash('sha256')
+    .update(fs.readFileSync(path.join(ROOT, f), 'utf8').replace(/\r\n/g, '\n')).digest('hex')]));
+  return {
+    command: { executable: 'node', argv, cwd: 'repository-root' },
+    git: { sha: git('rev-parse', 'HEAD'), dirty: Boolean(git('status', '--porcelain')),
+      sourceHashEncoding: 'UTF-8 with CRLF normalized to LF', sourceSha256: hashes },
+    controller: { node: process.version, ws: require('ws/package.json').version,
+      ioredis: require('ioredis/package.json').version, platform: process.platform,
+      release: os.release(), arch: process.arch, cpu: os.cpus()[0]?.model,
+      logicalCpus: os.cpus().length, totalMemoryBytes: os.totalmem() },
+    target: runtime,
+  };
 }
 
-const URL = arg('url', 'ws://localhost:8080');
-const CONNS = arg('conns', 1000);
-const CHANNELS = arg('channels', 10);
-const RAMP_PER_TICK = arg('ramp', 100);
-const MEASURE_SECONDS = arg('measure', 30);
-
-const latencies = [];
-let connected = 0;
-let failed = 0;
-let received = 0;
-let opened = 0;
-
-const sockets = [];
-const rampStart = Date.now();
-let rampEnd = null;
-
-console.log(`target=${URL} conns=${CONNS} channels=${CHANNELS} ramp=${RAMP_PER_TICK}/100ms measure=${MEASURE_SECONDS}s`);
-
-function openOne(i) {
-  const ws = new WebSocket(URL, { perMessageDeflate: false });
-  sockets.push(ws);
-
-  ws.on('open', () => {
-    connected += 1;
-    ws.send(JSON.stringify({ action: 'subscribe', channel: `product:${(i % CHANNELS) + 1}` }));
-    maybeStartMeasuring();
-  });
-
-  ws.on('message', (raw) => {
-    const now = Date.now();
-    let msg;
-    try { msg = JSON.parse(raw.toString()); } catch { return; }
-    if (msg.type === 'event' && typeof msg.publishedAt === 'number') {
-      received += 1;
-      // Reservoir-ish cap so a long run doesn't hold millions of numbers
-      if (latencies.length < 2_000_000) latencies.push(now - msg.publishedAt);
-    }
-  });
-
-  ws.on('error', () => {
-    failed += 1;
-    maybeStartMeasuring();
-  });
-}
-
-// Start the measurement window once every connection attempt has RESOLVED
-// (connected or failed) — waiting for connected === CONNS would hang forever
-// if even one connection fails, and a few failures at high counts are normal.
-let measuring = false;
-function maybeStartMeasuring() {
-  if (measuring) return;
-  if (connected + failed >= CONNS) {
-    measuring = true;
-    rampEnd = Date.now();
-    console.log(`ramp done: ${connected}/${CONNS} connected (${failed} failed) in ${((rampEnd - rampStart) / 1000).toFixed(1)}s — measuring for ${MEASURE_SECONDS}s`);
-    setTimeout(finish, MEASURE_SECONDS * 1000);
+async function execute(options, runtime, argv) {
+  const meta = provenance(argv, runtime);
+  const lines = [];
+  const result = await runBenchmark(options, runtime, { onState: (s) => {
+    const line = `${new Date().toISOString()} ${s}`;
+    lines.push(line); console.log(line);
+  } });
+  const after = provenance(argv, runtime);
+  meta.sourceChangedDuringRun = meta.git.sha !== after.git.sha ||
+    JSON.stringify(meta.git.sourceSha256) !== JSON.stringify(after.git.sourceSha256);
+  if (meta.sourceChangedDuringRun) {
+    result.status = 'FAILED';
+    result.failures.push('source-changed-during-run');
   }
+  result.provenance = meta;
+  result.methodology = {
+    latency: 'controller monotonic time before Redis publish to the same controller receiving a unique event; in-window only; 1ms histogram',
+    throughput: 'unique in-window deliveries / actual monotonic measurement seconds; late/duplicates excluded',
+    expected: 'issued measurement events times assigned subscribers, including uncertain/failed publishes',
+    boundary: 'warmup reset; bounded post-measurement drain counts late and missing; no latency samples in drain',
+    limitations: ['single controller/publisher process shares CPU and event loop with clients',
+      'target metadata is declared by operator or captured by run-local; instance IDs are observations, not multi-node proof',
+      'complete is a finite benchmark result, not a delivery guarantee; after-drain arrivals are missing'],
+  };
+  const directory = path.resolve(ROOT, options['output-dir']);
+  fs.mkdirSync(directory, { recursive: true });
+  const name = `${result.startedAt.replace(/[:.]/g, '-')}-${result.runId}`;
+  const jsonPath = path.join(directory, `${name}.json`);
+  fs.writeFileSync(jsonPath, JSON.stringify(result, null, 2) + '\n', { flag: 'wx' });
+  lines.push(JSON.stringify({ status: result.status, failures: result.failures, accounting: result.accounting }));
+  fs.writeFileSync(path.join(directory, `${name}.log`), lines.join('\n') + '\n', { flag: 'wx' });
+  console.log(`RESULT ${jsonPath}`);
+  console.log(`${result.status}: ${result.accounting.inWindow} in-window deliveries; ${result.accounting.deliveriesPerSecond.toFixed(2)}/s`);
+  return result;
 }
 
-const ramp = setInterval(() => {
-  for (let i = 0; i < RAMP_PER_TICK && opened < CONNS; i++) {
-    openOne(opened);
-    opened += 1;
-  }
-  if (opened >= CONNS) clearInterval(ramp);
-}, 100);
-
-// Progress line every 5s
-const progress = setInterval(() => {
-  console.log(`  connected=${connected}/${CONNS} failed=${failed} received=${received}`);
-}, 5000);
-
-function pct(sorted, p) {
-  if (sorted.length === 0) return NaN;
-  return sorted[Math.min(sorted.length - 1, Math.floor((p / 100) * sorted.length))];
+if (require.main === module) {
+  (async () => {
+    const options = parseArgs(process.argv.slice(2));
+    if (!options.runtime) throw new Error('provide --runtime <metadata.json>, or use bench/run-local.js');
+    const runtime = JSON.parse(fs.readFileSync(path.resolve(options.runtime), 'utf8'));
+    const result = await execute(options, runtime, ['bench/connect-storm.js', ...process.argv.slice(2)]);
+    process.exitCode = result.status === 'COMPLETE' ? 0 : 1;
+  })().catch((e) => { console.error(e.message); process.exitCode = 1; });
 }
-
-function finish() {
-  clearInterval(progress);
-  latencies.sort((a, b) => a - b);
-  console.log('\n══════════ RESULTS ══════════');
-  console.log(`connections opened : ${connected}/${CONNS} (${failed} failed)`);
-  console.log(`ramp time          : ${rampEnd ? ((rampEnd - rampStart) / 1000).toFixed(1) : '?'}s`);
-  console.log(`events received    : ${received}`);
-  if (latencies.length > 0) {
-    console.log(`E2E latency  p50   : ${pct(latencies, 50)} ms`);
-    console.log(`             p95   : ${pct(latencies, 95)} ms`);
-    console.log(`             p99   : ${pct(latencies, 99)} ms`);
-    console.log(`             max   : ${latencies[latencies.length - 1]} ms`);
-  } else {
-    console.log('no events received — is the publisher running?');
-  }
-  for (const ws of sockets) { try { ws.terminate(); } catch { /* noop */ } }
-  process.exit(0);
-}
+module.exports = { provenance, execute };
