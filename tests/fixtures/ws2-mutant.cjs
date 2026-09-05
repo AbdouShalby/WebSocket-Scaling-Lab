@@ -4,7 +4,9 @@ const fs = require('node:fs'), path = require('node:path'), Module = require('no
 const original = Module._extensions['.js'];
 const mode = process.env.WS2_MUTATION;
 const targets = {
-  recovery: ['src/server.js', '...config.redis, retryStrategy:', '...config.redis, autoResubscribe: false, retryStrategy:'],
+  // WS-3 owns ACK-aware resubscription. Suppress every attempt after the first
+  // connection generation, including periodic retries; same missing-recovery bug.
+  recovery: ['src/readiness.js', 'if (this.draining || this.inFlight ||', 'if (this.epoch > 1 || this.draining || this.inFlight ||'],
   drain: ['src/server.js', "process.on('SIGTERM', () => shutdown('SIGTERM'));", '// negative control: no SIGTERM handler'],
   backpressure: ['src/hub.js', 'if (socket.bufferedAmount > this.maxBufferedBytes)', 'if (false)'],
 };

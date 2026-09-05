@@ -90,7 +90,28 @@ npm run test:ws2
 npm run proof:operations
 ```
 
-No application source change was needed for WS-2. `/healthz` still reports success during Redis outage and is not a readiness check. These are bounded production-inspired experiments, not lossless-deployment, arbitrary-crash or production-recovery guarantees.
+No application source change was needed for WS-2. `/healthz` reports liveness even during Redis outage; WS-3 adds a separate readiness check below. These are bounded production-inspired experiments, not lossless-deployment, arbitrary-crash or production-recovery guarantees.
+
+### Security, readiness and operational telemetry
+
+[WS-3 contracts, tests and evidence](docs/ws-3.md) cover malformed-input crash prevention,
+exact optional Origin checks, per-connection message limits, and real subscriber
+readiness across unavailable startup, denied SUBSCRIBE, Redis outage/stall/recovery
+and SIGTERM. `/readyz` returns 503 until the current Redis subscription is acknowledged;
+new upgrades also fail 503 while unready/draining. Existing connections do not gain
+durable replay. `/metrics` exposes per-process state/counters and event-loop telemetry,
+not receipt acknowledgments or fleet-level SLOs.
+
+Direct startup binds loopback by default; Compose publishes only loopback ports.
+`ALLOWED_ORIGINS` is optional for local benchmarks and **is not authentication**.
+There is no user/channel authorization, TLS termination or DDoS protection. Keep
+simulated events and metrics on a trusted local network; this is not a public-ready
+security deployment. See WS-3 for exact configuration and limitations.
+
+```bash
+npm run test:ws3     # Linux/WSL; owned real Redis and server processes; no skip
+npm run proof:guards # versioned security/readiness/telemetry evidence
+```
 
 Watch the fleet while it runs:
 
@@ -165,9 +186,10 @@ npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; 
 npm run test:ws1b # mandatory real Redis + two-process proof and negative controls; no skip
 npm run test:ws1c # mandatory real Redis + short 1/2/4-process matrix; not a capacity test
 npm run test:ws2  # POSIX only; owns real Redis/processes; operational scenarios + negative controls
+npm run test:ws3  # POSIX only; real security/readiness/telemetry proof + negative controls
 ```
 
-CI is configured to run the first four commands against a Redis service container and WS-2 in a separate Linux job with owned ephemeral Redis processes. Benchmark regression fixtures are explicitly distinguished from real infrastructure. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. WS-2 covers the documented close/deadline scenarios, not rolling deployments or full heartbeat-failure coverage.
+CI is configured to run the first four commands against a Redis service container and WS-2/WS-3 in a separate Linux job with owned ephemeral Redis processes. Benchmark regression fixtures are explicitly distinguished from real infrastructure. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. WS-2 covers the documented close/deadline scenarios, not rolling deployments or full heartbeat-failure coverage.
 
 ## Project layout
 
@@ -178,6 +200,8 @@ src/
   publisher.js   simulated marketplace event source (rate/channels/duration flags)
   metrics.js     dependency-free counters behind /metrics
   config.js      every knob as an env var
+  protocol.js    ingress shape validation and per-connection token bucket
+  readiness.js   ACK-aware subscriber readiness, health checks and drain state
 bench/
   connect-storm.js   existing-target CLI + versioned result/provenance artifacts
   run-local.js       one-server launcher with captured runtime metadata
@@ -187,6 +211,7 @@ bench/
   scaling-report.js  validated aggregation and generated same-host curves
   operational-lab.js owned POSIX Redis/server/socket test resources and receipt ledger
   prove-operations.js real operational scenarios and versioned evidence
+  prove-guards.js     real WS-3 security/readiness/telemetry scenarios and evidence
   runner.js          acknowledged lifecycle + controlled publisher
   accounting.js      exact per-event/per-client delivery ledger
   options.js         bounded workload and runtime metadata validation
@@ -201,6 +226,9 @@ tests/
   scaling.test.js    matrix/routing/aggregation regressions
   scaling-integration.test.js   real 1/2/4-process short matrix + negative control
   operations.test.js real POSIX failure/recovery scenarios + targeted negative controls
+  guards.test.js     deterministic validation/rate/readiness/config regressions
+  guards-integration.test.js real WS-3 scenarios + four negative controls
+  fixtures/ws3-mutant.cjs       explicit in-memory WS-3 negative controls
   fixtures/ws2-mutant.cjs       explicit in-memory operational negative controls
   fixtures/ws1b-mutant.cjs       explicit test-only in-memory mutation preload
 ```

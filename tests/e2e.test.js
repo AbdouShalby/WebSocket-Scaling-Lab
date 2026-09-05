@@ -52,6 +52,12 @@ test('publish → redis → server → subscribed client (end to end)', { timeou
     server.on('exit', () => reject(new Error('server exited early')));
   });
 
+  // Listening is liveness, not readiness: WS-3 rejects upgrades until Redis ACK.
+  const readyDeadline = Date.now() + 5000;
+  while (!(await fetch(`http://127.0.0.1:${PORT}/readyz`, { signal: AbortSignal.timeout(1000) })).ok) {
+    assert.ok(Date.now() < readyDeadline, 'server did not become subscription-ready');
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
   const ws = new WebSocket(`ws://127.0.0.1:${PORT}`);
   t.after(() => ws.terminate());
 

@@ -1,0 +1,1472 @@
+{
+  "schemaVersion": 1,
+  "milestone": "WS-3",
+  "startedAt": "2026-09-05T15:31:52.483Z",
+  "status": "PASSED",
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "bench/prove-guards.js",
+        "--output-dir",
+        "docs/evidence/ws-3"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "7cd086e097f9a740984dec92270c8408af9bc3fb",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "20f849e8c33f58e820a572254335da01d65f46bb765039a6cfc574467a8394e7",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-guards.js": "396113f4d6b4a3924bd5b97ec45ef9c344b0a1555a727d0fb04cc3e11ad59b8d",
+        "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "d56838bb7ae22925b50d8b893f2b519e3a72aa8bbc1bfdc5725c659e40cba115",
+        "nginx.conf": "39fe4a4ebe0bfb54435f0e7c30f6b8126e582f2fb27f43c3d73cc8624f76af22",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "b5472f0869a9396f5f99c2e2e91a7b8b24231a3ce2ca06519d49d054f2f49fc9",
+        "src/config.js": "995545a86b0b649cb46fe40226d88fd4e36f1e77e4d952d0cac00ac876e1d5c0",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "af942c83f6784f8256c00836198a9285869c138f1faed9e077f79563bb17ea93",
+        "src/protocol.js": "99017b05176dd3aa3afc48e4dfa9d24d0d5d7434c9ddfa01f6472cb78e728c79",
+        "src/publisher.js": "1ba669bfbaadb7f259092e6161797bb8ec3d96612bd10c2a6e0cd55a6bebd993",
+        "src/readiness.js": "bac46350010519e6279510dcdeb24dddc653102685ce39eaece8ef257e0861c6",
+        "src/server.js": "c5a90236c0937fafb2b794f78e251718a337536c78347b84ac161c13cfdcff1f",
+        "tests/guards.test.js": "45389abb15598aab1acd9d699efe0b4c9e601f403fc139ca6e6ee1a08c37d2d4",
+        "tests/guards-integration.test.js": "ecf59e826a0b9a9059acd7027c0bc1d7f1526b0d38d5e0ae9ebace8393d3a8ed",
+        "tests/fixtures/ws3-mutant.cjs": "5b3914ec6bfbfaf29c117f595f9fb93e01188c68c018e8f7477b4c104bceb999"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "linux",
+      "release": "6.18.33.1-microsoft-standard-WSL2",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 12490276864
+    },
+    "target": {
+      "topology": "owned real POSIX Redis/server processes and loopback sockets; no nginx",
+      "testProfile": "WS-3 security/readiness/telemetry, not capacity"
+    },
+    "testMutation": null,
+    "sourceChangedDuringRun": false
+  },
+  "scenarios": [
+    {
+      "scenario": "ws3-security",
+      "runId": "d6abb0ea-0a79-4e24-800e-0b6df9e49bfc",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 6.382820000000038,
+          "role": "redis",
+          "pid": 10243
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 38.84393799999998,
+          "role": "ws3-server",
+          "pid": 10253
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 932.5618170000002,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:53.881Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 954.2805229999999,
+          "status": 403
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 974.9095860000002,
+          "status": 403
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 995.3520509999998,
+          "status": 403
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 1016.3822279999999,
+          "status": 403
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 1037.3164660000002,
+          "status": 403
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 1058.1981150000001,
+          "status": 404
+        },
+        {
+          "action": "valid-event-after-invalid-input",
+          "elapsedMs": 1408.481261,
+          "event": {
+            "type": "event",
+            "channel": "safe:channel",
+            "data": {
+              "marker": "after-invalid-input"
+            },
+            "publishedAt": 1788622314374,
+            "relayedBy": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be",
+            "relayedAt": 1788622314382
+          }
+        },
+        {
+          "action": "binary-close",
+          "elapsedMs": 1448.976576,
+          "code": 1003,
+          "reason": "text JSON required"
+        },
+        {
+          "action": "oversized-close",
+          "elapsedMs": 1489.812907,
+          "code": 1009,
+          "reason": ""
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1491.432104,
+          "route": "/metrics",
+          "status": 200,
+          "body": {
+            "instance": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be",
+            "uptimeSeconds": 1,
+            "rss": 79249408,
+            "heapUsed": 13877688,
+            "eventLoop": {
+              "meanDelayMs": 19.987387733333335,
+              "p99DelayMs": 20.692991,
+              "maxDelayMs": 20.692991,
+              "utilization": 0.05513318223735548
+            },
+            "connectionsTotal": 3,
+            "connectionsClosed": 2,
+            "socketErrors": 0,
+            "invalidMessages": 12,
+            "oversizedMessages": 1,
+            "subscriptionRejections": 1,
+            "rateLimitedConnections": 0,
+            "rejectedUpgrades": 6,
+            "unreadyUpgrades": 0,
+            "malformedEnvelopes": 7,
+            "envelopesReceived": 1,
+            "delivered": 1,
+            "dropped": 0,
+            "reapedConnections": 0,
+            "redisErrors": 0,
+            "redisReconnects": 0,
+            "redisCheckFailures": 0,
+            "redisSubscriptionAcks": 1,
+            "readinessTransitions": 2,
+            "readiness": {
+              "ready": true,
+              "draining": false,
+              "reason": "subscribed",
+              "changedAt": "2026-09-05T15:31:53.881Z",
+              "redis": {
+                "status": "ready",
+                "subscribed": true
+              }
+            },
+            "hub": {
+              "channels": 2,
+              "connections": 1,
+              "messagesSent": 1,
+              "messagesDropped": 0,
+              "slowConsumersKicked": 0
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1492.3177719999999,
+          "route": "/healthz",
+          "status": 200,
+          "body": {
+            "ok": true,
+            "instance": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be"
+          }
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1749.793542,
+          "role": "ws3-server",
+          "pid": 10253,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1765.775799,
+          "role": "redis",
+          "pid": 10243,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 1785.0253400000001
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 10243,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "32829",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10243:C 05 Sep 2026 18:31:52.997 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10243:C 05 Sep 2026 18:31:52.997 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10243:C 05 Sep 2026 18:31:52.997 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10243, just started\n10243:C 05 Sep 2026 18:31:52.997 * Configuration loaded\n10243:M 05 Sep 2026 18:31:52.997 * monotonic clock: POSIX clock_gettime\n10243:M 05 Sep 2026 18:31:52.998 * Running mode=standalone, port=32829.\n10243:M 05 Sep 2026 18:31:52.998 * Server initialized\n10243:M 05 Sep 2026 18:31:52.999 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "229b0b727f722580f4273ea5ee0cdbced3f6cdf0",
+            "port": 32829
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1765.766119
+          }
+        },
+        {
+          "role": "ws3-server",
+          "pid": 10253,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be\",\"msg\":\"listening on :44689\",\"t\":\"2026-09-05T15:31:53.873Z\"}\n{\"level\":\"info\",\"instance\":\"ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:53.880Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:53.880Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be\",\"msg\":\"subscribed to ws2:d6abb0ea-0a79-4e24-800e-0b6df9e49bfc:all\",\"t\":\"2026-09-05T15:31:53.881Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:53.881Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n",
+          "errors": "",
+          "config": {
+            "PORT": "44689",
+            "HOST": "127.0.0.1",
+            "INSTANCE_ID": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "32829",
+            "CHANNEL_PREFIX": "ws2:d6abb0ea-0a79-4e24-800e-0b6df9e49bfc:",
+            "ALLOWED_ORIGINS": "https://allowed.example",
+            "MAX_SUBS_PER_CONN": "2",
+            "MAX_PAYLOAD_BYTES": "4096",
+            "MAX_ENVELOPE_BYTES": "1048576",
+            "MESSAGES_PER_SECOND": "100",
+            "MESSAGE_BURST": "200",
+            "REDIS_CHECK_INTERVAL_MS": "500",
+            "REDIS_CHECK_TIMEOUT_MS": "500",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1749.781042
+          }
+        }
+      ],
+      "clients": [],
+      "publications": [],
+      "receipts": [],
+      "observations": {
+        "securityMetrics": {
+          "instance": "ws3-4238f126-cb7d-48d6-9a1a-8dc256eb80be",
+          "uptimeSeconds": 1,
+          "rss": 79249408,
+          "heapUsed": 13877688,
+          "eventLoop": {
+            "meanDelayMs": 19.987387733333335,
+            "p99DelayMs": 20.692991,
+            "maxDelayMs": 20.692991,
+            "utilization": 0.05513318223735548
+          },
+          "connectionsTotal": 3,
+          "connectionsClosed": 2,
+          "socketErrors": 0,
+          "invalidMessages": 12,
+          "oversizedMessages": 1,
+          "subscriptionRejections": 1,
+          "rateLimitedConnections": 0,
+          "rejectedUpgrades": 6,
+          "unreadyUpgrades": 0,
+          "malformedEnvelopes": 7,
+          "envelopesReceived": 1,
+          "delivered": 1,
+          "dropped": 0,
+          "reapedConnections": 0,
+          "redisErrors": 0,
+          "redisReconnects": 0,
+          "redisCheckFailures": 0,
+          "redisSubscriptionAcks": 1,
+          "readinessTransitions": 2,
+          "readiness": {
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:53.881Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          },
+          "hub": {
+            "channels": 2,
+            "connections": 1,
+            "messagesSent": 1,
+            "messagesDropped": 0,
+            "slowConsumersKicked": 0
+          }
+        }
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "ws3-rate",
+      "runId": "6ca39a62-534e-4ef1-96e9-03b8b1cb9223",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 2.439284999999927,
+          "role": "redis",
+          "pid": 10265
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 28.166271999999935,
+          "role": "ws3-server",
+          "pid": 10271
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 899.4758380000003,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-1b655038-3532-43e9-b2db-62ae3d3e90af",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:55.662Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 982.4701700000005,
+          "route": "/metrics",
+          "status": 200,
+          "body": {
+            "instance": "ws3-1b655038-3532-43e9-b2db-62ae3d3e90af",
+            "uptimeSeconds": 0,
+            "rss": 74420224,
+            "heapUsed": 12776040,
+            "eventLoop": {
+              "meanDelayMs": 20.328448,
+              "p99DelayMs": 21.020671,
+              "maxDelayMs": 21.020671,
+              "utilization": 0.17997306665102072
+            },
+            "connectionsTotal": 2,
+            "connectionsClosed": 1,
+            "socketErrors": 0,
+            "invalidMessages": 3,
+            "oversizedMessages": 0,
+            "subscriptionRejections": 0,
+            "rateLimitedConnections": 1,
+            "rejectedUpgrades": 0,
+            "unreadyUpgrades": 0,
+            "malformedEnvelopes": 0,
+            "envelopesReceived": 0,
+            "delivered": 0,
+            "dropped": 0,
+            "reapedConnections": 0,
+            "redisErrors": 0,
+            "redisReconnects": 0,
+            "redisCheckFailures": 0,
+            "redisSubscriptionAcks": 1,
+            "readinessTransitions": 2,
+            "readiness": {
+              "ready": true,
+              "draining": false,
+              "reason": "subscribed",
+              "changedAt": "2026-09-05T15:31:55.662Z",
+              "redis": {
+                "status": "ready",
+                "subscribed": true
+              }
+            },
+            "hub": {
+              "channels": 0,
+              "connections": 1,
+              "messagesSent": 0,
+              "messagesDropped": 0,
+              "slowConsumersKicked": 0
+            }
+          }
+        },
+        {
+          "action": "rate-close",
+          "elapsedMs": 982.4743200000003,
+          "code": 1008,
+          "reason": "message rate exceeded"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1236.9513619999998,
+          "role": "ws3-server",
+          "pid": 10271,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1253.992295,
+          "role": "redis",
+          "pid": 10265,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 1274.1149340000002
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 10265,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "44123",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10265:C 05 Sep 2026 18:31:54.779 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10265:C 05 Sep 2026 18:31:54.779 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10265:C 05 Sep 2026 18:31:54.779 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10265, just started\n10265:C 05 Sep 2026 18:31:54.779 * Configuration loaded\n10265:M 05 Sep 2026 18:31:54.779 * monotonic clock: POSIX clock_gettime\n10265:M 05 Sep 2026 18:31:54.780 * Running mode=standalone, port=44123.\n10265:M 05 Sep 2026 18:31:54.780 * Server initialized\n10265:M 05 Sep 2026 18:31:54.781 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "6942048f2f24ed231592c7eb158b355a9dd08879",
+            "port": 44123
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1253.9878049999998
+          }
+        },
+        {
+          "role": "ws3-server",
+          "pid": 10271,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws3-1b655038-3532-43e9-b2db-62ae3d3e90af\",\"msg\":\"listening on :36953\",\"t\":\"2026-09-05T15:31:55.651Z\"}\n{\"level\":\"info\",\"instance\":\"ws3-1b655038-3532-43e9-b2db-62ae3d3e90af\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:55.661Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:55.661Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-1b655038-3532-43e9-b2db-62ae3d3e90af\",\"msg\":\"subscribed to ws2:6ca39a62-534e-4ef1-96e9-03b8b1cb9223:all\",\"t\":\"2026-09-05T15:31:55.662Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:55.662Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n",
+          "errors": "",
+          "config": {
+            "PORT": "36953",
+            "HOST": "127.0.0.1",
+            "INSTANCE_ID": "ws3-1b655038-3532-43e9-b2db-62ae3d3e90af",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "44123",
+            "CHANNEL_PREFIX": "ws2:6ca39a62-534e-4ef1-96e9-03b8b1cb9223:",
+            "ALLOWED_ORIGINS": "",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096",
+            "MAX_ENVELOPE_BYTES": "1048576",
+            "MESSAGES_PER_SECOND": "1",
+            "MESSAGE_BURST": "3",
+            "REDIS_CHECK_INTERVAL_MS": "500",
+            "REDIS_CHECK_TIMEOUT_MS": "500",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1236.9425419999998
+          }
+        }
+      ],
+      "clients": [],
+      "publications": [],
+      "receipts": [],
+      "observations": {
+        "rateMetrics": {
+          "instance": "ws3-1b655038-3532-43e9-b2db-62ae3d3e90af",
+          "uptimeSeconds": 0,
+          "rss": 74420224,
+          "heapUsed": 12776040,
+          "eventLoop": {
+            "meanDelayMs": 20.328448,
+            "p99DelayMs": 21.020671,
+            "maxDelayMs": 21.020671,
+            "utilization": 0.17997306665102072
+          },
+          "connectionsTotal": 2,
+          "connectionsClosed": 1,
+          "socketErrors": 0,
+          "invalidMessages": 3,
+          "oversizedMessages": 0,
+          "subscriptionRejections": 0,
+          "rateLimitedConnections": 1,
+          "rejectedUpgrades": 0,
+          "unreadyUpgrades": 0,
+          "malformedEnvelopes": 0,
+          "envelopesReceived": 0,
+          "delivered": 0,
+          "dropped": 0,
+          "reapedConnections": 0,
+          "redisErrors": 0,
+          "redisReconnects": 0,
+          "redisCheckFailures": 0,
+          "redisSubscriptionAcks": 1,
+          "readinessTransitions": 2,
+          "readiness": {
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:55.662Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          },
+          "hub": {
+            "channels": 0,
+            "connections": 1,
+            "messagesSent": 0,
+            "messagesDropped": 0,
+            "slowConsumersKicked": 0
+          }
+        }
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "ws3-readiness",
+      "runId": "7d003a99-88da-472c-8d60-80c648abcf45",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 2.11428000000069,
+          "role": "redis",
+          "pid": 10290
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 24.316141000000243,
+          "pid": 10290,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 24.998031000000083,
+          "role": "redis",
+          "pid": 10290,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 47.41259799999989,
+          "role": "ws3-server",
+          "pid": 10296
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 917.5425960000002,
+          "route": "/readyz",
+          "status": 503,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": false,
+            "draining": false,
+            "reason": "redis-unavailable",
+            "changedAt": "2026-09-05T15:31:56.946Z",
+            "redis": {
+              "status": "reconnecting",
+              "subscribed": false
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 918.6751400000003,
+          "route": "/healthz",
+          "status": 200,
+          "body": {
+            "ok": true,
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b"
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 939.1240750000006,
+          "status": 503
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 940.9813490000006,
+          "role": "redis",
+          "pid": 10306
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1009.7740600000006,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:57.053Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1010.1074560000006,
+          "count": 1
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1030.7585370000006,
+          "id": "same-client",
+          "instanceId": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1051.0679040000005,
+          "client": "same-client"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1051.473379,
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/0",
+          "label": "ready-before-outage",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1071.135494,
+          "pid": 10306,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1072.4553460000006,
+          "role": "redis",
+          "pid": 10306,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1093.4756630000002,
+          "route": "/readyz",
+          "status": 503,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": false,
+            "draining": false,
+            "reason": "redis-unavailable",
+            "changedAt": "2026-09-05T15:31:57.118Z",
+            "redis": {
+              "status": "reconnecting",
+              "subscribed": false
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1094.2191520000006,
+          "route": "/healthz",
+          "status": 200,
+          "body": {
+            "ok": true,
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b"
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 1114.2405830000007,
+          "status": 503
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 1116.1638760000005,
+          "role": "redis",
+          "pid": 10316
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1182.1451260000003,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:57.220Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1182.3363140000001,
+          "count": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1183.9558610000004,
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/1",
+          "label": "ready-after-outage",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1204.5876230000003,
+          "pid": 10316,
+          "signal": "SIGSTOP"
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1893.2736610000002,
+          "route": "/readyz",
+          "status": 503,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": false,
+            "draining": false,
+            "reason": "redis-check-failed",
+            "changedAt": "2026-09-05T15:31:57.937Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": false
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1893.888363,
+          "route": "/healthz",
+          "status": 200,
+          "body": {
+            "ok": true,
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b"
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 1914.1029710000003,
+          "status": 503
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1914.1149110000006,
+          "pid": 10316,
+          "signal": "SIGCONT"
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 2019.0039690000003,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:58.062Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 2019.2710550000002,
+          "count": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2019.4746220000006,
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/2",
+          "label": "ready-after-stall",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 2040.7247960000004,
+          "route": "/metrics",
+          "status": 200,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "uptimeSeconds": 1,
+            "rss": 75333632,
+            "heapUsed": 14406600,
+            "eventLoop": {
+              "meanDelayMs": 20.047261192982457,
+              "p99DelayMs": 20.856831,
+              "maxDelayMs": 20.856831,
+              "utilization": 0.03569854927736303
+            },
+            "connectionsTotal": 1,
+            "connectionsClosed": 0,
+            "socketErrors": 0,
+            "invalidMessages": 0,
+            "oversizedMessages": 0,
+            "subscriptionRejections": 0,
+            "rateLimitedConnections": 0,
+            "rejectedUpgrades": 0,
+            "unreadyUpgrades": 3,
+            "malformedEnvelopes": 0,
+            "envelopesReceived": 3,
+            "delivered": 3,
+            "dropped": 0,
+            "reapedConnections": 0,
+            "redisErrors": 1,
+            "redisReconnects": 3,
+            "redisCheckFailures": 2,
+            "redisSubscriptionAcks": 3,
+            "readinessTransitions": 10,
+            "readiness": {
+              "ready": true,
+              "draining": false,
+              "reason": "subscribed",
+              "changedAt": "2026-09-05T15:31:58.062Z",
+              "redis": {
+                "status": "ready",
+                "subscribed": true
+              }
+            },
+            "hub": {
+              "channels": 1,
+              "connections": 1,
+              "messagesSent": 3,
+              "messagesDropped": 0,
+              "slowConsumersKicked": 0
+            }
+          }
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 2040.8171740000007,
+          "pid": 10296,
+          "signal": "SIGTERM"
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 2061.681445,
+          "route": "/readyz",
+          "status": 503,
+          "body": {
+            "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "ready": false,
+            "draining": true,
+            "reason": "draining",
+            "changedAt": "2026-09-05T15:31:58.087Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": false
+            }
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 2081.7696450000003,
+          "status": 503
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2082.6458920000005,
+          "id": "same-client",
+          "code": 1001,
+          "reason": "server shutting down"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2089.1241120000004,
+          "role": "ws3-server",
+          "pid": 10296,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2353.15574,
+          "role": "redis",
+          "pid": 10316,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 2372.2856840000004
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 10290,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "46713",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10290:C 05 Sep 2026 18:31:56.052 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10290:C 05 Sep 2026 18:31:56.052 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10290:C 05 Sep 2026 18:31:56.052 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10290, just started\n10290:C 05 Sep 2026 18:31:56.052 * Configuration loaded\n10290:M 05 Sep 2026 18:31:56.053 * monotonic clock: POSIX clock_gettime\n10290:M 05 Sep 2026 18:31:56.053 * Running mode=standalone, port=46713.\n10290:M 05 Sep 2026 18:31:56.054 * Server initialized\n10290:M 05 Sep 2026 18:31:56.054 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "c0b875bc1c77355071d3bbff30530ffffe891809",
+            "port": 46713
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 24.990701000000627
+          }
+        },
+        {
+          "role": "ws3-server",
+          "pid": 10296,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"listening on :44387\",\"t\":\"2026-09-05T15:31:56.942Z\"}\n{\"level\":\"error\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"redis error\",\"t\":\"2026-09-05T15:31:56.946Z\",\"event\":\"redis-error\"}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:56.946Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-unavailable\",\"changedAt\":\"2026-09-05T15:31:56.946Z\",\"redis\":{\"status\":\"reconnecting\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:57.053Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:57.053Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"subscribed to ws2:7d003a99-88da-472c-8d60-80c648abcf45:all\",\"t\":\"2026-09-05T15:31:57.053Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:57.053Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:57.119Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-unavailable\",\"changedAt\":\"2026-09-05T15:31:57.118Z\",\"redis\":{\"status\":\"reconnecting\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:57.219Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:57.219Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"subscribed to ws2:7d003a99-88da-472c-8d60-80c648abcf45:all\",\"t\":\"2026-09-05T15:31:57.220Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:57.220Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:57.937Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-check-failed\",\"changedAt\":\"2026-09-05T15:31:57.937Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:57.961Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-unavailable\",\"changedAt\":\"2026-09-05T15:31:57.961Z\",\"redis\":{\"status\":\"reconnecting\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:58.062Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:58.062Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"subscribed to ws2:7d003a99-88da-472c-8d60-80c648abcf45:all\",\"t\":\"2026-09-05T15:31:58.062Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:58.062Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:58.087Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":true,\"reason\":\"draining\",\"changedAt\":\"2026-09-05T15:31:58.087Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"SIGTERM received — draining\",\"t\":\"2026-09-05T15:31:58.087Z\",\"event\":\"shutdown-start\"}\n{\"level\":\"info\",\"instance\":\"ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b\",\"msg\":\"drain complete\",\"t\":\"2026-09-05T15:31:58.130Z\",\"event\":\"shutdown-complete\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "44387",
+            "HOST": "127.0.0.1",
+            "INSTANCE_ID": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "46713",
+            "CHANNEL_PREFIX": "ws2:7d003a99-88da-472c-8d60-80c648abcf45:",
+            "ALLOWED_ORIGINS": "",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096",
+            "MAX_ENVELOPE_BYTES": "1048576",
+            "MESSAGES_PER_SECOND": "100",
+            "MESSAGE_BURST": "200",
+            "REDIS_CHECK_INTERVAL_MS": "500",
+            "REDIS_CHECK_TIMEOUT_MS": "500",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500"
+          },
+          "exit": {
+            "code": 0,
+            "signal": null,
+            "elapsedMs": 2089.1151520000003
+          }
+        },
+        {
+          "role": "redis",
+          "pid": 10306,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "46713",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10306:C 05 Sep 2026 18:31:56.991 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10306:C 05 Sep 2026 18:31:56.991 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10306:C 05 Sep 2026 18:31:56.991 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10306, just started\n10306:C 05 Sep 2026 18:31:56.991 * Configuration loaded\n10306:M 05 Sep 2026 18:31:56.992 * monotonic clock: POSIX clock_gettime\n10306:M 05 Sep 2026 18:31:56.993 * Running mode=standalone, port=46713.\n10306:M 05 Sep 2026 18:31:56.993 * Server initialized\n10306:M 05 Sep 2026 18:31:56.993 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "ac2204240dc1409d7ebadfbba56bb9a9eca10502",
+            "port": 46713
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1072.449326
+          }
+        },
+        {
+          "role": "redis",
+          "pid": 10316,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "46713",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10316:C 05 Sep 2026 18:31:57.167 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10316:C 05 Sep 2026 18:31:57.167 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10316:C 05 Sep 2026 18:31:57.167 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10316, just started\n10316:C 05 Sep 2026 18:31:57.167 * Configuration loaded\n10316:M 05 Sep 2026 18:31:57.167 * monotonic clock: POSIX clock_gettime\n10316:M 05 Sep 2026 18:31:57.168 * Running mode=standalone, port=46713.\n10316:M 05 Sep 2026 18:31:57.168 * Server initialized\n10316:M 05 Sep 2026 18:31:57.169 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "8c81bf9b65234de3436b164e1611968f2252523c",
+            "port": 46713
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2353.15042
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "same-client",
+          "url": "ws://127.0.0.1:44387",
+          "instanceId": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+          "errors": [],
+          "close": {
+            "code": 1001,
+            "reason": "server shutting down"
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/0",
+          "label": "ready-before-outage",
+          "required": [
+            "same-client"
+          ],
+          "allowed": [
+            "same-client"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/1",
+          "label": "ready-after-outage",
+          "required": [
+            "same-client"
+          ],
+          "allowed": [
+            "same-client"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/2",
+          "label": "ready-after-stall",
+          "required": [
+            "same-client"
+          ],
+          "allowed": [
+            "same-client"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        }
+      ],
+      "receipts": [
+        {
+          "client": "same-client",
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/0",
+          "relayedBy": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+          "bytes": 280,
+          "elapsedMs": 1051.9541520000002
+        },
+        {
+          "client": "same-client",
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/1",
+          "relayedBy": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+          "bytes": 279,
+          "elapsedMs": 1184.0365000000002
+        },
+        {
+          "client": "same-client",
+          "id": "7d003a99-88da-472c-8d60-80c648abcf45/2",
+          "relayedBy": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+          "bytes": 278,
+          "elapsedMs": 2019.7100690000007
+        }
+      ],
+      "observations": {
+        "recoveryMetrics": {
+          "instance": "ws3-c08f6628-b1ae-4287-bb3f-b5aa4fbb671b",
+          "uptimeSeconds": 1,
+          "rss": 75333632,
+          "heapUsed": 14406600,
+          "eventLoop": {
+            "meanDelayMs": 20.047261192982457,
+            "p99DelayMs": 20.856831,
+            "maxDelayMs": 20.856831,
+            "utilization": 0.03569854927736303
+          },
+          "connectionsTotal": 1,
+          "connectionsClosed": 0,
+          "socketErrors": 0,
+          "invalidMessages": 0,
+          "oversizedMessages": 0,
+          "subscriptionRejections": 0,
+          "rateLimitedConnections": 0,
+          "rejectedUpgrades": 0,
+          "unreadyUpgrades": 3,
+          "malformedEnvelopes": 0,
+          "envelopesReceived": 3,
+          "delivered": 3,
+          "dropped": 0,
+          "reapedConnections": 0,
+          "redisErrors": 1,
+          "redisReconnects": 3,
+          "redisCheckFailures": 2,
+          "redisSubscriptionAcks": 3,
+          "readinessTransitions": 10,
+          "readiness": {
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:58.062Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          },
+          "hub": {
+            "channels": 1,
+            "connections": 1,
+            "messagesSent": 3,
+            "messagesDropped": 0,
+            "slowConsumersKicked": 0
+          }
+        },
+        "structuredLogEntries": 15
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "ws3-subscription-ack",
+      "runId": "98f289cc-beb2-41c7-8681-7f204b6b6764",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 2.3686470000002373,
+          "role": "redis",
+          "pid": 10329
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 28.863177999999607,
+          "role": "ws3-server",
+          "pid": 10335
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 916.8346270000002,
+          "route": "/readyz",
+          "status": 503,
+          "body": {
+            "instance": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6",
+            "ready": false,
+            "draining": false,
+            "reason": "redis-unavailable",
+            "changedAt": "2026-09-05T15:31:59.325Z",
+            "redis": {
+              "status": "reconnecting",
+              "subscribed": false
+            }
+          }
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 917.3777689999997,
+          "route": "/healthz",
+          "status": 200,
+          "body": {
+            "ok": true,
+            "instance": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6"
+          }
+        },
+        {
+          "action": "upgrade-rejected",
+          "elapsedMs": 936.7010300000002,
+          "status": 503
+        },
+        {
+          "action": "http-observation",
+          "elapsedMs": 1025.4819319999997,
+          "route": "/readyz",
+          "status": 200,
+          "body": {
+            "instance": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6",
+            "ready": true,
+            "draining": false,
+            "reason": "subscribed",
+            "changedAt": "2026-09-05T15:31:59.427Z",
+            "redis": {
+              "status": "ready",
+              "subscribed": true
+            }
+          }
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1025.7898079999995,
+          "count": 1
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1045.7726190000003,
+          "id": "after-ack",
+          "instanceId": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1066.46861,
+          "client": "after-ack"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1066.8036759999995,
+          "id": "98f289cc-beb2-41c7-8681-7f204b6b6764/0",
+          "label": "ack-gated-delivery",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 1337.4430620000003,
+          "id": "after-ack",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1341.265219,
+          "role": "ws3-server",
+          "pid": 10335,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1358.670776,
+          "role": "redis",
+          "pid": 10329,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 1377.8206890000001
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 10329,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "38627",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "10329:C 05 Sep 2026 18:31:58.425 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n10329:C 05 Sep 2026 18:31:58.425 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n10329:C 05 Sep 2026 18:31:58.425 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=10329, just started\n10329:C 05 Sep 2026 18:31:58.425 * Configuration loaded\n10329:M 05 Sep 2026 18:31:58.425 * monotonic clock: POSIX clock_gettime\n10329:M 05 Sep 2026 18:31:58.426 * Running mode=standalone, port=38627.\n10329:M 05 Sep 2026 18:31:58.427 * Server initialized\n10329:M 05 Sep 2026 18:31:58.427 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "8f1b07316a32a8b2337df78b7fcf27ac5ff62a82",
+            "port": 38627
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1358.6606659999998
+          }
+        },
+        {
+          "role": "ws3-server",
+          "pid": 10335,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"listening on :46549\",\"t\":\"2026-09-05T15:31:59.313Z\"}\n{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:59.323Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:59.323Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:59.323Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-check-failed\",\"changedAt\":\"2026-09-05T15:31:59.323Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:59.325Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"redis-unavailable\",\"changedAt\":\"2026-09-05T15:31:59.325Z\",\"redis\":{\"status\":\"reconnecting\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"readiness changed\",\"t\":\"2026-09-05T15:31:59.427Z\",\"event\":\"readiness\",\"ready\":false,\"draining\":false,\"reason\":\"subscribing\",\"changedAt\":\"2026-09-05T15:31:59.426Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":false}}\n{\"level\":\"info\",\"instance\":\"ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6\",\"msg\":\"subscribed to ws2:98f289cc-beb2-41c7-8681-7f204b6b6764:all\",\"t\":\"2026-09-05T15:31:59.427Z\",\"event\":\"readiness\",\"ready\":true,\"draining\":false,\"reason\":\"subscribed\",\"changedAt\":\"2026-09-05T15:31:59.427Z\",\"redis\":{\"status\":\"ready\",\"subscribed\":true}}\n",
+          "errors": "",
+          "config": {
+            "PORT": "46549",
+            "HOST": "127.0.0.1",
+            "INSTANCE_ID": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "38627",
+            "CHANNEL_PREFIX": "ws2:98f289cc-beb2-41c7-8681-7f204b6b6764:",
+            "ALLOWED_ORIGINS": "",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096",
+            "MAX_ENVELOPE_BYTES": "1048576",
+            "MESSAGES_PER_SECOND": "100",
+            "MESSAGE_BURST": "200",
+            "REDIS_CHECK_INTERVAL_MS": "500",
+            "REDIS_CHECK_TIMEOUT_MS": "500",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1341.2608089999994
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "after-ack",
+          "url": "ws://127.0.0.1:46549",
+          "instanceId": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "98f289cc-beb2-41c7-8681-7f204b6b6764/0",
+          "label": "ack-gated-delivery",
+          "required": [
+            "after-ack"
+          ],
+          "allowed": [
+            "after-ack"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        }
+      ],
+      "receipts": [
+        {
+          "client": "after-ack",
+          "id": "98f289cc-beb2-41c7-8681-7f204b6b6764/0",
+          "relayedBy": "ws3-1b489d2e-c5a8-4f24-9bf4-46bb2c1e16a6",
+          "bytes": 279,
+          "elapsedMs": 1067.4097469999997
+        }
+      ],
+      "observations": {},
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    }
+  ],
+  "completedAt": "2026-09-05T15:32:00.292Z",
+  "limitations": [
+    "origin is not identity or authorization; unset permits origin-less benchmark clients",
+    "per-connection data-message limits, not DDoS or distributed/IP throttling",
+    "readiness is sampled subscriber health, not durable delivery or all-network-partition proof",
+    "JSON metrics are process-local; send counts are not receipt ACKs; loop delay is not message latency",
+    "same-host direct sockets, not hosted CI or load balancer enforcement"
+  ]
+}

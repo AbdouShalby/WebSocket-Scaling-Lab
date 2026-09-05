@@ -6,3 +6,4 @@ node_modules/
 !/docs/evidence/ws-1b/*.log
 !/docs/evidence/ws-1c/**/*.log
 !/docs/evidence/ws-2/*.log
+!/docs/evidence/ws-3/*.log

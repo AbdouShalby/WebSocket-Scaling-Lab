@@ -79,6 +79,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends redis-server
       - name: WS-2 real failures and negative controls (owned ephemeral processes only)
         run: npm run test:ws2
+      - name: WS-3 security, readiness and telemetry (owned ephemeral processes only)
+        run: npm run test:ws3
       - name: Operational evidence
         if: always()
         uses: actions/upload-artifact@v4
