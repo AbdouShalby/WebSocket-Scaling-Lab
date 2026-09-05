@@ -3,6 +3,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { EventEmitter } = require('node:events');
 const { spawnSync } = require('node:child_process');
+const { randomUUID } = require('node:crypto');
 const { ROOT } = require('../bench/options');
 const { validMessage, validEnvelope, validChannel, TokenBucket } = require('../src/protocol');
 const { Readiness } = require('../src/readiness');
@@ -71,12 +72,17 @@ test('drain wins over an outstanding subscription ACK', async () => {
 });
 
 test('configuration rejects malformed limits and origin allowlists without echoing values', () => {
+  // Synthetic per-run input: parsed and rejected locally, never sent to a service.
+  const credentialOrigin = new URL('https://example.test');
+  credentialOrigin.username = randomUUID(); credentialOrigin.password = randomUUID();
   for (const [name, value] of [['MAX_PAYLOAD_BYTES', '0'], ['MESSAGE_BURST', '2x'], ['MESSAGES_PER_SECOND', '-1'],
     ['PORT', '65536'], ['MAX_SUBS_PER_CONN', 'NaN'], ['REDIS_CHECK_TIMEOUT_MS', 'Infinity'],
     ['ALLOWED_ORIGINS', '*'], ['ALLOWED_ORIGINS', ','], ['ALLOWED_ORIGINS', 'https://allowed.example,'],
-    ['ALLOWED_ORIGINS', 'https://secret:private@example.test']]) {
+    ['ALLOWED_ORIGINS', credentialOrigin.href]]) {
     const result = spawnSync(process.execPath, ['-e', "require('./src/config')"], { cwd: ROOT, env: { ...process.env, [name]: value }, encoding: 'utf8' });
     assert.equal(result.status, 1, name); assert.match(result.stderr, new RegExp(name));
-    assert.ok(!result.stderr.includes('secret:private'));
+    for (const part of [credentialOrigin.username, credentialOrigin.password, credentialOrigin.href]) {
+      assert.ok(!result.stderr.includes(part), 'configuration errors must not echo synthetic credentials');
+    }
   }
 });

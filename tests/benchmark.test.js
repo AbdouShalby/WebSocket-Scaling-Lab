@@ -1,6 +1,7 @@
 'use strict';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+const { randomUUID } = require('node:crypto');
 const { EventEmitter, once } = require('node:events');
 const { WebSocketServer } = require('ws');
 const { DeliveryLedger, settle } = require('../bench/accounting');
@@ -58,9 +59,12 @@ test('error plus close or repeated acknowledgment settles readiness exactly once
   assert.equal(settle(ready, 'failed'), false); assert.equal(ready.outcome, 'ready');
 });
 test('invalid/unsafe parameters and missing provenance are rejected before networking', () => {
+  // Synthetic per-run userinfo exercises rejection without publishing a fixed credential pair.
+  const credentialUrl = new URL('ws://localhost');
+  credentialUrl.username = randomUUID(); credentialUrl.password = randomUUID();
   for (const argv of [['--conns', 'NaN'], ['--conns', '0'], ['--measure', '-1'], ['--rate', 'Infinity'],
     ['--ramp', '1.2'], ['--unknown', '1'], ['--measure'], ['--rate', '2', '--rate', '3'],
-    ['--url', 'ws://user:secret@localhost'], ['--url', 'ws://localhost?token=x'], ['--output-dir', '../outside']]) {
+    ['--url', credentialUrl.href], ['--url', 'ws://localhost?token=x'], ['--output-dir', '../outside']]) {
     assert.throws(() => parseArgs(argv));
   }
   assert.throws(() => validateRuntime({}));

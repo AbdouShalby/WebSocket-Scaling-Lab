@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "publish-events": "node src/publisher.js",
     "bench": "node bench/connect-storm.js",
-    "test": "node --test tests/hub.test.js tests/benchmark.test.js tests/guards.test.js tests/e2e.test.js",
+    "test": "node --test tests/hub.test.js tests/benchmark.test.js tests/guards.test.js tests/security-hygiene.test.js tests/e2e.test.js",
     "test:ws1a": "node --test tests/hub.test.js tests/benchmark.test.js tests/benchmark-integration.test.js",
     "bench:local": "node bench/run-local.js",
     "test:ws1b": "node --test tests/two-node.test.js",
@@ -19,6 +19,7 @@
     "test:ws3": "node --test tests/guards.test.js tests/guards-integration.test.js",
     "proof:guards": "node bench/prove-guards.js",
     "verify:evidence": "node scripts/verify-evidence.js",
+    "check:secrets": "node scripts/check-credential-literals.js",
     "validate": "node scripts/validate.js"
   },
   "engines": { "node": ">=20" },

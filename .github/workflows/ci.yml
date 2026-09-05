@@ -35,6 +35,9 @@ jobs:
         run: |
           for f in src/*.js bench/*.js scripts/*.js; do node --check "$f"; done
 
+      - name: Reject static credential-shaped material (offline guard)
+        run: npm run check:secrets
+
       - name: Curated evidence integrity and finalization-tool regressions
         run: |
           npm run verify:evidence
