@@ -1,0 +1,3252 @@
+{
+  "schemaVersion": 1,
+  "milestone": "WS-2",
+  "startedAt": "2026-09-05T14:55:12.178Z",
+  "status": "PASSED",
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "bench/prove-operations.js",
+        "--output-dir",
+        "docs/evidence/ws-2"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "b70f6a22e132fd665c84375c17d504d9495c1bec",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "20f849e8c33f58e820a572254335da01d65f46bb765039a6cfc574467a8394e7",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "52e523960378ce76f49dbc86dc58e08f32cdc661f77d37b43119fe8929bb2c45",
+        "nginx.conf": "39fe4a4ebe0bfb54435f0e7c30f6b8126e582f2fb27f43c3d73cc8624f76af22",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "bc2e5f3c6e995a37378ecbcf20dd7f02d00bd244b4559e85f710c19195bbb573",
+        "src/config.js": "2e23d78d2c188fdfe8ae82dc83d6ac5e37e1293d6f457b0a22a90e9e85d35784",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "3ec274e92a40d28f73e758470054540b7db8b16f11aa900bf2eb2df2bcded436",
+        "src/publisher.js": "1ba669bfbaadb7f259092e6161797bb8ec3d96612bd10c2a6e0cd55a6bebd993",
+        "src/server.js": "99f5e7dbc93daa776b584eede155331a17ff24b66d8f2ebc50405e948d00bf51",
+        "tests/operations.test.js": "30b9de8810a89d9f763dd89932d1763b2ff321fdf480adef8e6013818b3458a8",
+        "tests/fixtures/ws2-mutant.cjs": "1a6d95bcac8769ae2e65e3a280c0a0d4817beab0ee70371a39da63080bcf11bf"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "linux",
+      "release": "6.18.33.1-microsoft-standard-WSL2",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 12490276864
+    },
+    "target": {
+      "topology": "owned real Redis and Node processes on loopback; POSIX signals; direct clients; no nginx"
+    },
+    "testMutation": null,
+    "sourceChangedDuringRun": false
+  },
+  "scenarios": [
+    {
+      "scenario": "recovery",
+      "runId": "b0e63b58-88e9-43f5-a483-c1683c4df53b",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 9.643264999999928,
+          "role": "redis",
+          "pid": 3980
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 46.72722599999997,
+          "role": "A",
+          "pid": 3990
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 957.2258949999998,
+          "role": "B",
+          "pid": 4009
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1845.830291,
+          "count": 2
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1869.0788449999998,
+          "id": "a",
+          "instanceId": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1"
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1889.4052399999998,
+          "id": "b",
+          "instanceId": "ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1910.619223,
+          "client": "a"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1910.6444129999998,
+          "client": "b"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1911.235754,
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/0",
+          "label": "before-failure",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1931.739907,
+          "pid": 3980,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1933.976006,
+          "role": "redis",
+          "pid": 3980,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "outage-publish-rejected",
+          "elapsedMs": 2352.29478,
+          "policy": "fail-fast publisher, no offline queue or retry; no accepted publication claimed"
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 2400.527064,
+          "role": "redis",
+          "pid": 4023
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 2549.3566390000005,
+          "count": 2
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2549.6745900000005,
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/1",
+          "label": "after-Redis-recovery",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2821.1323520000005,
+          "id": "b",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2821.212391,
+          "id": "a",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2822.079739,
+          "role": "redis",
+          "pid": 4023,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2844.3482670000003,
+          "role": "B",
+          "pid": 4009,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2869.1831899999997,
+          "role": "A",
+          "pid": 3990,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 2880.510241
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 3980,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "46173",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "3980:C 05 Sep 2026 17:55:12.710 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n3980:C 05 Sep 2026 17:55:12.710 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n3980:C 05 Sep 2026 17:55:12.710 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=3980, just started\n3980:C 05 Sep 2026 17:55:12.710 * Configuration loaded\n3980:M 05 Sep 2026 17:55:12.711 * monotonic clock: POSIX clock_gettime\n3980:M 05 Sep 2026 17:55:12.711 * Running mode=standalone, port=46173.\n3980:M 05 Sep 2026 17:55:12.712 * Server initialized\n3980:M 05 Sep 2026 17:55:12.712 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "1cd026376a7ccb164b541a3b8bf85fea89d9fb5b",
+            "port": 46173
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1933.964126
+          }
+        },
+        {
+          "role": "A",
+          "pid": 3990,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1\",\"msg\":\"listening on :45287\",\"t\":\"2026-09-05T14:55:13.635Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1\",\"msg\":\"subscribed to ws2:b0e63b58-88e9-43f5-a483-c1683c4df53b:all\",\"t\":\"2026-09-05T14:55:13.647Z\"}\n",
+          "errors": "{\"level\":\"error\",\"msg\":\"redis error\",\"error\":\"connect ECONNREFUSED 127.0.0.1:46173\"}\n{\"level\":\"error\",\"msg\":\"redis error\",\"error\":\"connect ECONNREFUSED 127.0.0.1:46173\"}\n",
+          "config": {
+            "PORT": "45287",
+            "INSTANCE_ID": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "46173",
+            "CHANNEL_PREFIX": "ws2:b0e63b58-88e9-43f5-a483-c1683c4df53b:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2869.1791300000004
+          }
+        },
+        {
+          "role": "B",
+          "pid": 4009,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9\",\"msg\":\"listening on :43501\",\"t\":\"2026-09-05T14:55:14.509Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9\",\"msg\":\"subscribed to ws2:b0e63b58-88e9-43f5-a483-c1683c4df53b:all\",\"t\":\"2026-09-05T14:55:14.521Z\"}\n",
+          "errors": "{\"level\":\"error\",\"msg\":\"redis error\",\"error\":\"connect ECONNREFUSED 127.0.0.1:46173\"}\n{\"level\":\"error\",\"msg\":\"redis error\",\"error\":\"connect ECONNREFUSED 127.0.0.1:46173\"}\n",
+          "config": {
+            "PORT": "43501",
+            "INSTANCE_ID": "ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "46173",
+            "CHANNEL_PREFIX": "ws2:b0e63b58-88e9-43f5-a483-c1683c4df53b:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2844.3390470000004
+          }
+        },
+        {
+          "role": "redis",
+          "pid": 4023,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "46173",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "4023:C 05 Sep 2026 17:55:15.102 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n4023:C 05 Sep 2026 17:55:15.102 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n4023:C 05 Sep 2026 17:55:15.102 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=4023, just started\n4023:C 05 Sep 2026 17:55:15.102 * Configuration loaded\n4023:M 05 Sep 2026 17:55:15.102 * monotonic clock: POSIX clock_gettime\n4023:M 05 Sep 2026 17:55:15.103 * Running mode=standalone, port=46173.\n4023:M 05 Sep 2026 17:55:15.104 * Server initialized\n4023:M 05 Sep 2026 17:55:15.104 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "8d01f72ed3bbf9b82ee68538f2c1149ca627e976",
+            "port": 46173
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2822.0758590000005
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "a",
+          "url": "ws://127.0.0.1:45287",
+          "instanceId": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        },
+        {
+          "id": "b",
+          "url": "ws://127.0.0.1:43501",
+          "instanceId": "ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/0",
+          "label": "before-failure",
+          "required": [
+            "a",
+            "b"
+          ],
+          "allowed": [
+            "a",
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        },
+        {
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/1",
+          "label": "after-Redis-recovery",
+          "required": [
+            "a",
+            "b"
+          ],
+          "allowed": [
+            "a",
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        }
+      ],
+      "receipts": [
+        {
+          "client": "b",
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/0",
+          "relayedBy": "ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9",
+          "bytes": 277,
+          "elapsedMs": 1912.410208
+        },
+        {
+          "client": "a",
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/0",
+          "relayedBy": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1",
+          "bytes": 277,
+          "elapsedMs": 1912.5438860000002
+        },
+        {
+          "client": "a",
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/1",
+          "relayedBy": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1",
+          "bytes": 283,
+          "elapsedMs": 2550.092549
+        },
+        {
+          "client": "b",
+          "id": "b0e63b58-88e9-43f5-a483-c1683c4df53b/1",
+          "relayedBy": "ws2-B-cd9f8bf2-44a5-48cb-b890-f0d3eec3a9f9",
+          "bytes": 283,
+          "elapsedMs": 2550.188688
+        }
+      ],
+      "observations": {
+        "healthDuringRedisOutage": {
+          "ok": true,
+          "instance": "ws2-A-d29c019e-7a3c-45be-8ec7-3b64988b72f1"
+        },
+        "sameSocketsRecovered": true
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "crash",
+      "runId": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 1.6792560000003505,
+          "role": "redis",
+          "pid": 4029
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 26.10003400000005,
+          "role": "A",
+          "pid": 4035
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 895.2296329999999,
+          "role": "B",
+          "pid": 4047
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1760.0591520000007,
+          "count": 2
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1781.1574960000007,
+          "id": "a",
+          "instanceId": "ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814"
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1802.3004600000004,
+          "id": "b",
+          "instanceId": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1823.0065400000003,
+          "client": "a"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1823.0219100000004,
+          "client": "b"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1823.3621950000006,
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/0",
+          "label": "before-failure",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1844.2617230000005,
+          "pid": 4035,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 1848.487983,
+          "id": "a",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1848.667171,
+          "role": "A",
+          "pid": 4035,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1865.250489,
+          "count": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1865.4901950000003,
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/1",
+          "label": "while-A-is-down",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 1888.9094670000004,
+          "role": "A-replacement",
+          "pid": 4059
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 2778.3961120000004,
+          "count": 2
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 2798.857516,
+          "id": "a-reconnected",
+          "instanceId": "ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2799.196661,
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/2",
+          "label": "before-explicit-resubscribe",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 2990.0417780000007,
+          "client": "a-reconnected"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2990.483572,
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/3",
+          "label": "after-explicit-resubscribe",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 3262.2383960000006,
+          "id": "a-reconnected",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 3262.2678450000003,
+          "id": "b",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 3266.111602,
+          "role": "A-replacement",
+          "pid": 4059,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 3286.580205,
+          "role": "B",
+          "pid": 4047,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 3303.8647630000005,
+          "role": "redis",
+          "pid": 4029,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 3323.012675
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 4029,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "36547",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "4029:C 05 Sep 2026 17:55:15.583 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n4029:C 05 Sep 2026 17:55:15.583 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n4029:C 05 Sep 2026 17:55:15.583 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=4029, just started\n4029:C 05 Sep 2026 17:55:15.583 * Configuration loaded\n4029:M 05 Sep 2026 17:55:15.583 * monotonic clock: POSIX clock_gettime\n4029:M 05 Sep 2026 17:55:15.584 * Running mode=standalone, port=36547.\n4029:M 05 Sep 2026 17:55:15.585 * Server initialized\n4029:M 05 Sep 2026 17:55:15.585 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "de199801a7a092bd5a0b8ad116151bf2b5dc4267",
+            "port": 36547
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 3303.8599430000004
+          }
+        },
+        {
+          "role": "A",
+          "pid": 4035,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814\",\"msg\":\"listening on :36177\",\"t\":\"2026-09-05T14:55:16.442Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814\",\"msg\":\"subscribed to ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:all\",\"t\":\"2026-09-05T14:55:16.452Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "36177",
+            "INSTANCE_ID": "ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "36547",
+            "CHANNEL_PREFIX": "ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 1848.6629510000002
+          }
+        },
+        {
+          "role": "B",
+          "pid": 4047,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff\",\"msg\":\"listening on :34323\",\"t\":\"2026-09-05T14:55:17.310Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff\",\"msg\":\"subscribed to ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:all\",\"t\":\"2026-09-05T14:55:17.321Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "34323",
+            "INSTANCE_ID": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "36547",
+            "CHANNEL_PREFIX": "ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 3286.5750450000005
+          }
+        },
+        {
+          "role": "A-replacement",
+          "pid": 4059,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31\",\"msg\":\"listening on :45447\",\"t\":\"2026-09-05T14:55:18.327Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31\",\"msg\":\"subscribed to ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:all\",\"t\":\"2026-09-05T14:55:18.335Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "45447",
+            "INSTANCE_ID": "ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "36547",
+            "CHANNEL_PREFIX": "ws2:f6ea05db-29b5-4967-a425-c3a7fb4b40b6:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 3266.106842
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "a",
+          "url": "ws://127.0.0.1:36177",
+          "instanceId": "ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        },
+        {
+          "id": "b",
+          "url": "ws://127.0.0.1:34323",
+          "instanceId": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        },
+        {
+          "id": "a-reconnected",
+          "url": "ws://127.0.0.1:45447",
+          "instanceId": "ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/0",
+          "label": "before-failure",
+          "required": [
+            "a",
+            "b"
+          ],
+          "allowed": [
+            "a",
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        },
+        {
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/1",
+          "label": "while-A-is-down",
+          "required": [
+            "b"
+          ],
+          "allowed": [
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/2",
+          "label": "before-explicit-resubscribe",
+          "required": [
+            "b"
+          ],
+          "allowed": [
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        },
+        {
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/3",
+          "label": "after-explicit-resubscribe",
+          "required": [
+            "a-reconnected",
+            "b"
+          ],
+          "allowed": [
+            "a-reconnected",
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        }
+      ],
+      "receipts": [
+        {
+          "client": "a",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/0",
+          "relayedBy": "ws2-A-aa61fbb3-9679-4be5-85f6-7efc1c1e7814",
+          "bytes": 277,
+          "elapsedMs": 1823.9044470000008
+        },
+        {
+          "client": "b",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/0",
+          "relayedBy": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+          "bytes": 277,
+          "elapsedMs": 1824.0536350000002
+        },
+        {
+          "client": "b",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/1",
+          "relayedBy": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+          "bytes": 278,
+          "elapsedMs": 1865.9457790000006
+        },
+        {
+          "client": "b",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/2",
+          "relayedBy": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+          "bytes": 290,
+          "elapsedMs": 2799.6747540000006
+        },
+        {
+          "client": "b",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/3",
+          "relayedBy": "ws2-B-139b9a9c-c4d8-4ee9-b709-a528f8bea6ff",
+          "bytes": 289,
+          "elapsedMs": 2990.8539370000008
+        },
+        {
+          "client": "a-reconnected",
+          "id": "f6ea05db-29b5-4967-a425-c3a7fb4b40b6/3",
+          "relayedBy": "ws2-A-replacement-1a5a22f0-42d4-4a59-909c-3c0833fc4a31",
+          "bytes": 301,
+          "elapsedMs": 2990.9279260000003
+        }
+      ],
+      "observations": {
+        "recovery": "harness explicitly starts replacement and reconnects/resubscribes; no replay of gap events"
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "drain",
+      "runId": "27da8050-9c5a-4923-ad9f-0dff00552101",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 1.8753640000004452,
+          "role": "redis",
+          "pid": 4078
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 25.73968000000059,
+          "role": "A",
+          "pid": 4084
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 894.691393000001,
+          "role": "B",
+          "pid": 4100
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1760.7733550000012,
+          "count": 2
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1781.8416500000003,
+          "id": "a",
+          "instanceId": "ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2"
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1803.035804000001,
+          "id": "b",
+          "instanceId": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1823.743853,
+          "client": "a"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1823.7559130000009,
+          "client": "b"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1824.073069,
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/0",
+          "label": "before-failure",
+          "redisSubscribers": 2
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 1843.7231140000004,
+          "pid": 4084,
+          "signal": "SIGTERM"
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 1845.820984,
+          "id": "a",
+          "code": 1001,
+          "reason": "server shutting down"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 1853.2534400000004,
+          "role": "A",
+          "pid": 4084,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 1863.8166820000006,
+          "count": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1864.0593879999997,
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/1",
+          "label": "while-A-drained",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1903.917590000001,
+          "id": "a-on-B",
+          "instanceId": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1904.2512160000006,
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/2",
+          "label": "before-client-resubscribe",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 2095.908711,
+          "client": "a-on-B"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2096.2919249999995,
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/3",
+          "label": "after-client-resubscribe",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2367.881273000001,
+          "id": "a-on-B",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2367.9138029999995,
+          "id": "b",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2371.944456000001,
+          "role": "B",
+          "pid": 4100,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2388.9945069999994,
+          "role": "redis",
+          "pid": 4078,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 2409.1594160000004
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 4078,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "45157",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "4078:C 05 Sep 2026 17:55:18.906 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n4078:C 05 Sep 2026 17:55:18.906 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n4078:C 05 Sep 2026 17:55:18.906 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=4078, just started\n4078:C 05 Sep 2026 17:55:18.906 * Configuration loaded\n4078:M 05 Sep 2026 17:55:18.906 * monotonic clock: POSIX clock_gettime\n4078:M 05 Sep 2026 17:55:18.907 * Running mode=standalone, port=45157.\n4078:M 05 Sep 2026 17:55:18.908 * Server initialized\n4078:M 05 Sep 2026 17:55:18.908 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "9e6ef934df56081e59a805374277a4de389f3041",
+            "port": 45157
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2388.988477000001
+          }
+        },
+        {
+          "role": "A",
+          "pid": 4084,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2\",\"msg\":\"listening on :35859\",\"t\":\"2026-09-05T14:55:19.771Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2\",\"msg\":\"subscribed to ws2:27da8050-9c5a-4923-ad9f-0dff00552101:all\",\"t\":\"2026-09-05T14:55:19.781Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2\",\"msg\":\"SIGTERM received — draining\",\"t\":\"2026-09-05T14:55:20.744Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "35859",
+            "INSTANCE_ID": "ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "45157",
+            "CHANNEL_PREFIX": "ws2:27da8050-9c5a-4923-ad9f-0dff00552101:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": 0,
+            "signal": null,
+            "elapsedMs": 1853.24618
+          }
+        },
+        {
+          "role": "B",
+          "pid": 4100,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d\",\"msg\":\"listening on :39029\",\"t\":\"2026-09-05T14:55:20.638Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d\",\"msg\":\"subscribed to ws2:27da8050-9c5a-4923-ad9f-0dff00552101:all\",\"t\":\"2026-09-05T14:55:20.646Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "39029",
+            "INSTANCE_ID": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "45157",
+            "CHANNEL_PREFIX": "ws2:27da8050-9c5a-4923-ad9f-0dff00552101:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2371.9359760000007
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "a",
+          "url": "ws://127.0.0.1:35859",
+          "instanceId": "ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2",
+          "errors": [],
+          "close": {
+            "code": 1001,
+            "reason": "server shutting down"
+          }
+        },
+        {
+          "id": "b",
+          "url": "ws://127.0.0.1:39029",
+          "instanceId": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        },
+        {
+          "id": "a-on-B",
+          "url": "ws://127.0.0.1:39029",
+          "instanceId": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/0",
+          "label": "before-failure",
+          "required": [
+            "a",
+            "b"
+          ],
+          "allowed": [
+            "a",
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 2
+        },
+        {
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/1",
+          "label": "while-A-drained",
+          "required": [
+            "b"
+          ],
+          "allowed": [
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/2",
+          "label": "before-client-resubscribe",
+          "required": [
+            "b"
+          ],
+          "allowed": [
+            "b"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/3",
+          "label": "after-client-resubscribe",
+          "required": [
+            "b",
+            "a-on-B"
+          ],
+          "allowed": [
+            "b",
+            "a-on-B"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        }
+      ],
+      "receipts": [
+        {
+          "client": "b",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/0",
+          "relayedBy": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "bytes": 277,
+          "elapsedMs": 1824.5381319999997
+        },
+        {
+          "client": "a",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/0",
+          "relayedBy": "ws2-A-942d882a-a42f-4a35-a66b-eccdbeccafc2",
+          "bytes": 277,
+          "elapsedMs": 1824.5880120000002
+        },
+        {
+          "client": "b",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/1",
+          "relayedBy": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "bytes": 278,
+          "elapsedMs": 1864.4871029999995
+        },
+        {
+          "client": "b",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/2",
+          "relayedBy": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "bytes": 288,
+          "elapsedMs": 1904.5268919999999
+        },
+        {
+          "client": "b",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/3",
+          "relayedBy": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "bytes": 287,
+          "elapsedMs": 2096.580772000001
+        },
+        {
+          "client": "a-on-B",
+          "id": "27da8050-9c5a-4923-ad9f-0dff00552101/3",
+          "relayedBy": "ws2-B-b6ca5bb8-ef14-42a3-877d-7e75ecdfc37d",
+          "bytes": 287,
+          "elapsedMs": 2096.6391409999997
+        }
+      ],
+      "observations": {
+        "reconnect": "explicit harness reconnect to surviving B; no automatic load balancer or client failover claim"
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "forced-drain",
+      "runId": "7a89d0c6-3c62-4f54-9520-eee754a548a7",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 1.8170250000002852,
+          "role": "redis",
+          "pid": 4112
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 26.469633999999132,
+          "role": "A",
+          "pid": 4118
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 955.8250069999995,
+          "id": "non-cooperating",
+          "instanceId": "ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 976.7396939999999,
+          "client": "non-cooperating"
+        },
+        {
+          "action": "client-read-paused",
+          "elapsedMs": 976.9367220000004,
+          "client": "non-cooperating",
+          "purpose": "withhold close handshake"
+        },
+        {
+          "action": "signal",
+          "elapsedMs": 976.9603110000007,
+          "pid": 4118,
+          "signal": "SIGTERM"
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 1000.553441,
+          "id": "connection-during-drain",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "new-connection-rejected-during-drain",
+          "elapsedMs": 1019.1039810000002
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 10986.007618999998,
+          "role": "A",
+          "pid": 4118,
+          "code": 1,
+          "signal": null
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 10994.791166,
+          "id": "non-cooperating",
+          "code": 1001,
+          "reason": "server shutting down"
+        },
+        {
+          "action": "Redis-subscriber-count",
+          "elapsedMs": 11015.475696,
+          "count": 0
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 11267.300229999999,
+          "role": "redis",
+          "pid": 4112,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 11286.455340999999
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 4112,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "43993",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "4112:C 05 Sep 2026 17:55:21.315 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n4112:C 05 Sep 2026 17:55:21.316 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n4112:C 05 Sep 2026 17:55:21.316 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=4112, just started\n4112:C 05 Sep 2026 17:55:21.316 * Configuration loaded\n4112:M 05 Sep 2026 17:55:21.316 * monotonic clock: POSIX clock_gettime\n4112:M 05 Sep 2026 17:55:21.317 * Running mode=standalone, port=43993.\n4112:M 05 Sep 2026 17:55:21.317 * Server initialized\n4112:M 05 Sep 2026 17:55:21.318 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "9a1ca82ce1c09f19cf8a2693d16765208bc8ec44",
+            "port": 43993
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 11267.297069999999
+          }
+        },
+        {
+          "role": "A",
+          "pid": 4118,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9\",\"msg\":\"listening on :36217\",\"t\":\"2026-09-05T14:55:22.214Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9\",\"msg\":\"subscribed to ws2:7a89d0c6-3c62-4f54-9520-eee754a548a7:all\",\"t\":\"2026-09-05T14:55:22.225Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9\",\"msg\":\"SIGTERM received — draining\",\"t\":\"2026-09-05T14:55:22.286Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "36217",
+            "INSTANCE_ID": "ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "43993",
+            "CHANNEL_PREFIX": "ws2:7a89d0c6-3c62-4f54-9520-eee754a548a7:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "1048576",
+            "DROP_LIMIT": "500",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": 1,
+            "signal": null,
+            "elapsedMs": 10985.999248999999
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "non-cooperating",
+          "url": "ws://127.0.0.1:36217",
+          "instanceId": "ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9",
+          "errors": [],
+          "close": {
+            "code": 1001,
+            "reason": "server shutting down"
+          }
+        },
+        {
+          "id": "connection-during-drain",
+          "url": "ws://127.0.0.1:36217",
+          "instanceId": "ws2-A-f6a29398-de9d-47b3-9f6a-e97dab828cb9",
+          "errors": [
+            "Unexpected server response: 404"
+          ],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [],
+      "receipts": [],
+      "observations": {
+        "forcedExitElapsedMs": 10017.245633999999
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    },
+    {
+      "scenario": "backpressure",
+      "runId": "53536dfb-82ef-42d0-929e-c9f8e724840b",
+      "status": "PASSED",
+      "timeline": [
+        {
+          "action": "process-started",
+          "elapsedMs": 2.051582000000053,
+          "role": "redis",
+          "pid": 4162
+        },
+        {
+          "action": "process-started",
+          "elapsedMs": 27.53902999999991,
+          "role": "slow-consumer-server",
+          "pid": 4168
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 996.304197999998,
+          "id": "healthy",
+          "instanceId": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365"
+        },
+        {
+          "action": "client-open",
+          "elapsedMs": 1017.3475339999968,
+          "id": "paused",
+          "instanceId": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1038.144261999998,
+          "client": "healthy"
+        },
+        {
+          "action": "subscription-ack",
+          "elapsedMs": 1038.1568219999972,
+          "client": "paused"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1038.4648869999983,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/0",
+          "label": "both-ready",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-read-paused",
+          "elapsedMs": 1059.198397,
+          "client": "paused",
+          "purpose": "real TCP receive backpressure"
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1063.9119599999976,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/1",
+          "label": "pressure-0",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1086.7897999999986,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/2",
+          "label": "pressure-1",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1109.112836999997,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/3",
+          "label": "pressure-2",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1131.139998999999,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/4",
+          "label": "pressure-3",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1152.571258,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/5",
+          "label": "pressure-4",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1175.223630999997,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/6",
+          "label": "pressure-5",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1196.8725079999967,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/7",
+          "label": "pressure-6",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1218.100320999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/8",
+          "label": "pressure-7",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1239.713996999999,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/9",
+          "label": "pressure-8",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1262.1537040000003,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/10",
+          "label": "pressure-9",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1283.1911579999978,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/11",
+          "label": "pressure-10",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1304.4158419999985,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/12",
+          "label": "pressure-11",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1326.106678,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/13",
+          "label": "pressure-12",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1346.7838679999986,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/14",
+          "label": "pressure-13",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1368.2195269999975,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/15",
+          "label": "pressure-14",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1389.6929369999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/16",
+          "label": "pressure-15",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1410.718711999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/17",
+          "label": "pressure-16",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1431.6877179999974,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/18",
+          "label": "pressure-17",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1452.6618539999981,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/19",
+          "label": "pressure-18",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1473.7573589999993,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/20",
+          "label": "pressure-19",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1494.8606929999987,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/21",
+          "label": "pressure-20",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1516.167695,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/22",
+          "label": "pressure-21",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1536.9465339999988,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/23",
+          "label": "pressure-22",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1558.6485299999986,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/24",
+          "label": "pressure-23",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1580.4183449999982,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/25",
+          "label": "pressure-24",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1603.1742559999984,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/26",
+          "label": "pressure-25",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1624.5986859999975,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/27",
+          "label": "pressure-26",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1646.3661709999978,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/28",
+          "label": "pressure-27",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1668.3386529999989,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/29",
+          "label": "pressure-28",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1690.0121599999984,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/30",
+          "label": "pressure-29",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1711.067734999997,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/31",
+          "label": "pressure-30",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1732.82402,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/32",
+          "label": "pressure-31",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1754.5294759999997,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/33",
+          "label": "pressure-32",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1776.1268729999974,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/34",
+          "label": "pressure-33",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1796.853372999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/35",
+          "label": "pressure-34",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1818.515399,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/36",
+          "label": "pressure-35",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1840.2412960000001,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/37",
+          "label": "pressure-36",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1862.04392,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/38",
+          "label": "pressure-37",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1882.7447399999983,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/39",
+          "label": "pressure-38",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1904.4845249999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/40",
+          "label": "pressure-39",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1925.943754,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/41",
+          "label": "pressure-40",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1946.6649939999988,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/42",
+          "label": "pressure-41",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1968.3966999999975,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/43",
+          "label": "pressure-42",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 1989.862968999998,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/44",
+          "label": "pressure-43",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2010.485569999997,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/45",
+          "label": "pressure-44",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2032.1634769999982,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/46",
+          "label": "pressure-45",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2064.2324369999988,
+          "id": "paused",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "published",
+          "elapsedMs": 2073.785838,
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/47",
+          "label": "healthy-still-receives-after-kick",
+          "redisSubscribers": 1
+        },
+        {
+          "action": "client-close",
+          "elapsedMs": 2345.7333639999997,
+          "id": "healthy",
+          "code": 1006,
+          "reason": ""
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2350.3621399999975,
+          "role": "slow-consumer-server",
+          "pid": 4168,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "process-exit",
+          "elapsedMs": 2366.6987309999968,
+          "role": "redis",
+          "pid": 4162,
+          "code": null,
+          "signal": "SIGKILL"
+        },
+        {
+          "action": "owned-resources-cleaned",
+          "elapsedMs": 2385.872801999998
+        }
+      ],
+      "processes": [
+        {
+          "role": "redis",
+          "pid": 4162,
+          "executable": "redis-server",
+          "args": [
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "39939",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--protected-mode",
+            "yes"
+          ],
+          "log": "4162:C 05 Sep 2026 17:55:32.602 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n4162:C 05 Sep 2026 17:55:32.603 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n4162:C 05 Sep 2026 17:55:32.603 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=4162, just started\n4162:C 05 Sep 2026 17:55:32.603 * Configuration loaded\n4162:M 05 Sep 2026 17:55:32.603 * monotonic clock: POSIX clock_gettime\n4162:M 05 Sep 2026 17:55:32.604 * Running mode=standalone, port=39939.\n4162:M 05 Sep 2026 17:55:32.604 * Server initialized\n4162:M 05 Sep 2026 17:55:32.604 * Ready to accept connections tcp\n",
+          "errors": "",
+          "runtime": {
+            "version": "8.0.5",
+            "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+            "runId": "f90ffc0074952f19a9449fc4706c7d6aa2cf9d0c",
+            "port": 39939
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2366.6960709999985
+          }
+        },
+        {
+          "role": "slow-consumer-server",
+          "pid": 4168,
+          "executable": "node",
+          "args": [
+            "src/server.js"
+          ],
+          "log": "{\"level\":\"info\",\"instance\":\"ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365\",\"msg\":\"listening on :33121\",\"t\":\"2026-09-05T14:55:33.542Z\"}\n{\"level\":\"info\",\"instance\":\"ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365\",\"msg\":\"subscribed to ws2:53536dfb-82ef-42d0-929e-c9f8e724840b:all\",\"t\":\"2026-09-05T14:55:33.552Z\"}\n",
+          "errors": "",
+          "config": {
+            "PORT": "33121",
+            "INSTANCE_ID": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+            "REDIS_HOST": "127.0.0.1",
+            "REDIS_PORT": "39939",
+            "CHANNEL_PREFIX": "ws2:53536dfb-82ef-42d0-929e-c9f8e724840b:",
+            "HEARTBEAT_INTERVAL_MS": "30000",
+            "MAX_BUFFERED_BYTES": "65536",
+            "DROP_LIMIT": "3",
+            "MAX_SUBS_PER_CONN": "50",
+            "MAX_PAYLOAD_BYTES": "4096"
+          },
+          "exit": {
+            "code": null,
+            "signal": "SIGKILL",
+            "elapsedMs": 2350.36003
+          }
+        }
+      ],
+      "clients": [
+        {
+          "id": "healthy",
+          "url": "ws://127.0.0.1:33121",
+          "instanceId": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        },
+        {
+          "id": "paused",
+          "url": "ws://127.0.0.1:33121",
+          "instanceId": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "errors": [],
+          "close": {
+            "code": 1006,
+            "reason": ""
+          }
+        }
+      ],
+      "publications": [
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/0",
+          "label": "both-ready",
+          "required": [
+            "healthy",
+            "paused"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/1",
+          "label": "pressure-0",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/2",
+          "label": "pressure-1",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/3",
+          "label": "pressure-2",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/4",
+          "label": "pressure-3",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/5",
+          "label": "pressure-4",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/6",
+          "label": "pressure-5",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/7",
+          "label": "pressure-6",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/8",
+          "label": "pressure-7",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/9",
+          "label": "pressure-8",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/10",
+          "label": "pressure-9",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/11",
+          "label": "pressure-10",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/12",
+          "label": "pressure-11",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/13",
+          "label": "pressure-12",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/14",
+          "label": "pressure-13",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/15",
+          "label": "pressure-14",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/16",
+          "label": "pressure-15",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/17",
+          "label": "pressure-16",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/18",
+          "label": "pressure-17",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/19",
+          "label": "pressure-18",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/20",
+          "label": "pressure-19",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/21",
+          "label": "pressure-20",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/22",
+          "label": "pressure-21",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/23",
+          "label": "pressure-22",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/24",
+          "label": "pressure-23",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/25",
+          "label": "pressure-24",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/26",
+          "label": "pressure-25",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/27",
+          "label": "pressure-26",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/28",
+          "label": "pressure-27",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/29",
+          "label": "pressure-28",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/30",
+          "label": "pressure-29",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/31",
+          "label": "pressure-30",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/32",
+          "label": "pressure-31",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/33",
+          "label": "pressure-32",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/34",
+          "label": "pressure-33",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/35",
+          "label": "pressure-34",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/36",
+          "label": "pressure-35",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/37",
+          "label": "pressure-36",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/38",
+          "label": "pressure-37",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/39",
+          "label": "pressure-38",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/40",
+          "label": "pressure-39",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/41",
+          "label": "pressure-40",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/42",
+          "label": "pressure-41",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/43",
+          "label": "pressure-42",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/44",
+          "label": "pressure-43",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/45",
+          "label": "pressure-44",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/46",
+          "label": "pressure-45",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy",
+            "paused"
+          ],
+          "blobBytes": 65536,
+          "blobSha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "redisSubscribers": 1
+        },
+        {
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/47",
+          "label": "healthy-still-receives-after-kick",
+          "required": [
+            "healthy"
+          ],
+          "allowed": [
+            "healthy"
+          ],
+          "blobBytes": 0,
+          "blobSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "redisSubscribers": 1
+        }
+      ],
+      "receipts": [
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/0",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 292,
+          "elapsedMs": 1038.8786619999992
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/0",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 292,
+          "elapsedMs": 1038.9748199999995
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/1",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1065.3499300000003
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/2",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1086.945797999997
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/3",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1109.746267999999
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/4",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1131.9525079999985
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/5",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1153.1820999999982
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/6",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1175.7436239999988
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/7",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1197.3844809999973
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/8",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1218.5006149999972
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/9",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 1240.2345199999982
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/10",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65829,
+          "elapsedMs": 1262.8018039999988
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/11",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1283.712220999998
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/12",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1305.0662929999999
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/13",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1326.7592689999983
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/14",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1347.5536670000001
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/15",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1369.0644749999992
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/16",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1390.496794999999
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/17",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1411.5463899999995
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/18",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1432.4059979999984
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/19",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1453.4295239999992
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/20",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1474.5471679999973
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/21",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1495.603092999998
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/22",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1516.783947
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/23",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1537.6329039999982
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/24",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1558.7885479999968
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/25",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1581.0795049999979
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/26",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1603.7940679999992
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/27",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1625.0768389999976
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/28",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1646.7736049999985
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/29",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1668.7979669999986
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/30",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1690.570851999997
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/31",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1711.6301669999993
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/32",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1732.9558879999968
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/33",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1754.984758999999
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/34",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1776.5406369999982
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/35",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1797.2364669999988
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/36",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1818.8808639999988
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/37",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1840.7528579999998
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/38",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1862.4797029999972
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/39",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1883.1142849999997
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/40",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1904.8663500000002
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/41",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1926.349718999998
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/42",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1947.1444269999993
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/43",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1968.7817049999976
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/44",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 1990.3139429999974
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/45",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2010.9468039999992
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/46",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2032.664198999999
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/1",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2052.6720989999994
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/2",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2052.7631569999976
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/3",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2052.853415999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/4",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2053.027203999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/5",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2053.128772
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/6",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2053.206640999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/7",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2053.4772479999992
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/8",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2053.8233529999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/9",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65828,
+          "elapsedMs": 2054.1336789999987
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/10",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65829,
+          "elapsedMs": 2054.4992939999975
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/11",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2054.8226589999977
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/12",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2055.0745959999986
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/13",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2055.277202999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/14",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2055.500399999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/15",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2055.713026999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/16",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2055.9343339999978
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/17",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2056.1528709999984
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/18",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2056.405166999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/19",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2056.6076439999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/20",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2056.806561999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/21",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2057.006329
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/22",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2057.205436
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/23",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2057.511911999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/24",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2057.852246999999
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/25",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2058.1592429999982
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/26",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2058.4878879999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/27",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2058.796803999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/28",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2059.1159389999993
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/29",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2059.4349449999972
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/30",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2059.8388589999995
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/31",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2060.184143999999
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/32",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2060.5665389999995
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/33",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2060.940782999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/34",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2061.3105079999987
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/35",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2061.6564929999986
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/36",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2062.0282079999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/37",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2062.415122999999
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/38",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2063.517807
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/39",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2063.622575999998
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/40",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2063.697344999997
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/41",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2063.7654939999993
+        },
+        {
+          "client": "paused",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/42",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 65830,
+          "elapsedMs": 2063.838002999997
+        },
+        {
+          "client": "healthy",
+          "id": "53536dfb-82ef-42d0-929e-c9f8e724840b/47",
+          "relayedBy": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+          "bytes": 316,
+          "elapsedMs": 2074.114738999997
+        }
+      ],
+      "observations": {
+        "backpressure": {
+          "before": {
+            "instance": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+            "uptimeSeconds": 0,
+            "rss": 73334784,
+            "connectionsTotal": 2,
+            "delivered": 2,
+            "hub": {
+              "channels": 1,
+              "connections": 2,
+              "messagesSent": 2,
+              "messagesDropped": 0,
+              "slowConsumersKicked": 0
+            }
+          },
+          "after": {
+            "instance": "ws2-slow-consumer-server-a83c3ab5-12a3-4adc-bd93-531bd5f95365",
+            "uptimeSeconds": 1,
+            "rss": 81178624,
+            "connectionsTotal": 2,
+            "delivered": 91,
+            "dropped": 3,
+            "hub": {
+              "channels": 1,
+              "connections": 1,
+              "messagesSent": 91,
+              "messagesDropped": 3,
+              "slowConsumersKicked": 1
+            }
+          },
+          "payloadBlobBytes": 65536,
+          "pressurePublications": 46,
+          "maxOfferedBlobBytes": 67108864,
+          "behavior": "healthy receiver awaited between publishes; only paused client kicked"
+        }
+      },
+      "failures": [],
+      "cleanup": {
+        "allOwnedProcessesExited": true
+      }
+    }
+  ],
+  "completedAt": "2026-09-05T14:55:35.448Z",
+  "limitations": [
+    "finite representative windows, no durable delivery/replay or arbitrary crash safety",
+    "client reconnect/replacement performed explicitly by harness",
+    "TCP pause is a slow-reader experiment, not a whole-process memory bound or Internet congestion model",
+    "same-host POSIX experiment; no multi-host or rolling deployment guarantee"
+  ]
+}

@@ -65,3 +65,23 @@ jobs:
         with:
           name: websocket-validation
           path: bench/results/
+
+  operational:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install POSIX Redis test executable
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends redis-server
+      - name: WS-2 real failures and negative controls (owned ephemeral processes only)
+        run: npm run test:ws2
+      - name: Operational evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: websocket-operational-validation
+          path: bench/results/

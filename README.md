@@ -78,7 +78,19 @@ npm run bench:scaling -- --redis-port 6379 --connections 240,1200,2400 --ramp 50
 
 [WS-1C methodology, curves and raw evidence](docs/ws-1c.md) compare the same total workload across 1, 2 and 4 independent server processes: 240/1200/2400 total connections, 12 channels, a target 120 source events/sec, 15-second measurement windows, and three repetitions with rotated topology order. Every trial uses a fresh controller and server fleet, direct balanced client assignment, and real Redis. All repetitions are retained; tables and graphs show median and observed min/max rather than selecting the fastest run. The earlier 4800-client attempt failed the bounded delivery check and is retained separately, not presented as successful capacity evidence.
 
-Compare **actual issued rate** alongside received throughput and p95/p99. The controller, servers and Redis share one machine; neither resource saturation nor multi-host speedup is established. The short CI matrix validates the harness, not capacity. Failure/recovery experiments remain WS-2 work and have not started.
+Compare **actual issued rate** alongside received throughput and p95/p99. The controller, servers and Redis share one machine; neither resource saturation nor multi-host speedup is established. The short CI matrix validates the harness, not capacity.
+
+### Failure/recovery and operational evidence
+
+[WS-2 scenarios, evidence and limitations](docs/ws-2.md) exercise real POSIX Redis kill/restart, WebSocket process failure with a surviving peer, cooperative SIGTERM (close 1001 / exit 0), a non-cooperating peer reaching the forced shutdown deadline (exit 1), and real TCP slow-reader backpressure with healthy-client continuity. Client reconnect/resubscribe and replacement process starts are explicit harness actions, not automatic application features. Gap events are not replayed.
+
+```bash
+# Linux/WSL, Node and real redis-server required; owns isolated temporary processes.
+npm run test:ws2
+npm run proof:operations
+```
+
+No application source change was needed for WS-2. `/healthz` still reports success during Redis outage and is not a readiness check. These are bounded production-inspired experiments, not lossless-deployment, arbitrary-crash or production-recovery guarantees.
 
 Watch the fleet while it runs:
 
@@ -105,7 +117,7 @@ curl -s localhost:8080/metrics | jq   # hits one instance through the LB
 
 ### Backpressure — the part most demos skip
 
-`ws` exposes `socket.bufferedAmount`: queued outbound bytes. A congested client can accumulate buffered frames, creating memory pressure. The lab makes the drop/disconnect policy explicit; a real slow-network memory experiment remains future work.
+`ws` exposes `socket.bufferedAmount`: queued outbound bytes. A congested client can accumulate buffered frames, creating memory pressure. WS-2 demonstrates drops and eviction using a genuinely paused TCP reader and explicit low test thresholds while a healthy client continues. It does not establish a whole-process memory bound, leak-free operation or Internet-congestion performance.
 
 The policy in [`src/hub.js`](src/hub.js):
 
@@ -152,9 +164,10 @@ npm test          # Hub + benchmark regression tests; legacy E2E auto-skips with
 npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; no skip
 npm run test:ws1b # mandatory real Redis + two-process proof and negative controls; no skip
 npm run test:ws1c # mandatory real Redis + short 1/2/4-process matrix; not a capacity test
+npm run test:ws2  # POSIX only; owns real Redis/processes; operational scenarios + negative controls
 ```
 
-CI is configured to run all four commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. Heartbeat and deployment-drain experiments remain outside WS-1A/WS-1B/WS-1C.
+CI is configured to run the first four commands against a Redis service container and WS-2 in a separate Linux job with owned ephemeral Redis processes. Benchmark regression fixtures are explicitly distinguished from real infrastructure. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. WS-2 covers the documented close/deadline scenarios, not rolling deployments or full heartbeat-failure coverage.
 
 ## Project layout
 
@@ -172,6 +185,8 @@ bench/
   run-fleet.js       1/2/4-process measured trial with exact target/relay checks
   run-scaling.js     repeatable fixed-total-workload matrix, fresh trial processes
   scaling-report.js  validated aggregation and generated same-host curves
+  operational-lab.js owned POSIX Redis/server/socket test resources and receipt ledger
+  prove-operations.js real operational scenarios and versioned evidence
   runner.js          acknowledged lifecycle + controlled publisher
   accounting.js      exact per-event/per-client delivery ledger
   options.js         bounded workload and runtime metadata validation
@@ -185,6 +200,8 @@ tests/
   two-node.test.js   mandatory real Redis + two servers + negative controls
   scaling.test.js    matrix/routing/aggregation regressions
   scaling-integration.test.js   real 1/2/4-process short matrix + negative control
+  operations.test.js real POSIX failure/recovery scenarios + targeted negative controls
+  fixtures/ws2-mutant.cjs       explicit in-memory operational negative controls
   fixtures/ws1b-mutant.cjs       explicit test-only in-memory mutation preload
 ```
 
