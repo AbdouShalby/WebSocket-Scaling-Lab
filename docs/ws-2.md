@@ -1,5 +1,7 @@
 # WS-2: operational failure and recovery evidence
 
+Historical milestone snapshot. For current validation and claim boundaries, see [reproduction](reproduce.md) and the [evidence index](evidence/README.md).
+
 ## Read-only audit and plan
 
 Baseline: clean main at `b70f6a22e132fd665c84375c17d504d9495c1bec`.

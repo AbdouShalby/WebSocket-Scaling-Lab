@@ -1,5 +1,7 @@
 # WS-1A: benchmark integrity
 
+Historical milestone snapshot. For current validation and claim boundaries, see [reproduction](reproduce.md) and the [evidence index](evidence/README.md).
+
 ## Discovery and scope
 
 Baseline: clean `main` at `e8648b4d07106300077aa974f0b5d9ff0592a195`.

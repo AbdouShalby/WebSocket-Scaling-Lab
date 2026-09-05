@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "milestone": "WS-4",
+  "startedAt": "2026-09-05T15:49:19.132Z",
+  "status": "FAILED",
+  "failures": [
+    "Error: Redis startup failed: ENOENT\n    at /mnt/e/Abdou/Projects/careergithubupgrades/websocket-scaling-lab/bench/operational-lab.js:60:61\n    at waitFor (/mnt/e/Abdou/Projects/careergithubupgrades/websocket-scaling-lab/bench/operational-lab.js:13:18)\n    at async Lab.startRedis (/mnt/e/Abdou/Projects/careergithubupgrades/websocket-scaling-lab/bench/operational-lab.js:59:5)\n    at async main (/mnt/e/Abdou/Projects/careergithubupgrades/websocket-scaling-lab/scripts/validate.js:46:5)"
+  ],
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "scripts/validate.js"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "5583d6bdfdc23ae20bb1a304f34a6661b7e1511d",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "0386baa292793ffcd37d05832afee9a31a9da21e8f7c68c94db21279b750e4b1",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-guards.js": "396113f4d6b4a3924bd5b97ec45ef9c344b0a1555a727d0fb04cc3e11ad59b8d",
+        "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "f28d004b52e0acbce4afb86273597758be06b2cae0998efcd5b7e4a3b16ab069",
+        "nginx.conf": "bacccb30eee563b2bcf47901bf8092dcffc1dc1ddc9d5ad4eaedca96473b1710",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "d72432ba4e4fd26564f109356e76daf64fd62ba0e5eb6c41eaac24a379cad2c5",
+        "src/config.js": "995545a86b0b649cb46fe40226d88fd4e36f1e77e4d952d0cac00ac876e1d5c0",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "af942c83f6784f8256c00836198a9285869c138f1faed9e077f79563bb17ea93",
+        "src/protocol.js": "99017b05176dd3aa3afc48e4dfa9d24d0d5d7434c9ddfa01f6472cb78e728c79",
+        "src/publisher.js": "1c1ffad6668cabd3a72d2e52dcee1e173ecb944a029d800ad798c50dbd71e906",
+        "src/readiness.js": "bac46350010519e6279510dcdeb24dddc653102685ce39eaece8ef257e0861c6",
+        "src/server.js": "7a4261417f57a04bc2e2017dbb27499f97b22a5191bd2c7890f5b69d4faf9fd3"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "linux",
+      "release": "6.18.33.1-microsoft-standard-WSL2",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 12490276864
+    },
+    "target": {
+      "description": "same-host full suite; owned ephemeral Redis; direct process tests"
+    }
+  },
+  "sourceSha256": {
+    ".github/workflows/ci.yml": "50f442b2fa7cc1852f97598332b2bdc0099b190a690d4af936ca9fdd9049d218",
+    "Dockerfile": "0386baa292793ffcd37d05832afee9a31a9da21e8f7c68c94db21279b750e4b1",
+    "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+    "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+    "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+    "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+    "bench/prove-guards.js": "396113f4d6b4a3924bd5b97ec45ef9c344b0a1555a727d0fb04cc3e11ad59b8d",
+    "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+    "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+    "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+    "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+    "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+    "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+    "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+    "docker-compose.yml": "f28d004b52e0acbce4afb86273597758be06b2cae0998efcd5b7e4a3b16ab069",
+    "docs/evidence-index.json": "bf0ffb976bf708b97aa5edf2f72f8ed752d2dd514840c29e87382faeb6a4e427",
+    "nginx.conf": "bacccb30eee563b2bcf47901bf8092dcffc1dc1ddc9d5ad4eaedca96473b1710",
+    "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+    "package.json": "d72432ba4e4fd26564f109356e76daf64fd62ba0e5eb6c41eaac24a379cad2c5",
+    "scripts/validate.js": "6c48c4accb4a1fddd5ef62413a7ad7e26f8316e239483b7786ff39d3d8b1b8ce",
+    "scripts/verify-evidence.js": "793cb0f6cd6f96efc648e76a4e3582f1d18683aa081baa7ca18219c90cbb2edf",
+    "src/config.js": "995545a86b0b649cb46fe40226d88fd4e36f1e77e4d952d0cac00ac876e1d5c0",
+    "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+    "src/metrics.js": "af942c83f6784f8256c00836198a9285869c138f1faed9e077f79563bb17ea93",
+    "src/protocol.js": "99017b05176dd3aa3afc48e4dfa9d24d0d5d7434c9ddfa01f6472cb78e728c79",
+    "src/publisher.js": "1c1ffad6668cabd3a72d2e52dcee1e173ecb944a029d800ad798c50dbd71e906",
+    "src/readiness.js": "bac46350010519e6279510dcdeb24dddc653102685ce39eaece8ef257e0861c6",
+    "src/server.js": "7a4261417f57a04bc2e2017dbb27499f97b22a5191bd2c7890f5b69d4faf9fd3",
+    "tests/benchmark-integration.test.js": "01eb04caf7da5daa9e10ecb184894e9c6b6b98d56379e0b7072d78cd5dd3c6c4",
+    "tests/benchmark.test.js": "ac23eb69daf0a83282288f192caa7ff929b374bb1884337e0626ac22ce0c9dcf",
+    "tests/e2e.test.js": "89392e826cae4ad0cc8c27520d3fea35c375fb96c4802eb6fd3a4787f964f963",
+    "tests/fixtures/ws1b-mutant.cjs": "c14885f107f98a0de328d167273620b4ffcce45b2b0d93850a750c7012b22724",
+    "tests/fixtures/ws2-mutant.cjs": "8de19ae3f8e6c3534c6d5f6d9cabcce47bbe7061928be99e30a38b9b34474997",
+    "tests/fixtures/ws3-mutant.cjs": "5b3914ec6bfbfaf29c117f595f9fb93e01188c68c018e8f7477b4c104bceb999",
+    "tests/guards-integration.test.js": "ecf59e826a0b9a9059acd7027c0bc1d7f1526b0d38d5e0ae9ebace8393d3a8ed",
+    "tests/guards.test.js": "45389abb15598aab1acd9d699efe0b4c9e601f403fc139ca6e6ee1a08c37d2d4",
+    "tests/hub.test.js": "2af07c6e3424ed6eaafab6f4aca4a9bf5f8dacfe2a8aec12bbaede0afee8306f",
+    "tests/operations.test.js": "30b9de8810a89d9f763dd89932d1763b2ff321fdf480adef8e6013818b3458a8",
+    "tests/scaling-integration.test.js": "7855f35bdc09b0ea2162ff311ce7e49e7efa24c29d752e91fc26f9f1b3b0db20",
+    "tests/scaling.test.js": "f20867eb428c4cbab79cd385d4529972519601e318295715f1df1964afbb9260",
+    "tests/showcase.test.js": "bc3357a53cf12e8665e009f709f4191424fb4f6a641285d1f1aac6c8de4552d8",
+    "tests/two-node.test.js": "07ef7dcef56f864d7c58fe9ae031e8fcf1264c936566c4ee55322e595161e7ab"
+  },
+  "archive": {
+    "files": 111,
+    "matrixTrials": 49,
+    "completeMatrices": 1
+  },
+  "syntaxFiles": [
+    "bench/accounting.js",
+    "bench/connect-storm.js",
+    "bench/operational-lab.js",
+    "bench/options.js",
+    "bench/prove-guards.js",
+    "bench/prove-operations.js",
+    "bench/prove-two-node.js",
+    "bench/run-fleet.js",
+    "bench/run-local.js",
+    "bench/run-scaling.js",
+    "bench/runner.js",
+    "bench/scaling-report.js",
+    "scripts/validate.js",
+    "scripts/verify-evidence.js",
+    "src/config.js",
+    "src/hub.js",
+    "src/metrics.js",
+    "src/protocol.js",
+    "src/publisher.js",
+    "src/readiness.js",
+    "src/server.js",
+    "tests/benchmark-integration.test.js",
+    "tests/benchmark.test.js",
+    "tests/e2e.test.js",
+    "tests/fixtures/ws1b-mutant.cjs",
+    "tests/fixtures/ws2-mutant.cjs",
+    "tests/fixtures/ws3-mutant.cjs",
+    "tests/guards-integration.test.js",
+    "tests/guards.test.js",
+    "tests/hub.test.js",
+    "tests/operations.test.js",
+    "tests/scaling-integration.test.js",
+    "tests/scaling.test.js",
+    "tests/showcase.test.js",
+    "tests/two-node.test.js"
+  ],
+  "resources": {
+    "scenario": "ws4-full-suite",
+    "runId": "af447f35-2cf7-4f2b-98aa-d32c32cb8487",
+    "status": "RUNNING",
+    "timeline": [
+      {
+        "action": "process-started",
+        "elapsedMs": 2732.011708,
+        "role": "redis"
+      },
+      {
+        "action": "owned-resources-cleaned",
+        "elapsedMs": 2752.5626939999997
+      }
+    ],
+    "processes": [
+      {
+        "role": "redis",
+        "executable": "redis-server",
+        "args": [
+          "--bind",
+          "127.0.0.1",
+          "--port",
+          "38367",
+          "--save",
+          "",
+          "--appendonly",
+          "no",
+          "--protected-mode",
+          "yes"
+        ],
+        "log": "",
+        "errors": "",
+        "spawnError": "ENOENT"
+      }
+    ],
+    "clients": [],
+    "publications": [],
+    "receipts": [],
+    "observations": {},
+    "failures": [],
+    "cleanup": {
+      "allOwnedProcessesExited": true
+    }
+  },
+  "completedAt": "2026-09-05T15:49:21.885Z",
+  "tapSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -11,14 +11,17 @@
 
 This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. Evidence covers local Hub policies, a one-server Redis/WebSocket path, real two-process fan-out (WS-1B), and controlled same-host 1/2/4-process benchmark curves (WS-1C). These curves are finite offered-load measurements, not proof of a capacity ceiling or production scaling gains.
 
+**Start here:** [reproduce the full validation](docs/reproduce.md), [evidence index and claim boundaries](docs/evidence/README.md), [WS-4 finalization audit](docs/ws-4.md).
+WS-2 adds bounded failure/recovery experiments; WS-3 adds ingress guards, subscriber readiness and per-process telemetry. The retained performance curves describe the WS-1C snapshot, not a fresh capacity measurement of WS-3/WS-4.
+
 ---
 
 ## TL;DR
 
 | Problem | Solution in this lab |
 |---|---|
-| One instance can't hold every socket | Stateless instances behind an LB; **Redis pub/sub** fans events out to all instances; each instance delivers only to its own subscribers |
-| One slow client can OOM the server | **Backpressure policy**: drop frames for clients over a `bufferedAmount` threshold, disconnect after N consecutive drops — drops are counted, never silent |
+| Distribute local socket ownership | Independent instances with local subscription state; **Redis pub/sub** feeds connected subscribers; nginx is an optional, unmeasured topology |
+| Slow clients create memory pressure | **Backpressure policy**: drop frames over a `bufferedAmount` threshold, disconnect after N consecutive drops; counters expose this policy, not a total memory bound |
 | Mobile clients vanish without closing | **Heartbeat reaper**: ping/pong sweep terminates dead sockets every interval |
 | Performance needs a defined workload | Controlled benchmark publications, acknowledged subscriptions, an isolated measurement window, and versioned result artifacts |
 | Process termination | SIGTERM sends close frames to every client, then exits; connection-preserving deployment is not proven |
@@ -36,7 +39,7 @@ flowchart LR
     A -->|only its own\nsubscribers| CL1
 ```
 
-**Why this shape:** each instance is stateless with respect to its peers — it holds only its own sockets and a local `channel → subscribers` map. A published event hits Redis once and every instance once, and each instance fans out **only to its own subscribers of that channel** (O(subscribers), not O(connections)). Scaling out = `--scale ws=8`. No sticky-session state to migrate, no inter-instance mesh.
+**Why this shape:** each instance owns its sockets and a local `channel → subscribers` map. Healthy Redis subscribers receive publications and fan out **only to their own subscribers of that channel**. Disconnected instances can miss events. There is no inter-instance mesh or session migration; reconnecting clients must explicitly resubscribe. Compose can configure replicas, but the retained experiments use direct process ports, not nginx routing or dynamic service discovery.
 
 ## Run it
 
@@ -115,7 +118,7 @@ npm run proof:guards # versioned security/readiness/telemetry evidence
 
 Watch the fleet while it runs:
 
-The following JSON is illustrative server telemetry. Server `delivered` counts
+The following JSON is an illustrative excerpt of server telemetry. Server `delivered` counts
 send calls; the WS-1A benchmark counts actual client receipts independently.
 
 ```bash
@@ -142,7 +145,7 @@ curl -s localhost:8080/metrics | jq   # hits one instance through the LB
 
 The policy in [`src/hub.js`](src/hub.js):
 
-1. `bufferedAmount > MAX_BUFFERED_BYTES` → **drop** the frame for that client (real-time data ages instantly; a stale price update is worthless anyway)
+1. `bufferedAmount > MAX_BUFFERED_BYTES` → **drop** the frame for that client (this lab chooses loss-tolerant simulated events; suitability depends on the application)
 2. `DROP_LIMIT` consecutive drops → **disconnect** the client; let it reconnect on a better link
 3. every drop and kick is **counted and exported** — degradation must be visible
 
@@ -154,15 +157,15 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 
 | Omitted | Why |
 |---|---|
-| Redis Streams / Kafka | Pub/sub is fire-and-forget: disconnected clients miss events. Right trade-off for ephemeral data (prices, presence). If clients must catch up after reconnect, you need Streams + per-client cursors — different lab. |
+| Redis Streams / Kafka | Disconnected clients miss events. Replay would require a different persistence and client-cursor design, outside this lab. |
 | Message ACKs / delivery guarantees | Same reason: this models at-most-once ephemeral fan-out, and says so, instead of pretending to be exactly-once. |
 | `perMessageDeflate` | Disabled as a design choice for small payloads; no compression A/B benchmark is retained. |
-| Sticky sessions | Nothing is session-bound; any instance can serve any client. That's the point. |
+| Sticky sessions / session migration | Connections and subscriptions are process-local. A new connection can use another ready instance but must resubscribe; no session migration is implemented or tested. |
 
 ### Failure modes, honestly
 
-- **Redis is a SPOF here.** Production answer: Redis Sentinel/Cluster, or a broker per shard. The lab keeps one node so the fan-out logic stays legible.
-- **Pub/sub delivery is at-most-once.** A client that reconnects lost the events published while it was away — acceptable for tickers/presence, unacceptable for chat history.
+- **Redis is a SPOF here.** A single Redis process is a deliberate lab boundary. Broker high availability, sharding and multi-host recovery are not implemented or validated.
+- **Pub/sub delivery is at-most-once.** Reconnecting clients cannot recover gap events through this protocol. Loss tolerance is a workload assumption, not a recommendation for real financial or durable messaging data.
 - **Measurement overhead:** the WS-1A controller publishes and receives on one monotonic clock, including its own event-loop queuing. It does not isolate server-only latency or establish results for a distributed load generator.
 
 ## Client protocol
@@ -173,7 +176,7 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 { "action": "unsubscribe", "channel": "product:42" }
 { "action": "ping", "t": 1699999999999 }
 
-// ← server
+// ← server (event excerpt; actual envelopes also include relayedBy and relayedAt)
 { "type": "subscribed", "channel": "product:42" }
 { "type": "event", "channel": "product:42", "data": { "price": 49.9 }, "publishedAt": 1699999999999 }
 ```
@@ -181,7 +184,9 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 ## Tests
 
 ```bash
-npm test          # Hub + benchmark regression tests; legacy E2E auto-skips without Redis
+npm run validate  # full POSIX suite; owns Redis; fails on any skip; retains JSON + TAP
+npm run verify:evidence # read-only archive integrity + matrix recomputation; no Redis
+npm test          # Hub + benchmark + guards; legacy E2E auto-skips without Redis
 npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; no skip
 npm run test:ws1b # mandatory real Redis + two-process proof and negative controls; no skip
 npm run test:ws1c # mandatory real Redis + short 1/2/4-process matrix; not a capacity test
@@ -189,7 +194,9 @@ npm run test:ws2  # POSIX only; owns real Redis/processes; operational scenarios
 npm run test:ws3  # POSIX only; real security/readiness/telemetry proof + negative controls
 ```
 
-CI is configured to run the first four commands against a Redis service container and WS-2/WS-3 in a separate Linux job with owned ephemeral Redis processes. Benchmark regression fixtures are explicitly distinguished from real infrastructure. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. WS-2 covers the documented close/deadline scenarios, not rolling deployments or full heartbeat-failure coverage.
+CI is configured to run `npm test` and the WS-1A/B/C commands against a Redis service container, the archive/tooling checks without Redis, and WS-2/WS-3 in a separate Linux job with owned ephemeral Redis processes. `npm run validate` is the single-command local gate over every test file, including the same real-infrastructure and negative-control tests; it rejects skips. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. WS-2 covers the documented close/deadline scenarios, not rolling deployments or full heartbeat-failure coverage.
+
+`load-tests/k6-ws-test.js` is an **unvalidated optional churn script**, not part of the evidence gate. No retained k6 run proves its timing thresholds. Its HTTP 101 check has no `checks` failure threshold, and it has no exact per-client delivery ledger; its counters cannot substitute for the controlled benchmark.
 
 ## Project layout
 
@@ -216,7 +223,10 @@ bench/
   accounting.js      exact per-event/per-client delivery ledger
   options.js         bounded workload and runtime metadata validation
 load-tests/
-  k6-ws-test.js      connection-churn soak test (ramping VUs)
+  k6-ws-test.js      optional unvalidated connection-churn script (ramping VUs)
+scripts/
+  validate.js       full POSIX suite with owned Redis, zero-skip gate and raw evidence
+  verify-evidence.js read-only archive hashes and WS-1C table/curve recomputation
 tests/
   hub.test.js        unit tests (node:test, zero deps)
   e2e.test.js        full-stack smoke test
@@ -228,6 +238,7 @@ tests/
   operations.test.js real POSIX failure/recovery scenarios + targeted negative controls
   guards.test.js     deterministic validation/rate/readiness/config regressions
   guards-integration.test.js real WS-3 scenarios + four negative controls
+  showcase.test.js   archive integrity and fail-closed validation-summary regressions
   fixtures/ws3-mutant.cjs       explicit in-memory WS-3 negative controls
   fixtures/ws2-mutant.cjs       explicit in-memory operational negative controls
   fixtures/ws1b-mutant.cjs       explicit test-only in-memory mutation preload
@@ -235,9 +246,11 @@ tests/
 
 ## Related work
 
-- [Distributed-Order-Processing-System](https://github.com/AbdouShalby/Distributed-Order-Processing-System) — the transactional side: Redis distributed locks, idempotency, queue workers (Laravel)
-- [Distributed-Locking-Deep-Dive-Lab](https://github.com/AbdouShalby/Distributed-Locking-Deep-Dive-Lab) — race conditions, deadlocks, TTL edge cases under the microscope
-- [Backend-Architecture-Case-Studies](https://github.com/AbdouShalby/Backend-Architecture-Case-Studies) — system design write-ups incl. a 100k QPS notification fan-out design
+These are navigation links, not evidence audited by this repository:
+
+- [Distributed-Order-Processing-System](https://github.com/AbdouShalby/Distributed-Order-Processing-System)
+- [Distributed-Locking-Deep-Dive-Lab](https://github.com/AbdouShalby/Distributed-Locking-Deep-Dive-Lab)
+- [Backend-Architecture-Case-Studies](https://github.com/AbdouShalby/Backend-Architecture-Case-Studies)
 
 ## License
 

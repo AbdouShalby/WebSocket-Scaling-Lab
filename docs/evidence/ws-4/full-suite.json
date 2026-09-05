@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "milestone": "WS-4",
+  "startedAt": "2026-09-05T15:46:53.352Z",
+  "status": "PASSED",
+  "failures": [],
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "scripts/validate.js"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "5583d6bdfdc23ae20bb1a304f34a6661b7e1511d",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "0386baa292793ffcd37d05832afee9a31a9da21e8f7c68c94db21279b750e4b1",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-guards.js": "396113f4d6b4a3924bd5b97ec45ef9c344b0a1555a727d0fb04cc3e11ad59b8d",
+        "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "f28d004b52e0acbce4afb86273597758be06b2cae0998efcd5b7e4a3b16ab069",
+        "nginx.conf": "bacccb30eee563b2bcf47901bf8092dcffc1dc1ddc9d5ad4eaedca96473b1710",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "d72432ba4e4fd26564f109356e76daf64fd62ba0e5eb6c41eaac24a379cad2c5",
+        "src/config.js": "995545a86b0b649cb46fe40226d88fd4e36f1e77e4d952d0cac00ac876e1d5c0",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "af942c83f6784f8256c00836198a9285869c138f1faed9e077f79563bb17ea93",
+        "src/protocol.js": "99017b05176dd3aa3afc48e4dfa9d24d0d5d7434c9ddfa01f6472cb78e728c79",
+        "src/publisher.js": "1c1ffad6668cabd3a72d2e52dcee1e173ecb944a029d800ad798c50dbd71e906",
+        "src/readiness.js": "bac46350010519e6279510dcdeb24dddc653102685ce39eaece8ef257e0861c6",
+        "src/server.js": "7a4261417f57a04bc2e2017dbb27499f97b22a5191bd2c7890f5b69d4faf9fd3"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "linux",
+      "release": "6.18.33.1-microsoft-standard-WSL2",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 12490276864
+    },
+    "target": {
+      "description": "same-host full suite; owned ephemeral Redis; direct process tests"
+    }
+  },
+  "sourceSha256": {
+    ".github/workflows/ci.yml": "50f442b2fa7cc1852f97598332b2bdc0099b190a690d4af936ca9fdd9049d218",
+    "Dockerfile": "0386baa292793ffcd37d05832afee9a31a9da21e8f7c68c94db21279b750e4b1",
+    "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+    "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+    "bench/operational-lab.js": "0cfffa79a98e2633d036bf6b9457beed68e7d952442c3e397fcb721c52ee15be",
+    "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+    "bench/prove-guards.js": "396113f4d6b4a3924bd5b97ec45ef9c344b0a1555a727d0fb04cc3e11ad59b8d",
+    "bench/prove-operations.js": "8b150d1b2cbf90e5bdf020848aac1e5601af9ef0d3dd40d2634792a9aced5b0e",
+    "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+    "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+    "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+    "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+    "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+    "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+    "docker-compose.yml": "f28d004b52e0acbce4afb86273597758be06b2cae0998efcd5b7e4a3b16ab069",
+    "docs/evidence-index.json": "bf0ffb976bf708b97aa5edf2f72f8ed752d2dd514840c29e87382faeb6a4e427",
+    "nginx.conf": "bacccb30eee563b2bcf47901bf8092dcffc1dc1ddc9d5ad4eaedca96473b1710",
+    "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+    "package.json": "d72432ba4e4fd26564f109356e76daf64fd62ba0e5eb6c41eaac24a379cad2c5",
+    "scripts/validate.js": "6c48c4accb4a1fddd5ef62413a7ad7e26f8316e239483b7786ff39d3d8b1b8ce",
+    "scripts/verify-evidence.js": "793cb0f6cd6f96efc648e76a4e3582f1d18683aa081baa7ca18219c90cbb2edf",
+    "src/config.js": "995545a86b0b649cb46fe40226d88fd4e36f1e77e4d952d0cac00ac876e1d5c0",
+    "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+    "src/metrics.js": "af942c83f6784f8256c00836198a9285869c138f1faed9e077f79563bb17ea93",
+    "src/protocol.js": "99017b05176dd3aa3afc48e4dfa9d24d0d5d7434c9ddfa01f6472cb78e728c79",
+    "src/publisher.js": "1c1ffad6668cabd3a72d2e52dcee1e173ecb944a029d800ad798c50dbd71e906",
+    "src/readiness.js": "bac46350010519e6279510dcdeb24dddc653102685ce39eaece8ef257e0861c6",
+    "src/server.js": "7a4261417f57a04bc2e2017dbb27499f97b22a5191bd2c7890f5b69d4faf9fd3",
+    "tests/benchmark-integration.test.js": "01eb04caf7da5daa9e10ecb184894e9c6b6b98d56379e0b7072d78cd5dd3c6c4",
+    "tests/benchmark.test.js": "ac23eb69daf0a83282288f192caa7ff929b374bb1884337e0626ac22ce0c9dcf",
+    "tests/e2e.test.js": "89392e826cae4ad0cc8c27520d3fea35c375fb96c4802eb6fd3a4787f964f963",
+    "tests/fixtures/ws1b-mutant.cjs": "c14885f107f98a0de328d167273620b4ffcce45b2b0d93850a750c7012b22724",
+    "tests/fixtures/ws2-mutant.cjs": "8de19ae3f8e6c3534c6d5f6d9cabcce47bbe7061928be99e30a38b9b34474997",
+    "tests/fixtures/ws3-mutant.cjs": "5b3914ec6bfbfaf29c117f595f9fb93e01188c68c018e8f7477b4c104bceb999",
+    "tests/guards-integration.test.js": "ecf59e826a0b9a9059acd7027c0bc1d7f1526b0d38d5e0ae9ebace8393d3a8ed",
+    "tests/guards.test.js": "45389abb15598aab1acd9d699efe0b4c9e601f403fc139ca6e6ee1a08c37d2d4",
+    "tests/hub.test.js": "2af07c6e3424ed6eaafab6f4aca4a9bf5f8dacfe2a8aec12bbaede0afee8306f",
+    "tests/operations.test.js": "30b9de8810a89d9f763dd89932d1763b2ff321fdf480adef8e6013818b3458a8",
+    "tests/scaling-integration.test.js": "7855f35bdc09b0ea2162ff311ce7e49e7efa24c29d752e91fc26f9f1b3b0db20",
+    "tests/scaling.test.js": "f20867eb428c4cbab79cd385d4529972519601e318295715f1df1964afbb9260",
+    "tests/showcase.test.js": "bc3357a53cf12e8665e009f709f4191424fb4f6a641285d1f1aac6c8de4552d8",
+    "tests/two-node.test.js": "07ef7dcef56f864d7c58fe9ae031e8fcf1264c936566c4ee55322e595161e7ab"
+  },
+  "archive": {
+    "files": 111,
+    "matrixTrials": 49,
+    "completeMatrices": 1
+  },
+  "syntaxFiles": [
+    "bench/accounting.js",
+    "bench/connect-storm.js",
+    "bench/operational-lab.js",
+    "bench/options.js",
+    "bench/prove-guards.js",
+    "bench/prove-operations.js",
+    "bench/prove-two-node.js",
+    "bench/run-fleet.js",
+    "bench/run-local.js",
+    "bench/run-scaling.js",
+    "bench/runner.js",
+    "bench/scaling-report.js",
+    "scripts/validate.js",
+    "scripts/verify-evidence.js",
+    "src/config.js",
+    "src/hub.js",
+    "src/metrics.js",
+    "src/protocol.js",
+    "src/publisher.js",
+    "src/readiness.js",
+    "src/server.js",
+    "tests/benchmark-integration.test.js",
+    "tests/benchmark.test.js",
+    "tests/e2e.test.js",
+    "tests/fixtures/ws1b-mutant.cjs",
+    "tests/fixtures/ws2-mutant.cjs",
+    "tests/fixtures/ws3-mutant.cjs",
+    "tests/guards-integration.test.js",
+    "tests/guards.test.js",
+    "tests/hub.test.js",
+    "tests/operations.test.js",
+    "tests/scaling-integration.test.js",
+    "tests/scaling.test.js",
+    "tests/showcase.test.js",
+    "tests/two-node.test.js"
+  ],
+  "tests": [
+    "tests/benchmark-integration.test.js",
+    "tests/benchmark.test.js",
+    "tests/e2e.test.js",
+    "tests/guards-integration.test.js",
+    "tests/guards.test.js",
+    "tests/hub.test.js",
+    "tests/operations.test.js",
+    "tests/scaling-integration.test.js",
+    "tests/scaling.test.js",
+    "tests/showcase.test.js",
+    "tests/two-node.test.js"
+  ],
+  "argv": [
+    "--test",
+    "--test-reporter=tap",
+    "tests/benchmark-integration.test.js",
+    "tests/benchmark.test.js",
+    "tests/e2e.test.js",
+    "tests/guards-integration.test.js",
+    "tests/guards.test.js",
+    "tests/hub.test.js",
+    "tests/operations.test.js",
+    "tests/scaling-integration.test.js",
+    "tests/scaling.test.js",
+    "tests/showcase.test.js",
+    "tests/two-node.test.js"
+  ],
+  "totals": {
+    "tests": 63,
+    "pass": 63,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "sourceChangedDuringRun": false,
+  "resources": {
+    "scenario": "ws4-full-suite",
+    "runId": "facadee0-8b23-485c-a5ff-6a67b14e4a5d",
+    "status": "RUNNING",
+    "timeline": [
+      {
+        "action": "process-started",
+        "elapsedMs": 3469.9143810000005,
+        "role": "redis",
+        "pid": 11645
+      },
+      {
+        "action": "process-started",
+        "elapsedMs": 3614.595923,
+        "role": "full-suite",
+        "pid": 11655
+      },
+      {
+        "action": "process-exit",
+        "elapsedMs": 67629.06819399999,
+        "role": "full-suite",
+        "pid": 11655,
+        "code": 0,
+        "signal": null
+      },
+      {
+        "action": "process-exit",
+        "elapsedMs": 68312.532037,
+        "role": "redis",
+        "pid": 11645,
+        "code": null,
+        "signal": "SIGKILL"
+      },
+      {
+        "action": "owned-resources-cleaned",
+        "elapsedMs": 68331.701556
+      }
+    ],
+    "processes": [
+      {
+        "role": "redis",
+        "pid": 11645,
+        "executable": "redis-server",
+        "args": [
+          "--bind",
+          "127.0.0.1",
+          "--port",
+          "35423",
+          "--save",
+          "",
+          "--appendonly",
+          "no",
+          "--protected-mode",
+          "yes"
+        ],
+        "log": "11645:C 05 Sep 2026 18:46:56.827 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.\n11645:C 05 Sep 2026 18:46:56.827 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo\n11645:C 05 Sep 2026 18:46:56.827 * Redis version=8.0.5, bits=64, commit=00000000, modified=0, pid=11645, just started\n11645:C 05 Sep 2026 18:46:56.827 * Configuration loaded\n11645:M 05 Sep 2026 18:46:56.828 * monotonic clock: POSIX clock_gettime\n11645:M 05 Sep 2026 18:46:56.828 * Running mode=standalone, port=35423.\n11645:M 05 Sep 2026 18:46:56.829 * Server initialized\n11645:M 05 Sep 2026 18:46:56.829 * Ready to accept connections tcp\n",
+        "errors": "",
+        "runtime": {
+          "version": "8.0.5",
+          "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+          "runId": "a96ed1869b91c76d9e328a1001744d5238c25f7f",
+          "port": 35423
+        },
+        "exit": {
+          "code": null,
+          "signal": "SIGKILL",
+          "elapsedMs": 68312.52329699999
+        }
+      },
+      {
+        "role": "full-suite",
+        "pid": 11655,
+        "executable": "node",
+        "args": [
+          "--test",
+          "--test-reporter=tap",
+          "tests/benchmark-integration.test.js",
+          "tests/benchmark.test.js",
+          "tests/e2e.test.js",
+          "tests/guards-integration.test.js",
+          "tests/guards.test.js",
+          "tests/hub.test.js",
+          "tests/operations.test.js",
+          "tests/scaling-integration.test.js",
+          "tests/scaling.test.js",
+          "tests/showcase.test.js",
+          "tests/two-node.test.js"
+        ],
+        "log": "TAP version 13\n# Subtest: WS-1A CLI: real Redis, complete result/provenance, then refused-target failure artifact\nok 1 - WS-1A CLI: real Redis, complete result/provenance, then refused-target failure artifact\n  ---\n  duration_ms: 7264.317635\n  type: 'test'\n  ...\n# Subtest: measurement resets ramp/warmup and excludes drain from throughput and latency\nok 2 - measurement resets ramp/warmup and excludes drain from throughput and latency\n  ---\n  duration_ms: 1.785894\n  type: 'test'\n  ...\n# Subtest: expected ledger finds an entirely missing publication and unequal channel audiences\nok 3 - expected ledger finds an entirely missing publication and unequal channel audiences\n  ---\n  duration_ms: 0.354695\n  type: 'test'\n  ...\n# Subtest: dedup is per client and event; wrong channel/unknown IDs cannot erase missing\nok 4 - dedup is per client and event; wrong channel/unknown IDs cannot erase missing\n  ---\n  duration_ms: 0.285576\n  type: 'test'\n  ...\n# Subtest: late warmup/foreign traffic and absent instance IDs do not become measurement samples\nok 5 - late warmup/foreign traffic and absent instance IDs do not become measurement samples\n  ---\n  duration_ms: 0.312336\n  type: 'test'\n  ...\n# Subtest: error plus close or repeated acknowledgment settles readiness exactly once\nok 6 - error plus close or repeated acknowledgment settles readiness exactly once\n  ---\n  duration_ms: 0.176857\n  type: 'test'\n  ...\n# Subtest: invalid/unsafe parameters and missing provenance are rejected before networking\nok 7 - invalid/unsafe parameters and missing provenance are rejected before networking\n  ---\n  duration_ms: 19.28042\n  type: 'test'\n  ...\n# Subtest: complete lifecycle waits for real WS acknowledgments and resets warmup\nok 8 - complete lifecycle waits for real WS acknowledgments and resets warmup\n  ---\n  duration_ms: 481.985997\n  type: 'test'\n  ...\n# Subtest: failed run: no-ack\nok 9 - failed run: no-ack\n  ---\n  duration_ms: 406.66046\n  type: 'test'\n  ...\n# Subtest: failed run: reject\nok 10 - failed run: reject\n  ---\n  duration_ms: 108.243096\n  type: 'test'\n  ...\n# Subtest: failed run: drop-all\nok 11 - failed run: drop-all\n  ---\n  duration_ms: 387.629688\n  type: 'test'\n  ...\n# Subtest: failed run: drop-event\nok 12 - failed run: drop-event\n  ---\n  duration_ms: 389.016758\n  type: 'test'\n  ...\n# Subtest: failed run: duplicate\nok 13 - failed run: duplicate\n  ---\n  duration_ms: 389.945105\n  type: 'test'\n  ...\n# Subtest: failed run: publish-error\nok 14 - failed run: publish-error\n  ---\n  duration_ms: 107.005693\n  type: 'test'\n  ...\n# Subtest: failed run: disconnect\nok 15 - failed run: disconnect\n  ---\n  duration_ms: 140.79732\n  type: 'test'\n  ...\n# Subtest: publish → redis → server → subscribed client (end to end)\nok 16 - publish → redis → server → subscribed client (end to end)\n  ---\n  duration_ms: 969.474127\n  type: 'test'\n  ...\n# Subtest: mandatory real WS-3 protocol, origin, rate, readiness and telemetry proof\nok 17 - mandatory real WS-3 protocol, origin, rate, readiness and telemetry proof\n  ---\n  duration_ms: 8569.931567\n  type: 'test'\n  ...\n# Subtest: real negative control detects disabled origin\nok 18 - real negative control detects disabled origin\n  ---\n  duration_ms: 2663.090503\n  type: 'test'\n  ...\n# Subtest: real negative control detects disabled schema\nok 19 - real negative control detects disabled schema\n  ---\n  duration_ms: 3125.636516\n  type: 'test'\n  ...\n# Subtest: real negative control detects disabled rate\nok 20 - real negative control detects disabled rate\n  ---\n  duration_ms: 8151.866242\n  type: 'test'\n  ...\n# Subtest: real negative control detects disabled ready\nok 21 - real negative control detects disabled ready\n  ---\n  duration_ms: 10285.991892\n  type: 'test'\n  ...\n# Subtest: protocol rejects null, non-object, malformed channel and envelope shapes\nok 22 - protocol rejects null, non-object, malformed channel and envelope shapes\n  ---\n  duration_ms: 2.072111\n  type: 'test'\n  ...\n# Subtest: per-connection token bucket refills monotonically and caps idle credit\nok 23 - per-connection token bucket refills monotonically and caps idle credit\n  ---\n  duration_ms: 1.231713\n  type: 'test'\n  ...\n# Subtest: readiness waits for ACK; stale ACK after disconnect or drain cannot resurrect it\nok 24 - readiness waits for ACK; stale ACK after disconnect or drain cannot resurrect it\n  ---\n  duration_ms: 9.425038\n  type: 'test'\n  ...\n# Subtest: failed subscription stays unready and a later check retries; failed ping revokes readiness\nok 25 - failed subscription stays unready and a later check retries; failed ping revokes readiness\n  ---\n  duration_ms: 0.666541\n  type: 'test'\n  ...\n# Subtest: drain wins over an outstanding subscription ACK\nok 26 - drain wins over an outstanding subscription ACK\n  ---\n  duration_ms: 3.428602\n  type: 'test'\n  ...\n# Subtest: configuration rejects malformed limits and origin allowlists without echoing values\nok 27 - configuration rejects malformed limits and origin allowlists without echoing values\n  ---\n  duration_ms: 571.388926\n  type: 'test'\n  ...\n# Subtest: broadcast reaches only subscribers of the channel\nok 28 - broadcast reaches only subscribers of the channel\n  ---\n  duration_ms: 1.657572\n  type: 'test'\n  ...\n# Subtest: unsubscribe stops delivery and empty channels are garbage-collected\nok 29 - unsubscribe stops delivery and empty channels are garbage-collected\n  ---\n  duration_ms: 0.225317\n  type: 'test'\n  ...\n# Subtest: removeClient cleans every channel the socket was in\nok 30 - removeClient cleans every channel the socket was in\n  ---\n  duration_ms: 0.185537\n  type: 'test'\n  ...\n# Subtest: subscription limit is enforced\nok 31 - subscription limit is enforced\n  ---\n  duration_ms: 0.290215\n  type: 'test'\n  ...\n# Subtest: slow consumer gets messages dropped, not queued\nok 32 - slow consumer gets messages dropped, not queued\n  ---\n  duration_ms: 0.269856\n  type: 'test'\n  ...\n# Subtest: slow consumer is disconnected after dropLimit consecutive drops\nok 33 - slow consumer is disconnected after dropLimit consecutive drops\n  ---\n  duration_ms: 0.235907\n  type: 'test'\n  ...\n# Subtest: recovered consumer resets its consecutive-drop counter\nok 34 - recovered consumer resets its consecutive-drop counter\n  ---\n  duration_ms: 0.69862\n  type: 'test'\n  ...\n# Subtest: closed sockets are skipped without counting as drops\nok 35 - closed sockets are skipped without counting as drops\n  ---\n  duration_ms: 0.278306\n  type: 'test'\n  ...\n# Subtest: broadcast to a channel with no subscribers is a cheap no-op\nok 36 - broadcast to a channel with no subscribers is a cheap no-op\n  ---\n  duration_ms: 1.185873\n  type: 'test'\n  ...\n# Subtest: operational options reject unsafe paths and unknown scenarios\nok 37 - operational options reject unsafe paths and unknown scenarios\n  ---\n  duration_ms: 1.018036\n  type: 'test'\n  ...\n# Subtest: mandatory real POSIX Redis/process/drain/backpressure scenarios with raw evidence\nok 38 - mandatory real POSIX Redis/process/drain/backpressure scenarios with raw evidence\n  ---\n  duration_ms: 23110.317578\n  type: 'test'\n  ...\n# Subtest: real negative control detects broken recovery\nok 39 - real negative control detects broken recovery\n  ---\n  duration_ms: 10869.508818\n  type: 'test'\n  ...\n# Subtest: real negative control detects broken drain\nok 40 - real negative control detects broken drain\n  ---\n  duration_ms: 4025.372165\n  type: 'test'\n  ...\n# Subtest: real negative control detects broken backpressure\nok 41 - real negative control detects broken backpressure\n  ---\n  duration_ms: 25265.822474\n  type: 'test'\n  ...\n# Subtest: mandatory real Redis 1/2/4-process matrix and regression-sensitive evidence aggregation\nok 42 - mandatory real Redis 1/2/4-process matrix and regression-sensitive evidence aggregation\n  ---\n  duration_ms: 42238.976166\n  type: 'test'\n  ...\n# Subtest: real four-node fleet rejects duplicated fan-out rather than graphing inflated throughput\nok 43 - real four-node fleet rejects duplicated fan-out rather than graphing inflated throughput\n  ---\n  duration_ms: 6111.284009\n  type: 'test'\n  ...\n# Subtest: matrix covers all 27 cells and rotates topology order across repeats\nok 44 - matrix covers all 27 cells and rotates topology order across repeats\n  ---\n  duration_ms: 2.1381\n  type: 'test'\n  ...\n# Subtest: fleet validation rejects ambiguous identities and imbalanced workloads\nok 45 - fleet validation rejects ambiguous identities and imbalanced workloads\n  ---\n  duration_ms: 6.35441\n  type: 'test'\n  ...\n# Subtest: matrix options enforce equal balanced loads and bounded repetitions\nok 46 - matrix options enforce equal balanced loads and bounded repetitions\n  ---\n  duration_ms: 0.990956\n  type: 'test'\n  ...\n# Subtest: ledger rejects a valid-looking event from the wrong assigned instance\nok 47 - ledger rejects a valid-looking event from the wrong assigned instance\n  ---\n  duration_ms: 0.561183\n  type: 'test'\n  ...\n# Subtest: runner rejects inconsistent or duplicate fleet declarations before networking\nok 48 - runner rejects inconsistent or duplicate fleet declarations before networking\n  ---\n  duration_ms: 1.175934\n  type: 'test'\n  ...\n# Subtest: aggregation uses all repetitions, not maximum/first-run selection\nok 49 - aggregation uses all repetitions, not maximum/first-run selection\n  ---\n  duration_ms: 0.604131\n  type: 'test'\n  ...\n# Subtest: an incomplete matrix cannot produce successful curves\nok 50 - an incomplete matrix cannot produce successful curves\n  ---\n  duration_ms: 0.597042\n  type: 'test'\n  ...\n# Subtest: curated archive verifies original hashes and regenerates successful matrix tables/curves\nok 51 - curated archive verifies original hashes and regenerates successful matrix tables/curves\n  ---\n  duration_ms: 657.038357\n  type: 'test'\n  ...\n# Subtest: archive verifier rejects changed hashes, missing entries and reclassified failures\nok 52 - archive verifier rejects changed hashes, missing entries and reclassified failures\n  ---\n  duration_ms: 2455.961863\n  type: 'test'\n  ...\n# Subtest: full-suite gate fails closed on skipped, failing, empty or incomplete TAP\nok 53 - full-suite gate fails closed on skipped, failing, empty or incomplete TAP\n  ---\n  duration_ms: 1.125404\n  type: 'test'\n  ...\n# Subtest: verifier accepts the exact cross-instance delivery matrix\nok 54 - verifier accepts the exact cross-instance delivery matrix\n  ---\n  duration_ms: 2.07804\n  type: 'test'\n  ...\n# Subtest: verifier rejects lost second-node delivery\nok 55 - verifier rejects lost second-node delivery\n  ---\n  duration_ms: 1.051395\n  type: 'test'\n  ...\n# Subtest: verifier rejects duplicate delivery\nok 56 - verifier rejects duplicate delivery\n  ---\n  duration_ms: 0.234117\n  type: 'test'\n  ...\n# Subtest: verifier rejects wrong instance\nok 57 - verifier rejects wrong instance\n  ---\n  duration_ms: 0.843678\n  type: 'test'\n  ...\n# Subtest: verifier rejects wrong channel\nok 58 - verifier rejects wrong channel\n  ---\n  duration_ms: 0.425714\n  type: 'test'\n  ...\n# Subtest: verifier rejects changed payload\nok 59 - verifier rejects changed payload\n  ---\n  duration_ms: 0.596962\n  type: 'test'\n  ...\n# Subtest: verifier rejects unsubscribed client leaked delivery\nok 60 - verifier rejects unsubscribed client leaked delivery\n  ---\n  duration_ms: 0.289766\n  type: 'test'\n  ...\n# Subtest: mandatory real Redis and two-process proof, including raw evidence\nok 61 - mandatory real Redis and two-process proof, including raw evidence\n  ---\n  duration_ms: 4323.145641\n  type: 'test'\n  ...\n# Subtest: real two-server negative control rejects suppress fan-out\nok 62 - real two-server negative control rejects suppress fan-out\n  ---\n  duration_ms: 5231.734968\n  type: 'test'\n  ...\n# Subtest: real two-server negative control rejects duplicate fan-out\nok 63 - real two-server negative control rejects duplicate fan-out\n  ---\n  duration_ms: 3168.891567\n  type: 'test'\n  ...\n1..63\n# tests 63\n# suites 0\n# pass 63\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 63929.053538\n",
+        "errors": "",
+        "exit": {
+          "code": 0,
+          "signal": null,
+          "elapsedMs": 67629.04720399999
+        }
+      }
+    ],
+    "clients": [],
+    "publications": [],
+    "receipts": [],
+    "observations": {},
+    "failures": [],
+    "cleanup": {
+      "allOwnedProcessesExited": true
+    }
+  },
+  "completedAt": "2026-09-05T15:48:01.684Z",
+  "tapSha256": "aea53eab0af815a65965a442bbdedb2765320609155cd894d04b5f4ac3af83c2"
+}

@@ -4,8 +4,9 @@
  * Event publisher — simulates the "marketplace" side of the system:
  * price/stock updates flowing into Redis, to be fanned out by the WS fleet.
  *
- * Every event carries `publishedAt` (epoch ms) so bench clients can measure
- * TRUE end-to-end latency: publish → Redis → instance → client receive.
+ * `publishedAt` is wall-clock metadata. This demo publishes in one-second
+ * batches; its final seq counts attempts, not acknowledged publications.
+ * The controlled benchmark owns a separate publisher and monotonic clock.
  *
  * Usage:
  *   node src/publisher.js --rate 100 --channels 50 --duration 60

@@ -1,5 +1,7 @@
 # WS-1B: real two-instance fan-out proof
 
+Historical milestone snapshot. For current validation and claim boundaries, see [reproduction](reproduce.md) and the [evidence index](evidence/README.md).
+
 ## Read-only discovery and plan
 
 Baseline: clean `main` at `23e72ba69a92e5725ec604347cc90b683ba7febd`.

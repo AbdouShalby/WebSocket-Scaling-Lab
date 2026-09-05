@@ -17,7 +17,9 @@
     "test:ws2": "node --test tests/operations.test.js",
     "proof:operations": "node bench/prove-operations.js",
     "test:ws3": "node --test tests/guards.test.js tests/guards-integration.test.js",
-    "proof:guards": "node bench/prove-guards.js"
+    "proof:guards": "node bench/prove-guards.js",
+    "verify:evidence": "node scripts/verify-evidence.js",
+    "validate": "node scripts/validate.js"
   },
   "engines": { "node": ">=20" },
   "license": "MIT",

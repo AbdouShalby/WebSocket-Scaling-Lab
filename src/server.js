@@ -8,10 +8,10 @@
  *   publisher ──▶ Redis pub/sub ──▶ every instance ──▶ local subscribers only
  *
  * Each instance holds its own client connections and subscribes to ONE Redis
- * pattern channel. A published event reaches every instance once, and each
- * instance fans it out only to its own sockets that subscribed to that logical
- * channel. Adding capacity = adding instances behind the load balancer; no
- * instance ever needs to know about another instance's sockets.
+ * literal Redis channel. Connected subscribers fan events out to their own
+ * sockets subscribed to that logical channel. Disconnected instances miss
+ * events; adding processes does not by itself prove a capacity gain.
+ * Instances do not know about another instance's sockets.
  *
  * Client protocol (JSON over WS):
  *   → {"action":"subscribe","channel":"product:42"}
@@ -113,8 +113,7 @@ const server = http.createServer((req, res) => {
 const wss = new WebSocketServer({
   noServer: true,
   maxPayload: config.limits.maxPayloadBytes,
-  // perMessageDeflate off: compression costs CPU per-frame and hurts p99 at
-  // high connection counts; our payloads are small JSON.
+  // Disabled for small simulated payloads; no compression A/B evidence retained.
   perMessageDeflate: false,
 });
 

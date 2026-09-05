@@ -1,5 +1,7 @@
 # WS-3: evidence-critical security, readiness and observability
 
+Historical milestone snapshot. For current validation and claim boundaries, see [reproduction](reproduce.md) and the [evidence index](evidence/README.md).
+
 ## Audit and bounded design
 
 Baseline: clean `main` at `7cd086e097f9a740984dec92270c8408af9bc3fb` (WS-2).

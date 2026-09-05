@@ -1,0 +1,388 @@
+TAP version 13
+# Subtest: WS-1A CLI: real Redis, complete result/provenance, then refused-target failure artifact
+ok 1 - WS-1A CLI: real Redis, complete result/provenance, then refused-target failure artifact
+  ---
+  duration_ms: 7264.317635
+  type: 'test'
+  ...
+# Subtest: measurement resets ramp/warmup and excludes drain from throughput and latency
+ok 2 - measurement resets ramp/warmup and excludes drain from throughput and latency
+  ---
+  duration_ms: 1.785894
+  type: 'test'
+  ...
+# Subtest: expected ledger finds an entirely missing publication and unequal channel audiences
+ok 3 - expected ledger finds an entirely missing publication and unequal channel audiences
+  ---
+  duration_ms: 0.354695
+  type: 'test'
+  ...
+# Subtest: dedup is per client and event; wrong channel/unknown IDs cannot erase missing
+ok 4 - dedup is per client and event; wrong channel/unknown IDs cannot erase missing
+  ---
+  duration_ms: 0.285576
+  type: 'test'
+  ...
+# Subtest: late warmup/foreign traffic and absent instance IDs do not become measurement samples
+ok 5 - late warmup/foreign traffic and absent instance IDs do not become measurement samples
+  ---
+  duration_ms: 0.312336
+  type: 'test'
+  ...
+# Subtest: error plus close or repeated acknowledgment settles readiness exactly once
+ok 6 - error plus close or repeated acknowledgment settles readiness exactly once
+  ---
+  duration_ms: 0.176857
+  type: 'test'
+  ...
+# Subtest: invalid/unsafe parameters and missing provenance are rejected before networking
+ok 7 - invalid/unsafe parameters and missing provenance are rejected before networking
+  ---
+  duration_ms: 19.28042
+  type: 'test'
+  ...
+# Subtest: complete lifecycle waits for real WS acknowledgments and resets warmup
+ok 8 - complete lifecycle waits for real WS acknowledgments and resets warmup
+  ---
+  duration_ms: 481.985997
+  type: 'test'
+  ...
+# Subtest: failed run: no-ack
+ok 9 - failed run: no-ack
+  ---
+  duration_ms: 406.66046
+  type: 'test'
+  ...
+# Subtest: failed run: reject
+ok 10 - failed run: reject
+  ---
+  duration_ms: 108.243096
+  type: 'test'
+  ...
+# Subtest: failed run: drop-all
+ok 11 - failed run: drop-all
+  ---
+  duration_ms: 387.629688
+  type: 'test'
+  ...
+# Subtest: failed run: drop-event
+ok 12 - failed run: drop-event
+  ---
+  duration_ms: 389.016758
+  type: 'test'
+  ...
+# Subtest: failed run: duplicate
+ok 13 - failed run: duplicate
+  ---
+  duration_ms: 389.945105
+  type: 'test'
+  ...
+# Subtest: failed run: publish-error
+ok 14 - failed run: publish-error
+  ---
+  duration_ms: 107.005693
+  type: 'test'
+  ...
+# Subtest: failed run: disconnect
+ok 15 - failed run: disconnect
+  ---
+  duration_ms: 140.79732
+  type: 'test'
+  ...
+# Subtest: publish → redis → server → subscribed client (end to end)
+ok 16 - publish → redis → server → subscribed client (end to end)
+  ---
+  duration_ms: 969.474127
+  type: 'test'
+  ...
+# Subtest: mandatory real WS-3 protocol, origin, rate, readiness and telemetry proof
+ok 17 - mandatory real WS-3 protocol, origin, rate, readiness and telemetry proof
+  ---
+  duration_ms: 8569.931567
+  type: 'test'
+  ...
+# Subtest: real negative control detects disabled origin
+ok 18 - real negative control detects disabled origin
+  ---
+  duration_ms: 2663.090503
+  type: 'test'
+  ...
+# Subtest: real negative control detects disabled schema
+ok 19 - real negative control detects disabled schema
+  ---
+  duration_ms: 3125.636516
+  type: 'test'
+  ...
+# Subtest: real negative control detects disabled rate
+ok 20 - real negative control detects disabled rate
+  ---
+  duration_ms: 8151.866242
+  type: 'test'
+  ...
+# Subtest: real negative control detects disabled ready
+ok 21 - real negative control detects disabled ready
+  ---
+  duration_ms: 10285.991892
+  type: 'test'
+  ...
+# Subtest: protocol rejects null, non-object, malformed channel and envelope shapes
+ok 22 - protocol rejects null, non-object, malformed channel and envelope shapes
+  ---
+  duration_ms: 2.072111
+  type: 'test'
+  ...
+# Subtest: per-connection token bucket refills monotonically and caps idle credit
+ok 23 - per-connection token bucket refills monotonically and caps idle credit
+  ---
+  duration_ms: 1.231713
+  type: 'test'
+  ...
+# Subtest: readiness waits for ACK; stale ACK after disconnect or drain cannot resurrect it
+ok 24 - readiness waits for ACK; stale ACK after disconnect or drain cannot resurrect it
+  ---
+  duration_ms: 9.425038
+  type: 'test'
+  ...
+# Subtest: failed subscription stays unready and a later check retries; failed ping revokes readiness
+ok 25 - failed subscription stays unready and a later check retries; failed ping revokes readiness
+  ---
+  duration_ms: 0.666541
+  type: 'test'
+  ...
+# Subtest: drain wins over an outstanding subscription ACK
+ok 26 - drain wins over an outstanding subscription ACK
+  ---
+  duration_ms: 3.428602
+  type: 'test'
+  ...
+# Subtest: configuration rejects malformed limits and origin allowlists without echoing values
+ok 27 - configuration rejects malformed limits and origin allowlists without echoing values
+  ---
+  duration_ms: 571.388926
+  type: 'test'
+  ...
+# Subtest: broadcast reaches only subscribers of the channel
+ok 28 - broadcast reaches only subscribers of the channel
+  ---
+  duration_ms: 1.657572
+  type: 'test'
+  ...
+# Subtest: unsubscribe stops delivery and empty channels are garbage-collected
+ok 29 - unsubscribe stops delivery and empty channels are garbage-collected
+  ---
+  duration_ms: 0.225317
+  type: 'test'
+  ...
+# Subtest: removeClient cleans every channel the socket was in
+ok 30 - removeClient cleans every channel the socket was in
+  ---
+  duration_ms: 0.185537
+  type: 'test'
+  ...
+# Subtest: subscription limit is enforced
+ok 31 - subscription limit is enforced
+  ---
+  duration_ms: 0.290215
+  type: 'test'
+  ...
+# Subtest: slow consumer gets messages dropped, not queued
+ok 32 - slow consumer gets messages dropped, not queued
+  ---
+  duration_ms: 0.269856
+  type: 'test'
+  ...
+# Subtest: slow consumer is disconnected after dropLimit consecutive drops
+ok 33 - slow consumer is disconnected after dropLimit consecutive drops
+  ---
+  duration_ms: 0.235907
+  type: 'test'
+  ...
+# Subtest: recovered consumer resets its consecutive-drop counter
+ok 34 - recovered consumer resets its consecutive-drop counter
+  ---
+  duration_ms: 0.69862
+  type: 'test'
+  ...
+# Subtest: closed sockets are skipped without counting as drops
+ok 35 - closed sockets are skipped without counting as drops
+  ---
+  duration_ms: 0.278306
+  type: 'test'
+  ...
+# Subtest: broadcast to a channel with no subscribers is a cheap no-op
+ok 36 - broadcast to a channel with no subscribers is a cheap no-op
+  ---
+  duration_ms: 1.185873
+  type: 'test'
+  ...
+# Subtest: operational options reject unsafe paths and unknown scenarios
+ok 37 - operational options reject unsafe paths and unknown scenarios
+  ---
+  duration_ms: 1.018036
+  type: 'test'
+  ...
+# Subtest: mandatory real POSIX Redis/process/drain/backpressure scenarios with raw evidence
+ok 38 - mandatory real POSIX Redis/process/drain/backpressure scenarios with raw evidence
+  ---
+  duration_ms: 23110.317578
+  type: 'test'
+  ...
+# Subtest: real negative control detects broken recovery
+ok 39 - real negative control detects broken recovery
+  ---
+  duration_ms: 10869.508818
+  type: 'test'
+  ...
+# Subtest: real negative control detects broken drain
+ok 40 - real negative control detects broken drain
+  ---
+  duration_ms: 4025.372165
+  type: 'test'
+  ...
+# Subtest: real negative control detects broken backpressure
+ok 41 - real negative control detects broken backpressure
+  ---
+  duration_ms: 25265.822474
+  type: 'test'
+  ...
+# Subtest: mandatory real Redis 1/2/4-process matrix and regression-sensitive evidence aggregation
+ok 42 - mandatory real Redis 1/2/4-process matrix and regression-sensitive evidence aggregation
+  ---
+  duration_ms: 42238.976166
+  type: 'test'
+  ...
+# Subtest: real four-node fleet rejects duplicated fan-out rather than graphing inflated throughput
+ok 43 - real four-node fleet rejects duplicated fan-out rather than graphing inflated throughput
+  ---
+  duration_ms: 6111.284009
+  type: 'test'
+  ...
+# Subtest: matrix covers all 27 cells and rotates topology order across repeats
+ok 44 - matrix covers all 27 cells and rotates topology order across repeats
+  ---
+  duration_ms: 2.1381
+  type: 'test'
+  ...
+# Subtest: fleet validation rejects ambiguous identities and imbalanced workloads
+ok 45 - fleet validation rejects ambiguous identities and imbalanced workloads
+  ---
+  duration_ms: 6.35441
+  type: 'test'
+  ...
+# Subtest: matrix options enforce equal balanced loads and bounded repetitions
+ok 46 - matrix options enforce equal balanced loads and bounded repetitions
+  ---
+  duration_ms: 0.990956
+  type: 'test'
+  ...
+# Subtest: ledger rejects a valid-looking event from the wrong assigned instance
+ok 47 - ledger rejects a valid-looking event from the wrong assigned instance
+  ---
+  duration_ms: 0.561183
+  type: 'test'
+  ...
+# Subtest: runner rejects inconsistent or duplicate fleet declarations before networking
+ok 48 - runner rejects inconsistent or duplicate fleet declarations before networking
+  ---
+  duration_ms: 1.175934
+  type: 'test'
+  ...
+# Subtest: aggregation uses all repetitions, not maximum/first-run selection
+ok 49 - aggregation uses all repetitions, not maximum/first-run selection
+  ---
+  duration_ms: 0.604131
+  type: 'test'
+  ...
+# Subtest: an incomplete matrix cannot produce successful curves
+ok 50 - an incomplete matrix cannot produce successful curves
+  ---
+  duration_ms: 0.597042
+  type: 'test'
+  ...
+# Subtest: curated archive verifies original hashes and regenerates successful matrix tables/curves
+ok 51 - curated archive verifies original hashes and regenerates successful matrix tables/curves
+  ---
+  duration_ms: 657.038357
+  type: 'test'
+  ...
+# Subtest: archive verifier rejects changed hashes, missing entries and reclassified failures
+ok 52 - archive verifier rejects changed hashes, missing entries and reclassified failures
+  ---
+  duration_ms: 2455.961863
+  type: 'test'
+  ...
+# Subtest: full-suite gate fails closed on skipped, failing, empty or incomplete TAP
+ok 53 - full-suite gate fails closed on skipped, failing, empty or incomplete TAP
+  ---
+  duration_ms: 1.125404
+  type: 'test'
+  ...
+# Subtest: verifier accepts the exact cross-instance delivery matrix
+ok 54 - verifier accepts the exact cross-instance delivery matrix
+  ---
+  duration_ms: 2.07804
+  type: 'test'
+  ...
+# Subtest: verifier rejects lost second-node delivery
+ok 55 - verifier rejects lost second-node delivery
+  ---
+  duration_ms: 1.051395
+  type: 'test'
+  ...
+# Subtest: verifier rejects duplicate delivery
+ok 56 - verifier rejects duplicate delivery
+  ---
+  duration_ms: 0.234117
+  type: 'test'
+  ...
+# Subtest: verifier rejects wrong instance
+ok 57 - verifier rejects wrong instance
+  ---
+  duration_ms: 0.843678
+  type: 'test'
+  ...
+# Subtest: verifier rejects wrong channel
+ok 58 - verifier rejects wrong channel
+  ---
+  duration_ms: 0.425714
+  type: 'test'
+  ...
+# Subtest: verifier rejects changed payload
+ok 59 - verifier rejects changed payload
+  ---
+  duration_ms: 0.596962
+  type: 'test'
+  ...
+# Subtest: verifier rejects unsubscribed client leaked delivery
+ok 60 - verifier rejects unsubscribed client leaked delivery
+  ---
+  duration_ms: 0.289766
+  type: 'test'
+  ...
+# Subtest: mandatory real Redis and two-process proof, including raw evidence
+ok 61 - mandatory real Redis and two-process proof, including raw evidence
+  ---
+  duration_ms: 4323.145641
+  type: 'test'
+  ...
+# Subtest: real two-server negative control rejects suppress fan-out
+ok 62 - real two-server negative control rejects suppress fan-out
+  ---
+  duration_ms: 5231.734968
+  type: 'test'
+  ...
+# Subtest: real two-server negative control rejects duplicate fan-out
+ok 63 - real two-server negative control rejects duplicate fan-out
+  ---
+  duration_ms: 3168.891567
+  type: 'test'
+  ...
+1..63
+# tests 63
+# suites 0
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 63929.053538

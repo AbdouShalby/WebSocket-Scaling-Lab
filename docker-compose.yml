@@ -1,7 +1,8 @@
 # Fleet topology: N ws instances behind nginx, one Redis, one publisher.
 #
 #   docker compose up --build --scale ws=4
-#   node bench/connect-storm.js --url ws://localhost:8080 --conns 5000
+#   curl http://localhost:8080/readyz
+# This topology is not the measured direct-process fleet; see docs/reproduce.md.
 #
 services:
   redis:

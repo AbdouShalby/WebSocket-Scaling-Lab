@@ -4,5 +4,5 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 COPY src ./src
 EXPOSE 8080
-# Raise the FD limit ceiling for high connection counts (compose sets ulimits too)
+# File-descriptor limits are configured by Compose, not by this image.
 CMD ["node", "src/server.js"]

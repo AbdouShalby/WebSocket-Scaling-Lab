@@ -33,7 +33,12 @@ jobs:
 
       - name: Syntax check
         run: |
-          for f in src/*.js bench/*.js; do node --check "$f"; done
+          for f in src/*.js bench/*.js scripts/*.js; do node --check "$f"; done
+
+      - name: Curated evidence integrity and finalization-tool regressions
+        run: |
+          npm run verify:evidence
+          node --test tests/showcase.test.js
 
       - name: Unit + E2E tests
         run: npm test

@@ -1,5 +1,7 @@
 # WS-1C: same-host 1 / 2 / 4 process benchmark curves
 
+Historical milestone snapshot. For current validation and claim boundaries, see [reproduction](reproduce.md) and the [evidence index](evidence/README.md).
+
 ## Read-only audit and plan
 
 Baseline: clean `main` at `842bdd95ab9972c8dd62e259ef95c7175f3fd90f`.
