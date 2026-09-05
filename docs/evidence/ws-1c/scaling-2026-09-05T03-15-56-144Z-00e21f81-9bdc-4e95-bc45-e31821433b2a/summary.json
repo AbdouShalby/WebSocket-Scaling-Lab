@@ -1,0 +1,851 @@
+{
+  "schemaVersion": 1,
+  "milestone": "WS-1C",
+  "startedAt": "2026-09-05T03:15:56.144Z",
+  "config": {
+    "connections": [
+      240,
+      1200,
+      2400
+    ],
+    "repeats": 3,
+    "options": {
+      "url": "ws://127.0.0.1:8080",
+      "conns": 2400,
+      "channels": 12,
+      "ramp": 50,
+      "measure": 15,
+      "warmup": 2,
+      "drain": 1,
+      "timeout": 10,
+      "rate": 120,
+      "redis-host": "127.0.0.1",
+      "redis-port": 16379,
+      "channel-prefix": "ws:broadcast:",
+      "output-dir": "docs/evidence/ws-1c",
+      "runtime": ""
+    }
+  },
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "bench/run-scaling.js",
+        "--redis-port",
+        "16379",
+        "--connections",
+        "240,1200,2400",
+        "--channels",
+        "12",
+        "--rate",
+        "120",
+        "--ramp",
+        "50",
+        "--warmup",
+        "2",
+        "--measure",
+        "15",
+        "--drain",
+        "1",
+        "--timeout",
+        "10",
+        "--repeats",
+        "3",
+        "--output-dir",
+        "docs/evidence/ws-1c"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "842bdd95ab9972c8dd62e259ef95c7175f3fd90f",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "20f849e8c33f58e820a572254335da01d65f46bb765039a6cfc574467a8394e7",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "1395be584b5e7cddf6c3e5f78206cfa92c17f7a459df52e41b7b0c394fd242b7",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "52e523960378ce76f49dbc86dc58e08f32cdc661f77d37b43119fe8929bb2c45",
+        "nginx.conf": "39fe4a4ebe0bfb54435f0e7c30f6b8126e582f2fb27f43c3d73cc8624f76af22",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "546d675d47b13021cbf4c593345696de164267440f18cceb65c0fee79eb61123",
+        "src/config.js": "2e23d78d2c188fdfe8ae82dc83d6ac5e37e1293d6f457b0a22a90e9e85d35784",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "3ec274e92a40d28f73e758470054540b7db8b16f11aa900bf2eb2df2bcded436",
+        "src/publisher.js": "1ba669bfbaadb7f259092e6161797bb8ec3d96612bd10c2a6e0cd55a6bebd993",
+        "src/server.js": "99f5e7dbc93daa776b584eede155331a17ff24b66d8f2ebc50405e948d00bf51",
+        "tests/scaling.test.js": "f20867eb428c4cbab79cd385d4529972519601e318295715f1df1964afbb9260",
+        "tests/scaling-integration.test.js": "7855f35bdc09b0ea2162ff311ce7e49e7efa24c29d752e91fc26f9f1b3b0db20"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "win32",
+      "release": "10.0.26200",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor             ",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 25672441856
+    },
+    "target": {
+      "description": "fresh controller and 1/2/4 independent server processes per trial; same host; no nginx"
+    },
+    "sourceChangedDuringRun": false
+  },
+  "order": [
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 1
+    },
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 2
+    },
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 4
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 1
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 2
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 4
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 1
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 2
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 4
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 2
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 4
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 1
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 2
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 4
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 1
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 2
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 4
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 1
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 4
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 1
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 2
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 4
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 1
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 2
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 4
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 1
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 2
+    }
+  ],
+  "artifacts": [
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 1,
+      "file": "2026-09-05T03-15-56-707Z-b6f51f78-f1bc-4435-9fd5-973003c0fabe.json",
+      "sha256": "8aee468977d0700861736dd022a25e3a7713ca77bf553ce7cbc6b1a86cde2b08"
+    },
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 2,
+      "file": "2026-09-05T03-16-15-954Z-99a81ed2-e1df-4462-bc4d-2dab415d4558.json",
+      "sha256": "91f2a39088934f2fc95604d4ee78c34d74edba1264d74080c1a3b85963ea329d"
+    },
+    {
+      "repetition": 1,
+      "conns": 240,
+      "nodes": 4,
+      "file": "2026-09-05T03-16-35-433Z-62e26bad-691d-46bc-8846-10848c909843.json",
+      "sha256": "1691570af9236bbc296fe63dacf12ee9458eb1ce40c3d15a49d964b3001b5815"
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 1,
+      "file": "2026-09-05T03-16-54-542Z-92e3320e-eb17-448b-9350-5dc584e3dd50.json",
+      "sha256": "44a4cfdba294737f54433c5b0f15279da3f4a8f103b83ad0cb05c32819f830bc"
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 2,
+      "file": "2026-09-05T03-17-15-927Z-472da968-646e-4b40-bf53-873c64073b74.json",
+      "sha256": "ace6e0b8944ff9a3e808246e0e4ea723c77059164b9a9f61cc37ae5b47cca7c2"
+    },
+    {
+      "repetition": 1,
+      "conns": 1200,
+      "nodes": 4,
+      "file": "2026-09-05T03-17-37-563Z-a08a6f07-1958-44a0-ac67-5f0da16f6859.json",
+      "sha256": "9a6d0f39fc8c13185dcefe952d794820e4d1f0a105695912ed2940da8e785eba"
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 1,
+      "file": "2026-09-05T03-17-58-834Z-1e4e51d7-b0fa-41b1-914d-92f63fc04414.json",
+      "sha256": "6be59e4965df3331bd05471d346a5b3b3d042eb267a84738c27c1482bbb889fd"
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 2,
+      "file": "2026-09-05T03-18-22-911Z-f90da1cd-6c10-4582-94ec-40966d62a268.json",
+      "sha256": "f5f92a5c0fad68daf5880f61315f43106588fd0cd35c29c962789b6a17a7386d"
+    },
+    {
+      "repetition": 1,
+      "conns": 2400,
+      "nodes": 4,
+      "file": "2026-09-05T03-18-47-289Z-807740cf-3804-4094-8e92-40d1daf08be3.json",
+      "sha256": "f0bd312436aad4b2765d9b0ddb1432e78b4aa96386a3d728b54b6fcc29251208"
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 2,
+      "file": "2026-09-05T03-19-11-391Z-c5c8f1ab-65e7-47d0-b6a5-01f67d65d045.json",
+      "sha256": "56454ce15b47e273dbfe539764af4d7c66094185e201c3191d7d5fcbc9e74d75"
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 4,
+      "file": "2026-09-05T03-19-30-904Z-4565ee19-c108-469b-82cb-c8c5aa31ce36.json",
+      "sha256": "24738c3739f084de18efc51fe2f244134b7f1712c74d065b7316550948bcaaae"
+    },
+    {
+      "repetition": 2,
+      "conns": 240,
+      "nodes": 1,
+      "file": "2026-09-05T03-19-50-017Z-6d607169-24d7-4c9c-8ffd-7eabb47351ca.json",
+      "sha256": "a27bbc691dd2bad7a547eaef0d95e7e87fd8697953c88b683003916a4d9a184f"
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 2,
+      "file": "2026-09-05T03-20-09-231Z-63cba4a5-7da2-4369-b4ca-db84919c4d23.json",
+      "sha256": "7fcb69ba927c762d205be65063418660b12cf23cb7c842226996c45c4a822921"
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 4,
+      "file": "2026-09-05T03-20-30-892Z-887f4e55-b1aa-4d64-833c-10c64dce976f.json",
+      "sha256": "bc3f8e7288bc89e6c6b49ea3a8b069bf96ee31f85b6805997d248082cba44931"
+    },
+    {
+      "repetition": 2,
+      "conns": 1200,
+      "nodes": 1,
+      "file": "2026-09-05T03-20-52-121Z-58992fb1-5dc0-4ef5-b083-f2e7dd896930.json",
+      "sha256": "a33fc07e798538233922aa63dc5214a8fffb50abc7326b0c97e538bb02445100"
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 2,
+      "file": "2026-09-05T03-21-13-492Z-712a270f-dfbb-4ea9-8a3e-5923255cdd26.json",
+      "sha256": "342c004e78b0873c03d846ec0093f092c150cdab910ffe614918d67e6217ee7d"
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 4,
+      "file": "2026-09-05T03-21-37-898Z-737751d7-16e3-44fa-b9a2-03eb63aa0190.json",
+      "sha256": "1ddd45b47bc51d1a4c9c9d57ca88caacff970b6099122b10b46e2a2bd6204729"
+    },
+    {
+      "repetition": 2,
+      "conns": 2400,
+      "nodes": 1,
+      "file": "2026-09-05T03-22-01-839Z-30cd4622-e921-476b-8d62-a3bb59a39665.json",
+      "sha256": "07f4db78363ce3e75304e3b17adfc8d2ee4c36d9aebb573463dd02ce0a439c71"
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 4,
+      "file": "2026-09-05T03-22-26-167Z-15d26d26-bcb8-41f2-ba04-d80c33b200e0.json",
+      "sha256": "989c108e48151a674191468cc38218f83cc603b2e107ace9ac80da4daf53cb4f"
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 1,
+      "file": "2026-09-05T03-22-45-281Z-3456159a-4331-4f5e-a1b1-538a99911cfd.json",
+      "sha256": "6758d1db663deffe3f67e5c2f0030e69e92e0d0ed406cfb7640b28b6cbc1944a"
+    },
+    {
+      "repetition": 3,
+      "conns": 240,
+      "nodes": 2,
+      "file": "2026-09-05T03-23-04-511Z-89c3c84f-d9f8-4a3c-b4f1-db7f5fa9349b.json",
+      "sha256": "c1f6908ee6aba0fa0435e8e2bcc208f3df7ab7ac67c02d4f8c89377ad1fa2c20"
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 4,
+      "file": "2026-09-05T03-23-24-034Z-dfbcb714-fb31-41d7-b942-b729d59a4f30.json",
+      "sha256": "ec2a5570871453fd4de0ada8605ee74ac39a83ff7ed44ce0dc5ce61acc1eef7d"
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 1,
+      "file": "2026-09-05T03-23-45-267Z-ffd22b87-0e91-443d-a1fd-f376d62c4864.json",
+      "sha256": "1989709879cf102663464675aae76d2865bf08dffea3c8087fc95ca855f22182"
+    },
+    {
+      "repetition": 3,
+      "conns": 1200,
+      "nodes": 2,
+      "file": "2026-09-05T03-24-06-659Z-d1dc1c9b-22cd-4bdf-bafb-947bd1662208.json",
+      "sha256": "98c98bb018724be650a9428d2d176f9160c2ef476f87e4c32e5cb3591003cb6d"
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 4,
+      "file": "2026-09-05T03-24-28-262Z-2703515d-d7e5-4b11-a2d5-09eb51c0588a.json",
+      "sha256": "507bd16d649ed25677a14ae16ca7d8ed9ddaf5d6f9de5351fb6ac669bb15dc7a"
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 1,
+      "file": "2026-09-05T03-24-52-201Z-b9a83802-3598-46df-a036-075d9e6401b8.json",
+      "sha256": "3ce23f0c6009462c60757e2920bb3ffd48b672c78c287bdd9ae10609a1de8f66"
+    },
+    {
+      "repetition": 3,
+      "conns": 2400,
+      "nodes": 2,
+      "file": "2026-09-05T03-25-16-312Z-c6a612fc-1c77-4037-8192-c78503043f46.json",
+      "sha256": "9601233f70cb8233060c36165bc42130ec614fa1ad8b48aaa8bf1fa142931bb2"
+    }
+  ],
+  "rows": [
+    {
+      "conns": 240,
+      "nodes": 1,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 2400,
+      "issuedEventsPerSecond": {
+        "median": 107.65887647036527,
+        "min": 107.34300801894247,
+        "max": 108.60665497339458
+      },
+      "deliveriesPerSecond": {
+        "median": 2152.9775438782585,
+        "min": 2146.8601603788497,
+        "max": 2172.1330994678915
+      },
+      "p50Ms": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "p95Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "p99Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 3
+      },
+      "controllerCpuCorePercent": {
+        "median": 11.353838423272201,
+        "min": 6.343411904307978,
+        "max": 13.645843185516565
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.07718805736572658,
+        "min": 0.07665855268248342,
+        "max": 0.07997368750056175
+      }
+    },
+    {
+      "conns": 240,
+      "nodes": 2,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 2400,
+      "issuedEventsPerSecond": {
+        "median": 102.97926747583149,
+        "min": 102.0428437443661,
+        "max": 103.57856757075746
+      },
+      "deliveriesPerSecond": {
+        "median": 2059.58534951663,
+        "min": 2040.856874887322,
+        "max": 2071.5713514151494
+      },
+      "p50Ms": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "p95Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "p99Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "controllerCpuCorePercent": {
+        "median": 5.202332811294888,
+        "min": 2.919355853862032,
+        "max": 7.173978162730205
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.053633544535672366,
+        "min": 0.053145144160137346,
+        "max": 0.05438432551004222
+      }
+    },
+    {
+      "conns": 240,
+      "nodes": 4,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 2400,
+      "issuedEventsPerSecond": {
+        "median": 102.63759285786311,
+        "min": 102.03113079024337,
+        "max": 102.79356306708075
+      },
+      "deliveriesPerSecond": {
+        "median": 2052.7518571572623,
+        "min": 2040.6226158048673,
+        "max": 2054.538011496387
+      },
+      "p50Ms": {
+        "median": 1,
+        "min": 1,
+        "max": 1
+      },
+      "p95Ms": {
+        "median": 2,
+        "min": 1,
+        "max": 2
+      },
+      "p99Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 20
+      },
+      "controllerCpuCorePercent": {
+        "median": 5.626385272384576,
+        "min": 5.525173065049236,
+        "max": 6.447030415537686
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.05021964857834952,
+        "min": 0.049202779750338134,
+        "max": 0.050376725154551015
+      }
+    },
+    {
+      "conns": 1200,
+      "nodes": 1,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 12000,
+      "issuedEventsPerSecond": {
+        "median": 116.57379654201328,
+        "min": 116.38245775141908,
+        "max": 116.79461265383364
+      },
+      "deliveriesPerSecond": {
+        "median": 11657.37965420133,
+        "min": 11638.245775141908,
+        "max": 11671.66162515477
+      },
+      "p50Ms": {
+        "median": 3,
+        "min": 3,
+        "max": 3
+      },
+      "p95Ms": {
+        "median": 6,
+        "min": 6,
+        "max": 6
+      },
+      "p99Ms": {
+        "median": 7,
+        "min": 7,
+        "max": 7
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 117
+      },
+      "controllerCpuCorePercent": {
+        "median": 33.532747537362624,
+        "min": 31.230990266483488,
+        "max": 34.7920161076035
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.32015016642965644,
+        "min": 0.3194582289423465,
+        "max": 0.3225701679406103
+      }
+    },
+    {
+      "conns": 1200,
+      "nodes": 2,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 12000,
+      "issuedEventsPerSecond": {
+        "median": 112.9248229340442,
+        "min": 112.51739711932132,
+        "max": 113.05792143857538
+      },
+      "deliveriesPerSecond": {
+        "median": 11292.48229340442,
+        "min": 11251.739711932132,
+        "max": 11305.792143857538
+      },
+      "p50Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "p95Ms": {
+        "median": 4,
+        "min": 4,
+        "max": 4
+      },
+      "p99Ms": {
+        "median": 4,
+        "min": 4,
+        "max": 4
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "controllerCpuCorePercent": {
+        "median": 21.8706059229707,
+        "min": 18.32133347062119,
+        "max": 22.691911931690445
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.20126464182436507,
+        "min": 0.19597369958181293,
+        "max": 0.21078401607862715
+      }
+    },
+    {
+      "conns": 1200,
+      "nodes": 4,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 12000,
+      "issuedEventsPerSecond": {
+        "median": 111.45622544746674,
+        "min": 110.45561521417909,
+        "max": 112.0360128772941
+      },
+      "deliveriesPerSecond": {
+        "median": 11138.95650255484,
+        "min": 11045.561521417909,
+        "max": 11203.601287729409
+      },
+      "p50Ms": {
+        "median": 2,
+        "min": 2,
+        "max": 2
+      },
+      "p95Ms": {
+        "median": 3,
+        "min": 3,
+        "max": 3
+      },
+      "p99Ms": {
+        "median": 4,
+        "min": 4,
+        "max": 4
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 100
+      },
+      "controllerCpuCorePercent": {
+        "median": 17.598473743033846,
+        "min": 16.126142375825992,
+        "max": 22.59868535914371
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.1804992405275636,
+        "min": 0.16103715228108656,
+        "max": 0.18173718731079547
+      }
+    },
+    {
+      "conns": 2400,
+      "nodes": 1,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 24000,
+      "issuedEventsPerSecond": {
+        "median": 114.98800675089588,
+        "min": 114.52551887542874,
+        "max": 115.1923174403755
+      },
+      "deliveriesPerSecond": {
+        "median": 22975.603644539875,
+        "min": 22878.77223844093,
+        "max": 23014.06511528391
+      },
+      "p50Ms": {
+        "median": 7,
+        "min": 7,
+        "max": 7
+      },
+      "p95Ms": {
+        "median": 12,
+        "min": 12,
+        "max": 13
+      },
+      "p99Ms": {
+        "median": 14,
+        "min": 14,
+        "max": 14
+      },
+      "late": {
+        "median": 366,
+        "min": 330,
+        "max": 395
+      },
+      "controllerCpuCorePercent": {
+        "median": 67.91014155668017,
+        "min": 67.60133787853948,
+        "max": 68.02315984603274
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.632902213826913,
+        "min": 0.6275465628447298,
+        "max": 0.6433896114318984
+      }
+    },
+    {
+      "conns": 2400,
+      "nodes": 2,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 24000,
+      "issuedEventsPerSecond": {
+        "median": 109.79447148237931,
+        "min": 108.8832985540931,
+        "max": 110.79074232557126
+      },
+      "deliveriesPerSecond": {
+        "median": 21933.828891935867,
+        "min": 21776.65971081862,
+        "max": 22157.4818541496
+      },
+      "p50Ms": {
+        "median": 3,
+        "min": 3,
+        "max": 4
+      },
+      "p95Ms": {
+        "median": 7,
+        "min": 7,
+        "max": 8
+      },
+      "p99Ms": {
+        "median": 8,
+        "min": 8,
+        "max": 9
+      },
+      "late": {
+        "median": 10,
+        "min": 0,
+        "max": 376
+      },
+      "controllerCpuCorePercent": {
+        "median": 38.74391223279966,
+        "min": 37.07856728416014,
+        "max": 38.83580362829161
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.3802071500483583,
+        "min": 0.3786555883080762,
+        "max": 0.4036026176419632
+      }
+    },
+    {
+      "conns": 2400,
+      "nodes": 4,
+      "repetitions": 3,
+      "targetDeliveriesPerSecond": 24000,
+      "issuedEventsPerSecond": {
+        "median": 114.97323346476118,
+        "min": 114.5768707490248,
+        "max": 115.25810298961454
+      },
+      "deliveriesPerSecond": {
+        "median": 22994.646692952236,
+        "min": 22886.846575238014,
+        "max": 23051.62059792291
+      },
+      "p50Ms": {
+        "median": 3,
+        "min": 3,
+        "max": 3
+      },
+      "p95Ms": {
+        "median": 6,
+        "min": 6,
+        "max": 6
+      },
+      "p99Ms": {
+        "median": 7,
+        "min": 6,
+        "max": 7
+      },
+      "late": {
+        "median": 0,
+        "min": 0,
+        "max": 428
+      },
+      "controllerCpuCorePercent": {
+        "median": 34.89351631942097,
+        "min": 32.19121000112167,
+        "max": 35.09905344798011
+      },
+      "controllerEventLoopUtilization": {
+        "median": 0.339840821720368,
+        "min": 0.3349041384685363,
+        "max": 0.340987964554132
+      }
+    }
+  ],
+  "status": "COMPLETE",
+  "failures": [],
+  "completedAt": "2026-09-05T03:25:39.979Z",
+  "interpretation": "Fixed total offered workload across process counts. Same-host curves, not capacity or speedup proof. All repetitions retained; median/min/max, not confidence intervals. p99 is median of trial p99 values."
+}

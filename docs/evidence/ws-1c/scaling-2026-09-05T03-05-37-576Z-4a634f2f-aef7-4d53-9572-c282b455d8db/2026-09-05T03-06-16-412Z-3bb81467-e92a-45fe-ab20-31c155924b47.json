@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "runId": "3bb81467-e92a-45fe-ab20-31c155924b47",
+  "startedAt": "2026-09-05T03:06:16.412Z",
+  "completedAt": "2026-09-05T03:06:34.777Z",
+  "status": "COMPLETE",
+  "failures": [],
+  "lifecycle": [
+    {
+      "state": "PREFLIGHT",
+      "at": "2026-09-05T03:06:16.412Z",
+      "elapsedMs": 0.027699999999981628
+    },
+    {
+      "state": "RAMPING",
+      "at": "2026-09-05T03:06:16.416Z",
+      "elapsedMs": 3.5860000000000127
+    },
+    {
+      "state": "SUBSCRIBING",
+      "at": "2026-09-05T03:06:16.538Z",
+      "elapsedMs": 126.01890000000003
+    },
+    {
+      "state": "READY",
+      "at": "2026-09-05T03:06:16.563Z",
+      "elapsedMs": 150.67469999999992
+    },
+    {
+      "state": "WARMUP",
+      "at": "2026-09-05T03:06:16.563Z",
+      "elapsedMs": 150.68330000000003
+    },
+    {
+      "state": "MEASURING",
+      "at": "2026-09-05T03:06:18.564Z",
+      "elapsedMs": 2152.3271
+    },
+    {
+      "state": "DRAINING",
+      "at": "2026-09-05T03:06:33.570Z",
+      "elapsedMs": 17157.869
+    },
+    {
+      "state": "CLEANUP",
+      "at": "2026-09-05T03:06:34.577Z",
+      "elapsedMs": 18164.836
+    },
+    {
+      "state": "COMPLETE",
+      "at": "2026-09-05T03:06:34.588Z",
+      "elapsedMs": 18176.0628
+    }
+  ],
+  "options": {
+    "url": "ws://127.0.0.1:52080",
+    "conns": 240,
+    "channels": 12,
+    "ramp": 200,
+    "measure": 15,
+    "warmup": 2,
+    "drain": 1,
+    "timeout": 10,
+    "rate": 120,
+    "redis-host": "127.0.0.1",
+    "redis-port": 16379,
+    "channel-prefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:",
+    "output-dir": "docs/evidence/ws-1c/scaling-2026-09-05T03-05-37-576Z-4a634f2f-aef7-4d53-9572-c282b455d8db",
+    "runtime": ""
+  },
+  "connections": {
+    "requested": 240,
+    "opened": 240,
+    "ready": 240,
+    "failed": 0,
+    "disconnected": 0,
+    "unattempted": 0,
+    "unresolved": 0
+  },
+  "publisher": {
+    "issued": 1694,
+    "confirmed": 1694,
+    "errors": 0,
+    "redisVersion": "8.0.5",
+    "redisRuntime": {
+      "version": "8.0.5",
+      "os": "Linux 6.18.33.1-microsoft-standard-WSL2 x86_64",
+      "archBits": "64",
+      "mode": "standalone",
+      "buildId": "9729964261b8fc0f"
+    },
+    "eventsPerSecond": 112.88970071141038
+  },
+  "accounting": {
+    "issuedEvents": 1694,
+    "expected": 33880,
+    "received": 33880,
+    "inWindow": 33880,
+    "late": 0,
+    "duplicates": 0,
+    "missing": 0,
+    "unexpected": 0,
+    "foreign": 0,
+    "clientsWithEvents": 240,
+    "elapsedMs": 15005.797599999998,
+    "deliveriesPerSecond": 2257.7940142282077,
+    "latencyMs": {
+      "samples": 33880,
+      "resolutionMs": 1,
+      "p50": 1,
+      "p95": 2,
+      "p99": 3,
+      "max": 12.86660000000029,
+      "histogram": [
+        [
+          1,
+          20666
+        ],
+        [
+          2,
+          12314
+        ],
+        [
+          3,
+          711
+        ],
+        [
+          4,
+          89
+        ],
+        [
+          5,
+          37
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          10,
+          20
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          13,
+          20
+        ]
+      ]
+    },
+    "instances": {
+      "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3": {
+        "clients": 60,
+        "received": 8470
+      },
+      "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d": {
+        "clients": 60,
+        "received": 8470
+      },
+      "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676": {
+        "clients": 60,
+        "received": 8470
+      },
+      "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d": {
+        "clients": 60,
+        "received": 8470
+      }
+    }
+  },
+  "routing": [
+    {
+      "url": "ws://127.0.0.1:52080",
+      "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+      "assigned": 60,
+      "ready": 60
+    },
+    {
+      "url": "ws://127.0.0.1:52082",
+      "instanceId": "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676",
+      "assigned": 60,
+      "ready": 60
+    },
+    {
+      "url": "ws://127.0.0.1:52086",
+      "instanceId": "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d",
+      "assigned": 60,
+      "ready": 60
+    },
+    {
+      "url": "ws://127.0.0.1:52088",
+      "instanceId": "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d",
+      "assigned": 60,
+      "ready": 60
+    }
+  ],
+  "milestone": "WS-1C",
+  "provenance": {
+    "command": {
+      "executable": "node",
+      "argv": [
+        "bench/run-fleet.js",
+        "--nodes",
+        "4",
+        "--conns",
+        "240",
+        "--channels",
+        "12",
+        "--rate",
+        "120",
+        "--ramp",
+        "200",
+        "--warmup",
+        "2",
+        "--measure",
+        "15",
+        "--drain",
+        "1",
+        "--timeout",
+        "10",
+        "--redis-host",
+        "127.0.0.1",
+        "--redis-port",
+        "16379",
+        "--output-dir",
+        "docs/evidence/ws-1c/scaling-2026-09-05T03-05-37-576Z-4a634f2f-aef7-4d53-9572-c282b455d8db"
+      ],
+      "cwd": "repository-root"
+    },
+    "git": {
+      "sha": "842bdd95ab9972c8dd62e259ef95c7175f3fd90f",
+      "dirty": true,
+      "sourceHashEncoding": "UTF-8 with CRLF normalized to LF",
+      "sourceSha256": {
+        "Dockerfile": "20f849e8c33f58e820a572254335da01d65f46bb765039a6cfc574467a8394e7",
+        "bench/accounting.js": "7c2c31353b06434a51ca1905c0f748934e4a9ffcdd37f89f83a3d22d1aa23fc4",
+        "bench/connect-storm.js": "9ce195715002551e72845f280cefef184e28a258a6be8c453b686d38a32a6028",
+        "bench/options.js": "d7f567e013efeabba8a0cf990f49028f0400d24fc33f8a73c1fd10257245cf65",
+        "bench/prove-two-node.js": "d314cc978848894ef6360c1ca50880f3b14b9434569268610e4a9fa4e5e43d16",
+        "bench/run-fleet.js": "b293c20e524c8106c4e6eb94ec1cb6bd155d138f2430e4caa315354d8de7b306",
+        "bench/run-local.js": "f359987733ca3191a10c37a55d54dae54b0f6590e029bdec3da723f80379b445",
+        "bench/run-scaling.js": "1839b9415703302f7d095994fd055a3a6c5c4bebc74d06bd4d8eef7e12bb59e7",
+        "bench/runner.js": "7904d4ccbf11861be1226b1da7413e8a68a3b08d2aa5ad947790922967ce82dd",
+        "bench/scaling-report.js": "8f80f77fe8badea8a1c7a8616491a688c04a1b03950b2ef5f8e007574d8f2505",
+        "docker-compose.yml": "52e523960378ce76f49dbc86dc58e08f32cdc661f77d37b43119fe8929bb2c45",
+        "nginx.conf": "39fe4a4ebe0bfb54435f0e7c30f6b8126e582f2fb27f43c3d73cc8624f76af22",
+        "package-lock.json": "599928a22a03ec3d55a927ed5373c5cf1ae3a24a3106f2d90ed78ebd43f4bc77",
+        "package.json": "546d675d47b13021cbf4c593345696de164267440f18cceb65c0fee79eb61123",
+        "src/config.js": "2e23d78d2c188fdfe8ae82dc83d6ac5e37e1293d6f457b0a22a90e9e85d35784",
+        "src/hub.js": "9ae604f0124537d14bbfc99274eb042df3fc480c9616b50196986d3f5564ff20",
+        "src/metrics.js": "3ec274e92a40d28f73e758470054540b7db8b16f11aa900bf2eb2df2bcded436",
+        "src/publisher.js": "1ba669bfbaadb7f259092e6161797bb8ec3d96612bd10c2a6e0cd55a6bebd993",
+        "src/server.js": "99f5e7dbc93daa776b584eede155331a17ff24b66d8f2ebc50405e948d00bf51",
+        "tests/scaling.test.js": "f20867eb428c4cbab79cd385d4529972519601e318295715f1df1964afbb9260",
+        "tests/scaling-integration.test.js": "313c009340b967edacdbcb28e486faf1b6e2b3b6978913936d2ded2576076ee8"
+      }
+    },
+    "controller": {
+      "node": "v24.15.0",
+      "ws": "8.21.0",
+      "ioredis": "5.11.1",
+      "platform": "win32",
+      "release": "10.0.26200",
+      "arch": "x64",
+      "cpu": "AMD Ryzen 7 5800X 8-Core Processor             ",
+      "logicalCpus": 16,
+      "totalMemoryBytes": 25672441856
+    },
+    "target": {
+      "schemaVersion": 1,
+      "environment": "same-host Node controller and independent servers; external real Redis",
+      "topology": {
+        "description": "direct channel-balanced connections; no nginx; all processes share host resources",
+        "wsInstances": 4
+      },
+      "servers": [
+        {
+          "index": 0,
+          "pid": 34420,
+          "url": "ws://127.0.0.1:52080",
+          "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+          "runtime": {
+            "node": "v24.15.0",
+            "ws": "8.21.0",
+            "ioredis": "5.11.1",
+            "config": {
+              "port": 52080,
+              "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+              "heartbeatMs": 30000,
+              "maxBufferedBytes": 1048576,
+              "dropLimit": 500,
+              "maxSubscriptions": 50,
+              "maxPayloadBytes": 4096,
+              "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+            }
+          }
+        },
+        {
+          "index": 1,
+          "pid": 39520,
+          "url": "ws://127.0.0.1:52082",
+          "instanceId": "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676",
+          "runtime": {
+            "node": "v24.15.0",
+            "ws": "8.21.0",
+            "ioredis": "5.11.1",
+            "config": {
+              "port": 52082,
+              "instanceId": "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676",
+              "heartbeatMs": 30000,
+              "maxBufferedBytes": 1048576,
+              "dropLimit": 500,
+              "maxSubscriptions": 50,
+              "maxPayloadBytes": 4096,
+              "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+            }
+          }
+        },
+        {
+          "index": 2,
+          "pid": 35644,
+          "url": "ws://127.0.0.1:52086",
+          "instanceId": "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d",
+          "runtime": {
+            "node": "v24.15.0",
+            "ws": "8.21.0",
+            "ioredis": "5.11.1",
+            "config": {
+              "port": 52086,
+              "instanceId": "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d",
+              "heartbeatMs": 30000,
+              "maxBufferedBytes": 1048576,
+              "dropLimit": 500,
+              "maxSubscriptions": 50,
+              "maxPayloadBytes": 4096,
+              "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+            }
+          }
+        },
+        {
+          "index": 3,
+          "pid": 39224,
+          "url": "ws://127.0.0.1:52088",
+          "instanceId": "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d",
+          "runtime": {
+            "node": "v24.15.0",
+            "ws": "8.21.0",
+            "ioredis": "5.11.1",
+            "config": {
+              "port": 52088,
+              "instanceId": "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d",
+              "heartbeatMs": 30000,
+              "maxBufferedBytes": 1048576,
+              "dropLimit": 500,
+              "maxSubscriptions": 50,
+              "maxPayloadBytes": 4096,
+              "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+            }
+          }
+        }
+      ],
+      "server": {
+        "node": "v24.15.0",
+        "ws": "8.21.0",
+        "ioredis": "5.11.1",
+        "config": {
+          "port": 52080,
+          "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+          "heartbeatMs": 30000,
+          "maxBufferedBytes": 1048576,
+          "dropLimit": 500,
+          "maxSubscriptions": 50,
+          "maxPayloadBytes": 4096,
+          "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+        }
+      }
+    },
+    "sourceChangedDuringRun": false
+  },
+  "fleet": {
+    "requestedNodes": 4,
+    "servers": [
+      {
+        "index": 0,
+        "pid": 34420,
+        "url": "ws://127.0.0.1:52080",
+        "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+        "runtime": {
+          "node": "v24.15.0",
+          "ws": "8.21.0",
+          "ioredis": "5.11.1",
+          "config": {
+            "port": 52080,
+            "instanceId": "ws-1a-44f87332-9d52-4196-a2b6-d1707d8865f3",
+            "heartbeatMs": 30000,
+            "maxBufferedBytes": 1048576,
+            "dropLimit": 500,
+            "maxSubscriptions": 50,
+            "maxPayloadBytes": 4096,
+            "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+          }
+        }
+      },
+      {
+        "index": 1,
+        "pid": 39520,
+        "url": "ws://127.0.0.1:52082",
+        "instanceId": "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676",
+        "runtime": {
+          "node": "v24.15.0",
+          "ws": "8.21.0",
+          "ioredis": "5.11.1",
+          "config": {
+            "port": 52082,
+            "instanceId": "ws-1a-c57caba5-da0d-4e1f-bf87-47da64170676",
+            "heartbeatMs": 30000,
+            "maxBufferedBytes": 1048576,
+            "dropLimit": 500,
+            "maxSubscriptions": 50,
+            "maxPayloadBytes": 4096,
+            "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "pid": 35644,
+        "url": "ws://127.0.0.1:52086",
+        "instanceId": "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d",
+        "runtime": {
+          "node": "v24.15.0",
+          "ws": "8.21.0",
+          "ioredis": "5.11.1",
+          "config": {
+            "port": 52086,
+            "instanceId": "ws-1a-1fd6b44c-f289-471c-b890-29b89ded174d",
+            "heartbeatMs": 30000,
+            "maxBufferedBytes": 1048576,
+            "dropLimit": 500,
+            "maxSubscriptions": 50,
+            "maxPayloadBytes": 4096,
+            "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "pid": 39224,
+        "url": "ws://127.0.0.1:52088",
+        "instanceId": "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d",
+        "runtime": {
+          "node": "v24.15.0",
+          "ws": "8.21.0",
+          "ioredis": "5.11.1",
+          "config": {
+            "port": 52088,
+            "instanceId": "ws-1a-1a305ca4-b767-45ff-a24c-dcbf0ab45a1d",
+            "heartbeatMs": 30000,
+            "maxBufferedBytes": 1048576,
+            "dropLimit": 500,
+            "maxSubscriptions": 50,
+            "maxPayloadBytes": 4096,
+            "channelPrefix": "ws1c:46bc1fa8-1467-4019-ab9f-1ce9357e459d:"
+          }
+        }
+      }
+    ],
+    "subscribersBefore": 4,
+    "subscribersAfter": 4,
+    "subscribersAfterCleanup": 0
+  },
+  "controllerMeasurement": {
+    "rssStartBytes": 95580160,
+    "elapsedMs": 15005.2323,
+    "cpuCorePercent": 6.970901743387205,
+    "eventLoopUtilization": 0.07454352374526871,
+    "eventLoopDelayP99Ms": 23.396351,
+    "rssEndBytes": 82132992
+  },
+  "methodology": {
+    "routing": "client floor(id/channels) modulo nodes; each channel equally represented on every node",
+    "throughput": "unique in-window deliveries / actual monotonic seconds; late and duplicates excluded",
+    "latency": "same-controller pre-PUBLISH to receive; in-window 1ms histogram; includes controller and Redis costs",
+    "controller": "measurement lifecycle interval; CPU percent relative to one core, 10ms event-loop-delay sampler; RSS endpoints are not peak memory",
+    "limits": "same host/direct sockets, no nginx, no capacity ceiling or production scaling guarantee"
+  }
+}

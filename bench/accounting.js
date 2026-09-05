@@ -30,7 +30,8 @@ class DeliveryLedger {
     const event = this.events.get(msg.data.seq);
     const client = this.clients[clientId];
     if (!event || event.channel !== msg.channel || client.channel !== msg.channel ||
-        typeof msg.relayedBy !== 'string' || !msg.relayedBy || now < event.sentAt) {
+        typeof msg.relayedBy !== 'string' || !msg.relayedBy || now < event.sentAt ||
+        (client.instanceId && client.instanceId !== msg.relayedBy)) {
       this.unexpected++; return;
     }
     if (this.seen[clientId].has(msg.data.seq)) { this.duplicates++; return; }

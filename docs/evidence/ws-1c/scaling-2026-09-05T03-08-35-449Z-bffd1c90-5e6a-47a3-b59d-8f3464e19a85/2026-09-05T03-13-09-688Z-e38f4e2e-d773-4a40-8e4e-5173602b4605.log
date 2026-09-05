@@ -1,0 +1,7 @@
+2026-09-05T03:13:09.689Z PREFLIGHT
+2026-09-05T03:13:09.693Z RAMPING
+2026-09-05T03:13:10.260Z SUBSCRIBING
+2026-09-05T03:13:10.334Z CLEANUP
+2026-09-05T03:13:10.362Z FAILED
+2026-09-05T03:13:10.376Z CLEANUP-FLEET
+{"status":"FAILED","failures":["socket-error","socket-closed","not all subscriptions are ready","no-measured-deliveries","clients-without-events"],"accounting":{"issuedEvents":0,"expected":0,"received":0,"inWindow":0,"late":0,"duplicates":0,"missing":0,"unexpected":0,"foreign":0,"clientsWithEvents":0,"elapsedMs":0,"deliveriesPerSecond":0,"latencyMs":{"samples":0,"resolutionMs":1,"p50":null,"p95":null,"p99":null,"max":null,"histogram":[]},"instances":{}}}

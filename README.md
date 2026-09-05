@@ -9,7 +9,7 @@
 [![Redis](https://img.shields.io/badge/Redis-pub%2Fsub-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. Current evidence covers local Hub policies, a one-server Redis/WebSocket path, and real Redis fan-out across two independent server processes on the same host (WS-1B). Scaling curves remain deferred to WS-1C.
+This repository demonstrates engineering decisions using simulated events. It does not establish production usage or 30k connection capacity. Evidence covers local Hub policies, a one-server Redis/WebSocket path, real two-process fan-out (WS-1B), and controlled same-host 1/2/4-process benchmark curves (WS-1C). These curves are finite offered-load measurements, not proof of a capacity ceiling or production scaling gains.
 
 ---
 
@@ -69,6 +69,16 @@ npm run proof:two-node -- --redis-port 6379
 ```
 
 [WS-1B methodology and retained evidence](docs/ws-1b.md) demonstrate six simultaneously open real WebSocket connections, split deterministically between two independent ports/processes. Shared-channel fan-out, private-channel isolation, unsubscribe and repeat subscribe produce exactly the 13 expected client/event receipts during bounded observation windows. Two real-server negative controls ensure missing and duplicate fan-out fail the proof. This is same-host correctness evidence, not a throughput, nginx routing, failover or multi-host experiment.
+
+### 1 / 2 / 4 process benchmark curves
+
+```bash
+npm run bench:scaling -- --redis-port 6379 --connections 240,1200,2400 --ramp 50
+```
+
+[WS-1C methodology, curves and raw evidence](docs/ws-1c.md) compare the same total workload across 1, 2 and 4 independent server processes: 240/1200/2400 total connections, 12 channels, a target 120 source events/sec, 15-second measurement windows, and three repetitions with rotated topology order. Every trial uses a fresh controller and server fleet, direct balanced client assignment, and real Redis. All repetitions are retained; tables and graphs show median and observed min/max rather than selecting the fastest run. The earlier 4800-client attempt failed the bounded delivery check and is retained separately, not presented as successful capacity evidence.
+
+Compare **actual issued rate** alongside received throughput and p95/p99. The controller, servers and Redis share one machine; neither resource saturation nor multi-host speedup is established. The short CI matrix validates the harness, not capacity. Failure/recovery experiments remain WS-2 work and have not started.
 
 Watch the fleet while it runs:
 
@@ -141,9 +151,10 @@ Serialization happens **once per broadcast**, not once per recipient (`JSON.stri
 npm test          # Hub + benchmark regression tests; legacy E2E auto-skips without Redis
 npm run test:ws1a # mandatory real Redis + one-server benchmark/CLI validation; no skip
 npm run test:ws1b # mandatory real Redis + two-process proof and negative controls; no skip
+npm run test:ws1c # mandatory real Redis + short 1/2/4-process matrix; not a capacity test
 ```
 
-CI is configured to run all three commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. Heartbeat and deployment-drain experiments remain outside WS-1A/WS-1B.
+CI is configured to run all four commands against a Redis service container on main pushes and pull requests. Benchmark regression fixtures are explicitly distinguished from the real Redis validation. CI uploads generated validation artifacts. A local pass is not a claim that remote CI has run. Heartbeat and deployment-drain experiments remain outside WS-1A/WS-1B/WS-1C.
 
 ## Project layout
 
@@ -158,6 +169,9 @@ bench/
   connect-storm.js   existing-target CLI + versioned result/provenance artifacts
   run-local.js       one-server launcher with captured runtime metadata
   prove-two-node.js  two-process Redis fan-out proof + per-client receipt artifacts
+  run-fleet.js       1/2/4-process measured trial with exact target/relay checks
+  run-scaling.js     repeatable fixed-total-workload matrix, fresh trial processes
+  scaling-report.js  validated aggregation and generated same-host curves
   runner.js          acknowledged lifecycle + controlled publisher
   accounting.js      exact per-event/per-client delivery ledger
   options.js         bounded workload and runtime metadata validation
@@ -169,6 +183,8 @@ tests/
   benchmark.test.js  accounting regressions + real-socket/test-publisher fixtures
   benchmark-integration.test.js  mandatory real Redis + one server + CLI artifacts
   two-node.test.js   mandatory real Redis + two servers + negative controls
+  scaling.test.js    matrix/routing/aggregation regressions
+  scaling-integration.test.js   real 1/2/4-process short matrix + negative control
   fixtures/ws1b-mutant.cjs       explicit test-only in-memory mutation preload
 ```
 

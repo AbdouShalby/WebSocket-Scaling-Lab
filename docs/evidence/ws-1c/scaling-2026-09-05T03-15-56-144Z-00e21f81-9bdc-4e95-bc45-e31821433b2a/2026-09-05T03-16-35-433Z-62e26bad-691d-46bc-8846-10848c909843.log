@@ -1,0 +1,11 @@
+2026-09-05T03:16:35.433Z PREFLIGHT
+2026-09-05T03:16:35.437Z RAMPING
+2026-09-05T03:16:35.893Z SUBSCRIBING
+2026-09-05T03:16:35.922Z READY
+2026-09-05T03:16:35.922Z WARMUP
+2026-09-05T03:16:37.923Z MEASURING
+2026-09-05T03:16:52.923Z DRAINING
+2026-09-05T03:16:53.931Z CLEANUP
+2026-09-05T03:16:53.941Z COMPLETE
+2026-09-05T03:16:53.944Z CLEANUP-FLEET
+{"status":"COMPLETE","failures":[],"accounting":{"issuedEvents":1542,"expected":30840,"received":30840,"inWindow":30820,"late":20,"duplicates":0,"missing":0,"unexpected":0,"foreign":0,"clientsWithEvents":240,"elapsedMs":15000.939299999998,"deliveriesPerSecond":2054.538011496387,"latencyMs":{"samples":30820,"resolutionMs":1,"p50":1,"p95":2,"p99":2,"max":6.346099999999751,"histogram":[[1,29232],[2,1563],[3,5],[6,7],[7,13]]},"instances":{"ws-1a-c3af3c94-01ac-42df-adf6-55663c88f718":{"clients":60,"received":7710},"ws-1a-49e099c8-e031-4663-a857-2b158e81a5d8":{"clients":60,"received":7710},"ws-1a-836e3f54-1eb3-40d6-b41c-8a6909541ca4":{"clients":60,"received":7710},"ws-1a-f9cfea60-a020-43ed-b8b5-169322122b5f":{"clients":60,"received":7710}}}}

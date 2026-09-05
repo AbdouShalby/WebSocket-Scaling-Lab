@@ -4,3 +4,4 @@ node_modules/
 /bench/results/
 !/docs/evidence/ws-1a/*.log
 !/docs/evidence/ws-1b/*.log
+!/docs/evidence/ws-1c/**/*.log

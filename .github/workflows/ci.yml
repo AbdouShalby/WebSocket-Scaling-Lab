@@ -53,6 +53,12 @@ jobs:
           REDIS_HOST: 127.0.0.1
           REDIS_PORT: 6379
 
+      - name: WS-1C short 1/2/4-process harness gate (not capacity evidence)
+        run: npm run test:ws1c
+        env:
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
+
       - name: Benchmark and integration evidence
         if: always()
         uses: actions/upload-artifact@v4

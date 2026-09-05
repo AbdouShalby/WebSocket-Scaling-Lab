@@ -7,16 +7,27 @@ const { DeliveryLedger, settle } = require('./accounting');
 const { validateOptions, validateRuntime } = require('./options');
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function runBenchmark(options, runtime, { publisher: injectedPublisher, onState = () => {} } = {}) {
+async function runBenchmark(options, runtime, { publisher: injectedPublisher, onState = () => {}, targets = [] } = {}) {
   validateOptions(options);
   validateRuntime(runtime);
+  if (targets.length) {
+    if (targets.length !== runtime.topology.wsInstances || new Set(targets.map((t) => t.url)).size !== targets.length ||
+        new Set(targets.map((t) => t.instanceId)).size !== targets.length || targets.some((t) => !t.instanceId)) {
+      throw new Error('distinct targets must match declared fleet');
+    }
+    for (const t of targets) validateOptions({ ...options, url: t.url });
+  }
   const runId = randomUUID();
   const startedAt = new Date().toISOString();
   const clients = Array.from({ length: options.conns }, (_, id) => ({
     id, channel: `bench:${runId}:${id % options.channels}`, outcome: 'pending', opened: false, disconnected: false,
+    // Rotate blocks of channels, avoiding node/channel modulo correlation.
+    target: targets.length ? Math.floor(id / options.channels) % targets.length : null,
+    instanceId: targets.length ? targets[Math.floor(id / options.channels) % targets.length].instanceId : undefined,
   }));
   const ledger = new DeliveryLedger(clients, runId);
   const failures = new Set();
+  const socketErrors = new Map();
   const transitions = [];
   let state, publisher, redisVersion = null, redisRuntime = null;
   let issued = 0, confirmed = 0, publishErrors = 0, phaseSeq = 0;
@@ -48,7 +59,7 @@ async function runBenchmark(options, runtime, { publisher: injectedPublisher, on
     transition('RAMPING');
     for (let base = 0; base < clients.length; base += options.ramp) {
       for (const client of clients.slice(base, base + options.ramp)) {
-        const socket = new WebSocket(options.url, { perMessageDeflate: false, handshakeTimeout: options.timeout * 1000 });
+        const socket = new WebSocket(targets[client.target]?.url || options.url, { perMessageDeflate: false, handshakeTimeout: options.timeout * 1000 });
         client.socket = socket;
         const timer = setTimeout(() => { failClient(client, 'subscription-timeout'); socket.terminate(); }, options.timeout * 1000);
         timers.add(timer);
@@ -67,7 +78,11 @@ async function runBenchmark(options, runtime, { publisher: injectedPublisher, on
             ledger.receive(client.id, msg, performance.now());
           }
         });
-        socket.on('error', () => failClient(client, 'socket-error'));
+        socket.on('error', (error) => {
+          const code = String(error.code || error.name || 'unknown');
+          socketErrors.set(code, (socketErrors.get(code) || 0) + 1);
+          failClient(client, 'socket-error');
+        });
         socket.on('close', () => failClient(client, 'socket-closed'));
       }
       if (base + options.ramp < clients.length) await sleep(100);
@@ -92,6 +107,7 @@ async function runBenchmark(options, runtime, { publisher: injectedPublisher, on
         try {
           const subscribers = await publisher.publish(options['channel-prefix'] + 'all', JSON.stringify(envelope));
           if (subscribers < 1) throw new Error('no Redis subscribers');
+          if (targets.length && subscribers !== targets.length) throw new Error('Redis subscriber count differs from fleet');
           if (phase === 'measurement') confirmed++;
         } catch { publishErrors++; failures.add('publish-failed'); throw new Error('publish failed'); }
         // Delayed generators offer a lower measured rate, never a catch-up burst.
@@ -126,6 +142,7 @@ async function runBenchmark(options, runtime, { publisher: injectedPublisher, on
   return {
     schemaVersion: 1, runId, startedAt, completedAt: new Date().toISOString(), status: state,
     failures: [...failures], lifecycle: transitions, options,
+    socketErrors: Object.fromEntries(socketErrors),
     connections: { requested: options.conns, opened: clients.filter((c) => c.opened).length,
       ready: clients.filter((c) => c.outcome === 'ready').length,
       failed: clients.filter((c) => c.outcome === 'failed').length,
@@ -135,6 +152,9 @@ async function runBenchmark(options, runtime, { publisher: injectedPublisher, on
     publisher: { issued, confirmed, errors: publishErrors, redisVersion, redisRuntime,
       eventsPerSecond: accounting.elapsedMs ? issued * 1000 / accounting.elapsedMs : 0 },
     accounting,
+    routing: targets.map((target, index) => ({ ...target,
+      assigned: clients.filter((c) => c.target === index).length,
+      ready: clients.filter((c) => c.target === index && c.outcome === 'ready').length })),
   };
 }
 module.exports = { runBenchmark };
